@@ -1,14 +1,15 @@
 import { StyleSheet } from "react-native";
 import { ButtonProps } from "./button";
+import { colors } from "../../../theme/theme";
 
 export const styleButton = (props: ButtonProps) =>
   StyleSheet.create({
     conatiner: {
       width: "100%",
-      backgroundColor: "#121212",
+      backgroundColor: colors.primary,
       ...(props.disabled && { backgroundColor: "#ccc" }),
       padding: 14,
-      borderRadius: 6,
+      borderRadius: 20,
       alignItems: "center",
       flexDirection: "row",
       justifyContent: "center",

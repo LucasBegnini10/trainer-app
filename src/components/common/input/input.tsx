@@ -12,6 +12,7 @@ export interface InputProps {
   error?: string;
   icon?: ReactNode;
   secure?: boolean;
+  placeholder?: string;
 }
 
 export default function Input(props: InputProps) {
@@ -22,10 +23,12 @@ export default function Input(props: InputProps) {
       <Text style={style.label}>{props.label}</Text>
       <View style={style.inputWrapper}>
         <TextInput
+          placeholder={props.placeholder}
           secureTextEntry={props.secure}
           style={style.input}
           value={props.value}
           onChangeText={props.onChange}
+          placeholderTextColor={"#ccc"}
         />
         {props.loading && <ActivityIndicator size={"small"} />}
         {props.icon && props.icon}

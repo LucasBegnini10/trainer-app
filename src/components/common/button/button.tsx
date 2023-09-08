@@ -1,4 +1,10 @@
-import { ActivityIndicator, Text, TouchableOpacity } from "react-native";
+import {
+  ActivityIndicator,
+  StyleProp,
+  Text,
+  TouchableOpacity,
+  ViewStyle,
+} from "react-native";
 import { styleButton } from "./style";
 
 export interface ButtonProps {
@@ -6,6 +12,7 @@ export interface ButtonProps {
   disabled?: boolean;
   label: string;
   onClick: () => void;
+  style?: StyleProp<ViewStyle>;
 }
 
 export default function Button(props: ButtonProps) {
@@ -14,7 +21,7 @@ export default function Button(props: ButtonProps) {
   return (
     <TouchableOpacity
       onPress={props.onClick}
-      style={style.conatiner}
+      style={[style.conatiner, props.style]}
       disabled={props.disabled}
     >
       {props.loading ? (
