@@ -11,9 +11,9 @@ export const styleInput = (props: InputProps) =>
     },
 
     label: {
-      ...(props.invalid && { color: "red" }),
       fontFamily: "Inter-Medium",
       color: colors.grey,
+      ...(props.invalid && { color: "red" }),
     },
 
     inputWrapper: {

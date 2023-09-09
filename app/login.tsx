@@ -19,6 +19,7 @@ export default function Page() {
     setPassword,
     saveData,
     setSaveData,
+    loading,
   } = useLogin();
 
   return (
@@ -34,6 +35,7 @@ export default function Page() {
           value={email}
           invalid={invalid.email.invalid}
           error={invalid.email.error}
+          inputProps={{ autoCapitalize: "none" }}
           placeholder="seuemail@email.com"
         />
         <Input
@@ -44,6 +46,7 @@ export default function Page() {
           value={password}
           secure={!seePassword}
           placeholder="*************"
+          inputProps={{ autoCapitalize: "none" }}
           icon={
             <Pressable onPress={toogleSeePassword}>
               <Ionicons
@@ -71,7 +74,12 @@ export default function Page() {
             </Link>
           </View>
         </View>
-        <Button label="Login" onClick={handleLogin} style={{ marginTop: 20 }} />
+        <Button
+          label="Login"
+          onClick={handleLogin}
+          style={{ marginTop: 20 }}
+          loading={loading}
+        />
         <View style={{ width: "100%" }}>
           <Text style={[styles.textActions, { textAlign: "center" }]}>
             Ainda não possui conta?{" "}

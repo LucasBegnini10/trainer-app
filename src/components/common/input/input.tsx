@@ -1,4 +1,10 @@
-import { ActivityIndicator, Text, TextInput, View } from "react-native";
+import {
+  ActivityIndicator,
+  Text,
+  TextInput,
+  TextInputProps,
+  View,
+} from "react-native";
 import { styleInput } from "./style";
 import { ReactNode } from "react";
 
@@ -13,6 +19,7 @@ export interface InputProps {
   icon?: ReactNode;
   secure?: boolean;
   placeholder?: string;
+  inputProps?: TextInputProps;
 }
 
 export default function Input(props: InputProps) {
@@ -29,6 +36,7 @@ export default function Input(props: InputProps) {
           value={props.value}
           onChangeText={props.onChange}
           placeholderTextColor={"#ccc"}
+          {...props.inputProps}
         />
         {props.loading && <ActivityIndicator size={"small"} />}
         {props.icon && props.icon}
