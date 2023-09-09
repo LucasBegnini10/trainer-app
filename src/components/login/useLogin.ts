@@ -1,3 +1,4 @@
+import { showToast } from "../../utils/toast";
 import { emailIsValid, isEmpty } from "../../utils/validate";
 import { useState } from "react";
 
@@ -32,6 +33,10 @@ export default function useLogin() {
           invalid: true,
         },
       }));
+      showToast({
+        type: "error",
+        text2: "Preencha seu e-mail",
+      });
       return false;
     }
     resetInvalid();
@@ -40,10 +45,14 @@ export default function useLogin() {
       setInvalid((prev) => ({
         ...prev,
         password: {
-          error: "Preencha seu e-mail",
+          error: "Preencha seu senha",
           invalid: true,
         },
       }));
+      showToast({
+        type: "error",
+        text2: "Preencha sua senha",
+      });
       return false;
     }
     resetInvalid();
@@ -52,10 +61,14 @@ export default function useLogin() {
       setInvalid((prev) => ({
         ...prev,
         email: {
-          error: "Preencha um e-mail válido",
+          error: "Preencha seu e-mail corretamente`",
           invalid: true,
         },
       }));
+      showToast({
+        type: "error",
+        text2: "Preencha seu e-mail corretamente",
+      });
       return false;
     }
     resetInvalid();

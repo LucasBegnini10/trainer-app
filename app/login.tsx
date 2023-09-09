@@ -6,6 +6,7 @@ import useLogin from "../src/components/login/useLogin";
 import { Ionicons } from "@expo/vector-icons";
 import Checkbox from "expo-checkbox";
 import { Link } from "expo-router";
+import Toast from "react-native-toast-message";
 
 export default function Page() {
   const {
@@ -89,6 +90,7 @@ export default function Page() {
           </Text>
         </View>
       </View>
+      <Toast />
     </View>
   );
 }
