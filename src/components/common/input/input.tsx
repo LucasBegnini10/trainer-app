@@ -9,10 +9,10 @@ import { styleInput } from "./style";
 import { ReactNode } from "react";
 
 export interface InputProps {
-  label: string;
+  label?: string;
   hint?: string;
-  value: string;
-  onChange: (e: string) => void;
+  value?: string;
+  onChange?: (e: string) => void;
   loading?: boolean;
   invalid?: boolean;
   error?: string;

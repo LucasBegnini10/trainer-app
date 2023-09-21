@@ -1,12 +1,13 @@
 import Input from "../src/components/common/input/index";
 import Button from "../src/components/common/button/index";
-import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { Image, Pressable, Text, View } from "react-native";
 import { colors } from "../src/theme/theme";
-import useLogin from "../src/components/login/useLogin";
+import useLogin from "../src/hooks/login/useLogin";
 import { Ionicons } from "@expo/vector-icons";
 import Checkbox from "expo-checkbox";
 import { Link } from "expo-router";
 import Toast from "react-native-toast-message";
+import { styles } from "../src/styles/form";
 
 export default function Page() {
   const {
@@ -36,7 +37,10 @@ export default function Page() {
           value={email}
           invalid={invalid.email.invalid}
           error={invalid.email.error}
-          inputProps={{ autoCapitalize: "none" }}
+          inputProps={{
+            autoCapitalize: "none",
+            textContentType: "emailAddress",
+          }}
           placeholder="seuemail@email.com"
         />
         <Input
@@ -94,50 +98,3 @@ export default function Page() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "column",
-    padding: 20,
-  },
-
-  logoWrapper: {
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 20,
-  },
-
-  logo: {
-    width: 120,
-    height: 120,
-  },
-
-  containerFields: {
-    flex: 1,
-    flexDirection: "column",
-    alignItems: "flex-start",
-    justifyContent: "flex-start",
-    gap: 24,
-  },
-
-  title: {
-    fontFamily: "Inter-Bold",
-    fontSize: 22,
-    color: colors.primary,
-  },
-
-  actions: {
-    flexDirection: "row",
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "space-between",
-  },
-
-  textActions: {
-    fontFamily: "Inter-Regular",
-    fontSize: 12.5,
-    color: colors.grey,
-  },
-});

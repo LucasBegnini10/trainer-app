@@ -10,8 +10,8 @@ import { styleButton } from "./style";
 export interface ButtonProps {
   loading?: boolean;
   disabled?: boolean;
-  label: string;
-  onClick: () => void;
+  label?: string;
+  onClick?: () => void;
   style?: StyleProp<ViewStyle>;
 }
 
