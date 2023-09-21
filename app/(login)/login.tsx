@@ -1,6 +1,6 @@
-import useLogin from "../src/hooks/login/useLogin";
+import useLogin from "../../src/hooks/login/useLogin";
 import { Link } from "expo-router";
-import InputComponent from "../src/components/common/input/input";
+import InputComponent from "../../src/components/common/input/input";
 import {
   Button,
   Center,
@@ -34,7 +34,7 @@ export default function LoginPage() {
       <Center mb={4}>
         <Image
           alt="Logo"
-          source={require("../assets/logo.png")}
+          source={require("../../assets/logo.png")}
           w={32}
           h={32}
         />
@@ -82,7 +82,14 @@ export default function LoginPage() {
           </Link>
         </View>
       </Row>
-      <Button mt={4} padding={4} rounded={"full"} w="full" bg="primary.700">
+      <Button
+        mt={4}
+        padding={4}
+        rounded={"full"}
+        w="full"
+        bg="primary.700"
+        onPress={handleLogin}
+      >
         <Text fontFamily={"Inter-Bold"} color={"white"} fontSize={14}>
           LOGIN
         </Text>

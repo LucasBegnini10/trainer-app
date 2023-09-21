@@ -1,4 +1,4 @@
-import StartPage from "./start";
+import StartPage from "./(start)/start";
 
 export default function IndexPage() {
   const isLogged = false;

@@ -1,4 +1,4 @@
-import { styles as styleForm } from "../src/styles/form";
+import { styles as styleForm } from "../../src/styles/form";
 import {
   Actionsheet,
   Button,
@@ -8,7 +8,7 @@ import {
   Text,
   View,
 } from "native-base";
-import useStart from "../src/hooks/start/useStart";
+import useStart from "../../src/hooks/start/useStart";
 import { Ionicons } from "@expo/vector-icons";
 
 export default function StartPage() {
@@ -18,7 +18,7 @@ export default function StartPage() {
     <Center flex={1} px={10}>
       <View flex={1} justifyContent={"flex-end"}>
         <Image
-          source={require("../assets/logo.png")}
+          source={require("../../assets/logo.png")}
           style={styleForm.logo}
           alt="Logo"
         />

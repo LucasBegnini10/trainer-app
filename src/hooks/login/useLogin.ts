@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import { emailIsValid, isEmpty } from "../../utils/validate";
 import { useState } from "react";
 
@@ -64,14 +65,15 @@ export default function useLogin() {
   };
 
   const handleLogin = async () => {
-    if (!validateFields()) return;
-    return new Promise((resolve) => {
-      setLoading(true);
-      setTimeout(() => {
-        setLoading(false);
-        resolve({ success: true, token: 123 });
-      }, 2000);
-    });
+    router.push("/home");
+    // if (!validateFields()) return;
+    // return new Promise((resolve) => {
+    //   setLoading(true);
+    //   setTimeout(() => {
+    //     setLoading(false);
+    //     resolve({ success: true, token: 123 });
+    //   }, 2000);
+    // });
   };
 
   return {
