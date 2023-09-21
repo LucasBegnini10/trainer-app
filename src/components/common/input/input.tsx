@@ -1,49 +1,39 @@
-import {
-  ActivityIndicator,
-  Text,
-  TextInput,
-  TextInputProps,
-  View,
-} from "react-native";
-import { styleInput } from "./style";
-import { ReactNode } from "react";
+import { FormControl, Input } from "native-base";
+import { IInputProps } from "native-base/lib/typescript/components/primitives/Input/types";
 
 export interface InputProps {
   label?: string;
   hint?: string;
   value?: string;
   onChange?: (e: string) => void;
-  loading?: boolean;
   invalid?: boolean;
   error?: string;
-  icon?: ReactNode;
+  icon?: JSX.Element | JSX.Element[];
   secure?: boolean;
   placeholder?: string;
-  inputProps?: TextInputProps;
+  inputProps?: IInputProps;
 }
 
-export default function Input(props: InputProps) {
-  const style = styleInput(props);
-
+export default function InputComponent(props: InputProps) {
   return (
-    <View style={style.container}>
-      <Text style={style.label}>{props.label}</Text>
-      <View style={style.inputWrapper}>
-        <TextInput
-          placeholder={props.placeholder}
-          secureTextEntry={props.secure}
-          style={style.input}
-          value={props.value}
-          onChangeText={props.onChange}
-          placeholderTextColor={"#ccc"}
-          {...props.inputProps}
-        />
-        {props.loading && <ActivityIndicator size={"small"} />}
-        {props.icon && props.icon}
-      </View>
-
-      {props.hint && <Text style={style.hint}>{props.hint}</Text>}
-      {props.error && <Text style={style.error}>{props.error}</Text>}
-    </View>
+    <FormControl isInvalid={props.invalid}>
+      <FormControl.Label>{props.label}</FormControl.Label>
+      <Input
+        fontSize={14}
+        py={3}
+        value={props.value}
+        onChangeText={props.onChange}
+        placeholder={props.placeholder}
+        secureTextEntry={props.secure}
+        InputRightElement={props.icon}
+        {...props.inputProps}
+      />
+      {props.hint ? (
+        <FormControl.HelperText>{props.hint}</FormControl.HelperText>
+      ) : null}
+      {props.error.trim() ? (
+        <FormControl.ErrorMessage>{props.error}</FormControl.ErrorMessage>
+      ) : null}
+    </FormControl>
   );
 }

@@ -1,4 +1,3 @@
-import { showToast } from "../../utils/toast";
 import { emailIsValid, isEmpty } from "../../utils/validate";
 import { useState } from "react";
 
@@ -33,10 +32,6 @@ export default function useLogin() {
           invalid: true,
         },
       }));
-      showToast({
-        type: "error",
-        text2: "Preencha seu e-mail",
-      });
       return false;
     }
     resetInvalid();
@@ -49,10 +44,6 @@ export default function useLogin() {
           invalid: true,
         },
       }));
-      showToast({
-        type: "error",
-        text2: "Preencha sua senha",
-      });
       return false;
     }
     resetInvalid();
@@ -65,10 +56,6 @@ export default function useLogin() {
           invalid: true,
         },
       }));
-      showToast({
-        type: "error",
-        text2: "Preencha seu e-mail corretamente",
-      });
       return false;
     }
     resetInvalid();

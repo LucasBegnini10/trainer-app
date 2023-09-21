@@ -1,11 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
-import Input from "../../../src/components/common/input/index";
 import { Image, Pressable, Text, View } from "react-native";
-import { colors } from "../../../src/theme/theme";
 import Checkbox from "expo-checkbox";
 import { Link } from "expo-router";
-import Button from "../../../src/components/common/button";
-import Toast from "react-native-toast-message";
 import { styles } from "../../../src/styles/form";
 
 export default function Page() {
@@ -24,7 +20,7 @@ export default function Page() {
             Faça seu cadastro e começe a utilizar nosso aplicativo
           </Text>
         </View>
-        <Input
+        {/* <Input
           label="Nome"
           inputProps={{
             autoCapitalize: "words",
@@ -32,17 +28,13 @@ export default function Page() {
           }}
           placeholder="Seu Nome"
         />
-        <Button label="Avançar" disabled style={{ marginTop: 20 }} />
+        <Button label="Avançar" disabled style={{ marginTop: 20 }} /> */}
         <View style={{ width: "100%" }}>
           <Text style={[styles.textActions, { textAlign: "center" }]}>
-            Já possui uma conta?{" "}
-            <Link href={"/login"} style={{ color: colors.primary }}>
-              Faça login
-            </Link>
+            Já possui uma conta? <Link href={"/login"}>Faça login</Link>
           </Text>
         </View>
       </View>
-      <Toast />
     </View>
   );
 }

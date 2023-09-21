@@ -1,4 +1,3 @@
-import { colors } from "../theme/theme";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -31,13 +30,11 @@ export const styles = StyleSheet.create({
   title: {
     fontFamily: "Inter-Bold",
     fontSize: 22,
-    color: colors.primary,
   },
 
   subtitle: {
     fontFamily: "Inter-Regular",
     fontSize: 14,
-    color: colors.grey,
   },
 
   actions: {
@@ -50,6 +47,5 @@ export const styles = StyleSheet.create({
   textActions: {
     fontFamily: "Inter-Regular",
     fontSize: 12.5,
-    color: colors.grey,
   },
 });

@@ -1,15 +1,20 @@
-import Input from "../src/components/common/input/index";
-import Button from "../src/components/common/button/index";
-import { Image, Pressable, Text, View } from "react-native";
-import { colors } from "../src/theme/theme";
 import useLogin from "../src/hooks/login/useLogin";
-import { Ionicons } from "@expo/vector-icons";
-import Checkbox from "expo-checkbox";
 import { Link } from "expo-router";
-import Toast from "react-native-toast-message";
-import { styles } from "../src/styles/form";
+import InputComponent from "../src/components/common/input/input";
+import {
+  Button,
+  Center,
+  Checkbox,
+  Icon,
+  IconButton,
+  Image,
+  Row,
+  Text,
+  View,
+} from "native-base";
+import { Ionicons } from "@expo/vector-icons";
 
-export default function Page() {
+export default function LoginPage() {
   const {
     email,
     handleLogin,
@@ -25,76 +30,71 @@ export default function Page() {
   } = useLogin();
 
   return (
-    <View style={styles.container}>
-      <View style={styles.containerFields}>
-        <View style={styles.logoWrapper}>
-          <Image source={require("../assets/logo.png")} style={styles.logo} />
-        </View>
-        <Text style={styles.title}>Bem vindo(a) de volta</Text>
-        <Input
-          label="E-mail"
-          onChange={setEmail}
-          value={email}
-          invalid={invalid.email.invalid}
-          error={invalid.email.error}
-          inputProps={{
-            autoCapitalize: "none",
-            textContentType: "emailAddress",
-          }}
-          placeholder="seuemail@email.com"
+    <View flex={1} justifyContent={"center"} px={4} style={{ gap: 20 }}>
+      <Center mb={4}>
+        <Image
+          alt="Logo"
+          source={require("../assets/logo.png")}
+          w={32}
+          h={32}
         />
-        <Input
-          invalid={invalid.password.invalid}
-          error={invalid.password.error}
-          label="Senha"
-          onChange={setPassword}
-          value={password}
-          secure={!seePassword}
-          placeholder="*************"
-          inputProps={{ autoCapitalize: "none" }}
-          icon={
-            <Pressable onPress={toogleSeePassword}>
-              <Ionicons
-                name={seePassword ? "eye" : "eye-off"}
-                size={20}
-                color={colors.primary}
-              />
-            </Pressable>
-          }
-        />
-        <View style={styles.actions}>
-          <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
-            <Checkbox
-              value={saveData}
-              onValueChange={setSaveData}
-              color={colors.primary}
-            />
-            <Text style={styles.textActions}>Salvar dados</Text>
-          </View>
-          <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
-            <Link href={"/forgot-password"}>
-              <Text style={[styles.textActions, { color: colors.primary }]}>
-                Esqueci minha senha
-              </Text>
-            </Link>
-          </View>
+      </Center>
+      <Text fontFamily={"Inter-Medium"} color="primary.600" fontSize={22}>
+        Bem vindo(a) de volta
+      </Text>
+      <InputComponent
+        label="E-mail"
+        onChange={setEmail}
+        value={email}
+        invalid={invalid.email.invalid}
+        error={invalid.email.error}
+        inputProps={{
+          rounded: "full",
+          textContentType: "emailAddress",
+        }}
+        placeholder="seuemail@email.com"
+      />
+      <InputComponent
+        invalid={invalid.password.invalid}
+        error={invalid.password.error}
+        label="Senha"
+        onChange={setPassword}
+        value={password}
+        secure={!seePassword}
+        placeholder="*************"
+        inputProps={{ autoCapitalize: "none", rounded: "full" }}
+        icon={
+          <IconButton
+            icon={<Icon as={Ionicons} name={seePassword ? "eye" : "eye-off"} />}
+            borderRadius="full"
+          />
+        }
+      />
+      <Row alignItems={"center"} justifyContent={"space-between"}>
+        <Row space={2}>
+          <Checkbox value={saveData ? "false" : "true"} onChange={setSaveData}>
+            <Text>Salvar dados</Text>
+          </Checkbox>
+        </Row>
+        <View>
+          <Link href={"/forgot-password"}>
+            <Text color={"primary.800"}>Esqueci minha senha</Text>
+          </Link>
         </View>
-        <Button
-          label="Login"
-          onClick={handleLogin}
-          style={{ marginTop: 20 }}
-          loading={loading}
-        />
-        <View style={{ width: "100%" }}>
-          <Text style={[styles.textActions, { textAlign: "center" }]}>
-            Ainda não possui conta?{" "}
-            <Link href={"/signup"} style={{ color: colors.primary }}>
-              Cadastre-se
-            </Link>
-          </Text>
-        </View>
-      </View>
-      <Toast />
+      </Row>
+      <Button mt={4} padding={4} rounded={"full"} w="full" bg="primary.700">
+        <Text fontFamily={"Inter-Bold"} color={"white"} fontSize={14}>
+          LOGIN
+        </Text>
+      </Button>
+      <Center>
+        <Text>
+          Ainda não possui conta?{" "}
+          <Link href={"/signup"}>
+            <Text color="primary.800">Cadastre-se</Text>
+          </Link>
+        </Text>
+      </Center>
     </View>
   );
 }
