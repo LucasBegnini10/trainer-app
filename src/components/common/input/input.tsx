@@ -31,7 +31,7 @@ export default function InputComponent(props: InputProps) {
       {props.hint ? (
         <FormControl.HelperText>{props.hint}</FormControl.HelperText>
       ) : null}
-      {props.error.trim() ? (
+      {props.error ? (
         <FormControl.ErrorMessage>{props.error}</FormControl.ErrorMessage>
       ) : null}
     </FormControl>
