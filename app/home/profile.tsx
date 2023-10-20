@@ -19,21 +19,21 @@ export default function ProfilePage() {
         <InputComponent label="Senha" value="*******" />
       </VStack>
 
-      <Button
-        variant={"outline"}
-        borderColor={"primary.800"}
-        mt={4}
-        padding={4}
-        rounded={"full"}
-        w="full"
-      >
-        <Text fontFamily={"Inter-Bold"} color={"primary.800"} fontSize={14}>
+      <Button bg={"primary.800"} mt={4} padding={4} rounded={"full"} w="full">
+        <Text fontFamily={"Inter-Bold"} color={"white"} fontSize={14}>
           SALVAR
         </Text>
       </Button>
 
-      <Button mt={20} padding={4} rounded={"full"} w="full" bg="red.500">
-        <Text fontFamily={"Inter-Bold"} color={"white"} fontSize={14}>
+      <Button
+        mt={20}
+        variant={"outline"}
+        borderColor={"red.700"}
+        padding={4}
+        rounded={"full"}
+        w="full"
+      >
+        <Text fontFamily={"Inter-Bold"} color={"red.700"} fontSize={14}>
           SAIR
         </Text>
       </Button>
