@@ -1,9 +1,12 @@
-import { Text, View } from "native-base";
+import {  Center, FlatList, Heading } from "native-base";
+import Card from "../../src/components/card/card";
 
 export default function HomeIndex() {
   return (
-    <View>
-      <Text>Home Index</Text>
-    </View>
+    <FlatList
+      bg={"white"} 
+      data={[1, 2, 3]} 
+      renderItem={({}) => <Card />} 
+      />
   );
 }

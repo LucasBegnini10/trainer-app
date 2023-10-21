@@ -1,10 +1,11 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
-import { Icon } from "native-base";
+import {  Icon, } from "native-base";
+import Header from "../../src/components/common/header/header";
 
 const routes = [
-  { name: "index", href: "home", title: "Home", icon: "home" },
-  { name: "profile", href: "home/profile", title: "Perfil", icon: "person" },
+  { name: "index", href: "home",  icon: "home" },
+  { name: "profile", href: "home/profile",  icon: "person" },
 ];
 
 export default function LayoutHome() {
@@ -17,13 +18,15 @@ export default function LayoutHome() {
           options={{
             href: item.href,
             tabBarShowLabel: false,
-            title: item.title,
+            header() {
+              return <Header /> 
+            },
             tabBarIcon: ({ focused }) => {
               return (
                 <Icon
                   as={Ionicons}
                   name={item.icon}
-                  size={28}
+                  size={"lg"}
                   color={focused ? "primary.800" : "gray.800"}
                 />
               );
