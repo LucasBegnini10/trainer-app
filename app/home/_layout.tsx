@@ -4,8 +4,8 @@ import {  Icon, } from "native-base";
 import Header from "../../src/components/common/header/header";
 
 const routes = [
-  { name: "index", href: "home",  icon: "home" },
-  { name: "profile", href: "home/profile",  icon: "person" },
+  { name: "index", href: "home",  icon: "home", showHeader: true },
+  { name: "profile", href: "home/profile",  icon: "person", showHeader: false },
 ];
 
 export default function LayoutHome() {
@@ -18,6 +18,7 @@ export default function LayoutHome() {
           options={{
             href: item.href,
             tabBarShowLabel: false,
+            headerShown: item.showHeader,
             header() {
               return <Header /> 
             },

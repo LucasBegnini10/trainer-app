@@ -7,7 +7,6 @@ export default function Header() {
   return (
     <HStack
       bg="white"
-      
       justifyContent={"space-between"}
       px={8}
       pb={4}

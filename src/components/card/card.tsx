@@ -8,7 +8,7 @@ interface CardProps {
 export default function Card(){
   return (
     <Box alignItems="center">
-      <Box maxW="80" rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" _dark={{
+      <Box  rounded="lg" overflow="hidden" borderColor="coolGray.200" borderWidth="1" _dark={{
       borderColor: "coolGray.600",
       backgroundColor: "gray.700"
     }} _web={{
