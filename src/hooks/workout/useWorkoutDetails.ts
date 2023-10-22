@@ -5,9 +5,12 @@ export default function useWorkoutDetails(){
 
   const goBack = () => router.back()
 
+  const goWorkout = () => router.push("/workout")
+
   return {
     goBack,
-    item
+    item,
+    goWorkout
   }
 
 }

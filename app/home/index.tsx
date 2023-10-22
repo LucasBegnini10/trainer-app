@@ -10,7 +10,7 @@ export default function HomeIndex() {
   return (
     <FlatList
       px={6}
-      pb={2}
+      contentContainerStyle={{paddingBottom: 20}}
       bg={"white"}
       data={[1, 2, 3]}
       ItemSeparatorComponent={() => <View py={2} />}

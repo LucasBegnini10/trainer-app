@@ -19,22 +19,22 @@ import useWorkoutDetails from "../../src/hooks/workout/useWorkoutDetails";
 export default function WorkoutDetails() {
   const insets = useSafeAreaInsets();
 
-  const {goBack, item} = useWorkoutDetails()
+  const { goBack, goWorkout } = useWorkoutDetails();
 
   return (
     <View style={{ paddingTop: insets.top }}>
       <HStack alignItems={"center"} space={3} p={3}>
-      <IconButton
-        onPress={goBack}
-        color="black"
-        size={"sm"}
-        _icon={{
-          color: "black",
-          size: "md",
-          as: Ionicons,
-          name: "arrow-back",
-        }}
-      />
+        <IconButton
+          onPress={goBack}
+          color="black"
+          size={"sm"}
+          _icon={{
+            color: "black",
+            size: "md",
+            as: Ionicons,
+            name: "arrow-back",
+          }}
+        />
         <Heading>Treino de Peito</Heading>
       </HStack>
       <FlatList
@@ -77,7 +77,13 @@ export default function WorkoutDetails() {
         )}
       />
       <Center position="absolute" bottom={24} w="full">
-        <Button padding={4} rounded={"full"} w="80" bg="primary.700">
+        <Button
+          padding={4}
+          rounded={"full"}
+          w="80"
+          bg="primary.700"
+          onPress={goWorkout}
+        >
           <Text fontFamily={"Inter-Bold"} color={"white"} fontSize={14}>
             INICIAR
           </Text>
