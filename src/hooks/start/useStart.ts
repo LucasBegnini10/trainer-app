@@ -1,5 +1,5 @@
 import { router } from "expo-router";
-import { useDisclose, useTheme } from "native-base";
+import { useDisclose } from "native-base";
 
 export default function useStart() {
   const disclose = useDisclose();
