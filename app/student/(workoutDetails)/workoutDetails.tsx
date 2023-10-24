@@ -14,7 +14,7 @@ import {
   View,
 } from "native-base";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import useWorkoutDetails from "../../src/hooks/workout/useWorkoutDetails";
+import useWorkoutDetails from "../../../src/hooks/workout/useWorkoutDetails";
 
 export default function WorkoutDetails() {
   const insets = useSafeAreaInsets();

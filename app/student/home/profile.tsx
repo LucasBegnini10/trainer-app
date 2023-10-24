@@ -1,5 +1,5 @@
 import { Avatar, Button, Center, HStack, Text, VStack } from "native-base";
-import InputComponent from "../../src/components/common/input/input";
+import InputComponent from "../../../src/components/common/input/input";
 
 export default function ProfilePage() {
   return (

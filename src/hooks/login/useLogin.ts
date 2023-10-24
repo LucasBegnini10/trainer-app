@@ -65,7 +65,7 @@ export default function useLogin() {
   };
 
   const handleLogin = async () => {
-    router.push("/home");
+    router.push("/trainer/home");
     // if (!validateFields()) return;
     // return new Promise((resolve) => {
     //   setLoading(true);

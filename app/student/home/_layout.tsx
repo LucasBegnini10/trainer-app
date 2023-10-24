@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import {  Icon, } from "native-base";
-import Header from "../../src/components/common/header/header";
+import Header from "../../../src/components/common/header/header";
 
 const routes = [
   { name: "index", href: "home",  icon: "home", showHeader: true },
