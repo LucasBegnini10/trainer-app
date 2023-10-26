@@ -20,7 +20,12 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const routes = [
   { name: "index", href: "home", icon: "barbell", title: "Exercícios" },
-  { name: "students", href: "home/students", icon: "ios-people-sharp", title: "Alunos" },
+  {
+    name: "students",
+    href: "home/students",
+    icon: "ios-people-sharp",
+    title: "Alunos",
+  },
 ];
 
 export default function LayoutHomeTrainer() {
@@ -80,9 +85,16 @@ export default function LayoutHomeTrainer() {
               key={route.name}
               name={route.name}
               options={{
-
+                drawerType: "front",
                 drawerIcon(props) {
-                  return <Icon as={Ionicons} name={route.icon} size={26} color={props.color}/>;
+                  return (
+                    <Icon
+                      as={Ionicons}
+                      name={route.icon}
+                      size={26}
+                      color={props.color}
+                    />
+                  );
                 },
                 drawerLabel: route.title,
                 title: route.title,
