@@ -4,8 +4,8 @@ import {  Icon, } from "native-base";
 import Header from "../../../src/components/common/header/header";
 
 const routes = [
-  { name: "index", href: "home",  icon: "home", showHeader: true },
-  { name: "profile", href: "home/profile",  icon: "person", showHeader: false },
+  { name: "index", href: "/student/home",  icon: "home", showHeader: true },
+  { name: "profile", href: "/student/home/profile",  icon: "person", showHeader: false },
 ];
 
 export default function LayoutHome() {

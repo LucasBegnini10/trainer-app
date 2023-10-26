@@ -1,9 +1,13 @@
-import { Avatar, Button, Center, HStack, Text, VStack } from "native-base";
+import { Avatar, Button, Text, VStack, View } from "native-base";
 import InputComponent from "../../../src/components/common/input/input";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function ProfilePage() {
+
+  const insets = useSafeAreaInsets()
+
   return (
-    <Center w={"full"} flex={1} justifyContent={"center"} bg="white" px={4}>
+    <View style={{paddingTop: insets.top}} w={"full"} flex={1} alignItems={"center"} justifyContent={"center"} bg="white" px={4}>
       <Avatar
         bg="green.500"
         size={"xl"}
@@ -37,6 +41,6 @@ export default function ProfilePage() {
           SAIR
         </Text>
       </Button>
-    </Center>
+    </View>
   );
 }

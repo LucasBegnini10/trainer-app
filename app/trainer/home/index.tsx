@@ -9,18 +9,19 @@ import {
   Input,
   Text,
   VStack,
-  View,
 } from "native-base";
 
 export default function HomeTrainer() {
   return (
     <FlatList
+      contentContainerStyle={{ paddingBottom: 20 }}
+      px={4}
       data={[..."OI TUDO BEM"]}
       ItemSeparatorComponent={Divider}
       bg="white"
       ListHeaderComponent={
         <Input
-          placeholder="Pesquisar Treino"
+          placeholder="Pesquisar Exercícios"
           w="100%"
           my={6}
           py={6}

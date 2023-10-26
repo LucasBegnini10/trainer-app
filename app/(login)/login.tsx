@@ -21,7 +21,6 @@ export default function LoginPage() {
     invalid,
     seePassword,
     setEmail,
-    toogleSeePassword,
     password,
     setPassword,
     saveData,

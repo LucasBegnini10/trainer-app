@@ -15,6 +15,8 @@ import {
 export default function StudentsList() {
   return (
     <FlatList
+      px={4}
+      contentContainerStyle={{paddingBottom: 20}}
       data={[..."OI TUDO BEM"]}
       ItemSeparatorComponent={Divider}
       bg="white"
