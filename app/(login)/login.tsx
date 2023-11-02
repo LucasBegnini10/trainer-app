@@ -1,4 +1,4 @@
-import useLogin from "../../src/hooks/login/useLogin";
+import useLogin from "../../src/controllers/login/useLogin";
 import { Link } from "expo-router";
 import InputComponent from "../../src/components/common/input/input";
 import {
@@ -50,6 +50,7 @@ export default function LoginPage() {
         error={invalid.email.error}
         inputProps={{
           rounded: "full",
+          autoCapitalize: "none",
           textContentType: "emailAddress",
         }}
         placeholder="seuemail@email.com"

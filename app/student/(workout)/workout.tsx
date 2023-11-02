@@ -12,7 +12,7 @@ import {
   VStack,
   View,
 } from "native-base";
-import useWorkout from "../../../src/hooks/workout/useWorkout";
+import useWorkout from "../../../src/controllers/workout/useWorkout";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import Tabs from "../../../src/components/common/tabs/tabs";

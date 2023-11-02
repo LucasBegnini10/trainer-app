@@ -8,11 +8,11 @@ import {
   Text,
   View,
 } from "native-base";
-import useStart from "../../src/hooks/start/useStart";
+import useStart from "../../src/controllers/start/useStart";
 import { Ionicons } from "@expo/vector-icons";
 
 export default function StartPage() {
-  const { disclose, navigateLogin } = useStart();
+  const { disclose, navigateLogin, navigateSignup } = useStart();
 
   return (
     <Center flex={1} px={10}>
@@ -52,12 +52,13 @@ export default function StartPage() {
             Fazer Login
           </Actionsheet.Item>
           <Actionsheet.Item
+          onPress={navigateSignup}
             startIcon={
               <Icon as={Ionicons} name="person" size="md" color="primary.700" />
             }
             rounded={"full"}
           >
-            Sou Treinador
+            Criar conta
           </Actionsheet.Item>
         </Actionsheet.Content>
       </Actionsheet>

@@ -11,7 +11,7 @@ import {
   Text,
   VStack,
 } from "native-base";
-import useHomeTrainer from "../../../src/hooks/home/trainer/useHome";
+import useHomeTrainer from "../../../src/controllers/home/trainer/useHome";
 
 export default function HomeTrainer() {
 

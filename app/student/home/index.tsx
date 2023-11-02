@@ -1,7 +1,7 @@
 import { FlatList, Icon, Input, View } from "native-base";
 import Card from "../../../src/components/card/card";
 import { Ionicons } from "@expo/vector-icons";
-import useHome from "../../../src/hooks/home/student/useHome";
+import useHome from "../../../src/controllers/home/student/useHome";
 
 export default function HomeIndex() {
 
