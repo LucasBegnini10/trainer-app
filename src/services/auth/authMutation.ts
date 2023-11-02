@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { IAuth, IAuthSignUp, signUpService, authService } from "./authService";
 
-export function authMutation(cbSuccess: () => void, cbError: () => void) {
+export function authMutation(cbSuccess: (content) => void, cbError: (err) => void) {
   return useMutation({
     mutationFn: (auth: IAuth) => authService(auth),
     onError: cbError,

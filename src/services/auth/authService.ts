@@ -17,7 +17,7 @@ export const authService = async (auth: IAuth) => {
     .post("/auth/signin", auth)
     .then((res) => res)
     .catch((err) => {
-      throw err;
+      throw err?.response || err;
     });
 };
 
@@ -26,7 +26,7 @@ export const signUpService = async (account: IAuthSignUp) => {
     .post("/auth/signup", account)
     .then((res) => res)
     .catch((err) => {
-      throw err;
+      throw err?.response || err;
     });
 };
 

@@ -25,6 +25,8 @@ export default function LoginPage() {
     setPassword,
     saveData,
     setSaveData,
+    toogleSeePassword,
+    loading
   } = useLogin();
 
   return (
@@ -65,6 +67,7 @@ export default function LoginPage() {
           <IconButton
             icon={<Icon as={Ionicons} name={seePassword ? "eye" : "eye-off"} />}
             borderRadius="full"
+            onPress={toogleSeePassword}
           />
         }
       />
@@ -87,6 +90,7 @@ export default function LoginPage() {
         w="full"
         bg="primary.700"
         onPress={handleLogin}
+        isLoading={loading}
       >
         <Text fontFamily={"Inter-Bold"} color={"white"} fontSize={14}>
           LOGIN

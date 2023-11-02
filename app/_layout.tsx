@@ -6,6 +6,7 @@ import { StatusBar } from "expo-status-bar";
 import { NativeBaseProvider, theme } from "native-base";
 import { colorModeManager } from "../src/utils/colorModeManager";
 import { Slot } from "expo-router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 SplashScreen.preventAutoHideAsync();
 export default function Layout() {
@@ -16,6 +17,8 @@ export default function Layout() {
     "Inter-Bold": require("../assets/Inter/static/Inter-Bold.ttf"),
     "Inter-Black": require("../assets/Inter/static/Inter-Black.ttf"),
   });
+
+  const queryClient = new QueryClient();
 
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
@@ -29,10 +32,12 @@ export default function Layout() {
 
   return (
     <SafeAreaProvider onLayout={onLayoutRootView}>
-      <NativeBaseProvider colorModeManager={colorModeManager} theme={theme}>
-        <StatusBar style="auto" />
-        <Slot />
-      </NativeBaseProvider>
+      <QueryClientProvider client={queryClient}>
+        <NativeBaseProvider colorModeManager={colorModeManager} theme={theme}>
+          <StatusBar style="auto" />
+          <Slot />
+        </NativeBaseProvider>
+      </QueryClientProvider>
     </SafeAreaProvider>
   );
 }
