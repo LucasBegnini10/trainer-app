@@ -9,7 +9,7 @@ export function authMutation(cbSuccess: (content) => void, cbError: (err) => voi
   });
 }
 
-export function signUpMutation(cbSuccess: () => void, cbError: () => void) {
+export function signUpMutation(cbSuccess: (content) => void, cbError: (err) => void) {
   return useMutation({
     mutationFn: (account: IAuthSignUp) => signUpService(account),
     onError: cbError,

@@ -1,6 +1,6 @@
 import { emailIsValid, isEmpty } from "../../utils/validate";
 import { useState } from "react";
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import { useToast } from "native-base";
 import { authMutation } from "../../services/auth/authMutation";
 
@@ -17,9 +17,10 @@ const intialStateInvalid = {
 
 export default function useLogin() {
   const toast = useToast();
+  const item = useLocalSearchParams();
 
   const [seePassword, setSeePassword] = useState(false);
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(item?.email as string || "");
   const [password, setPassword] = useState("");
   const [saveData, setSaveData] = useState(false);
   const [invalid, setInvalid] = useState(intialStateInvalid);
@@ -94,18 +95,33 @@ export default function useLogin() {
 
   const onError = (err: { status: number }) => {
     const context = {
-      404: "E-mail/Senha inválidos",
+      403: invalidCredentials,
+      404: invalidCredentials,
     };
 
-    const message = context[err.status] || "Ocorreu um erro.";
-
-    toast.show({
-      description: message,
-      bgColor: "red.500",
-    });
+    const action = context[err.status];
+    action && action();
   };
 
   const mutation = authMutation(onSuccess, onError);
+
+  const invalidCredentials = () => {
+    setInvalid((prev) => ({
+      ...prev,
+      email: {
+        error: "",
+        invalid: true,
+      },
+      password: {
+        error: "",
+        invalid: true,
+      },
+    }));
+    toast.show({
+      description: "E-mail/Senha inválidos",
+      bgColor: "red.500",
+    });
+  };
 
   return {
     email,

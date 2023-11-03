@@ -10,8 +10,18 @@ import {
   View,
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
+import useSignup from "../../src/controllers/signup/useSignup";
 
 export default function SignUpPage() {
+  const {
+    data: { get, set },
+    handleSignup,
+    invalid,
+    seePassword,
+    toogleSeePassword,
+    loading
+  } = useSignup();
+
   return (
     <View flex={1} justifyContent={"center"} px={4} style={{ gap: 20 }}>
       <Center mb={4}>
@@ -26,6 +36,10 @@ export default function SignUpPage() {
         Bem vindo(a) treinador(a)!
       </Text>
       <InputComponent
+        value={get.name}
+        onChange={set.name}
+        invalid={invalid.name.invalid}
+        error={invalid.name.error}
         label="Nome"
         inputProps={{
           rounded: "full",
@@ -35,6 +49,10 @@ export default function SignUpPage() {
         placeholder="Nome e Sobrenome"
       />
       <InputComponent
+        value={get.email}
+        onChange={set.email}
+        invalid={invalid.email.invalid}
+        error={invalid.email.error}
         label="E-mail"
         inputProps={{
           rounded: "full",
@@ -44,6 +62,10 @@ export default function SignUpPage() {
         placeholder="seuemail@email.com"
       />
       <InputComponent
+        value={get.document}
+        onChange={set.document}
+        invalid={invalid.document.invalid}
+        error={invalid.document.error}
         label="Documento (CPF/CNPJ)"
         inputProps={{
           rounded: "full",
@@ -52,17 +74,31 @@ export default function SignUpPage() {
       />
 
       <InputComponent
+        invalid={invalid.password.invalid}
+        error={invalid.password.error}
         label="Senha"
+        onChange={set.password}
+        value={get.password}
+        secure={!seePassword}
         placeholder="*************"
         inputProps={{ autoCapitalize: "none", rounded: "full" }}
         icon={
           <IconButton
-            icon={<Icon as={Ionicons} name={"eye"} />}
+            icon={<Icon as={Ionicons} name={seePassword ? "eye" : "eye-off"} />}
             borderRadius="full"
+            onPress={toogleSeePassword}
           />
         }
       />
-      <Button mt={4} padding={4} rounded={"full"} w="full" bg="primary.700">
+      <Button
+        onPress={handleSignup}
+        mt={4}
+        padding={4}
+        rounded={"full"}
+        w="full"
+        bg="primary.700"
+        isLoading={loading}
+      >
         <Text fontFamily={"Inter-Bold"} color={"white"} fontSize={14}>
           CADASTRAR
         </Text>
