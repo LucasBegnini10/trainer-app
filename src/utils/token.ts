@@ -1,3 +1,3 @@
-import { jwtDecode } from "jwt-decode";
+import jwtDecode from "jwt-decode";
 
-export const decode = (token: string): string => jwtDecode(token);
+export const decode = (text: string) => jwtDecode(text);

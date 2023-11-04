@@ -5,6 +5,9 @@ import { useToast } from "native-base";
 import { authMutation } from "../../services/auth/authMutation";
 import { useUserStore } from "../../stores/useUserStore";
 import { set } from "../../utils/storage";
+import { decode } from "../../utils/token";
+import { getUser } from "../../services/user/userService";
+import { UserModel } from "../../models/models";
 
 const intialStateInvalid = {
   email: {
@@ -20,10 +23,15 @@ const intialStateInvalid = {
 export default function useLogin() {
   const toast = useToast();
   const item = useLocalSearchParams();
-  const setToken = useUserStore((state) => state.setToken);
+  const [setToken, setUser] = useUserStore((state) => [
+    state.setToken,
+    state.setUser,
+  ]);
 
   const [seePassword, setSeePassword] = useState(false);
-  const [email, setEmail] = useState((item?.email as string) || "begninilucas12@gmail.com");
+  const [email, setEmail] = useState(
+    (item?.email as string) || "begninilucas12@gmail.com"
+  );
   const [password, setPassword] = useState("Qyon@2022");
   const [saveData, setSaveData] = useState(false);
   const [invalid, setInvalid] = useState(intialStateInvalid);
@@ -94,7 +102,14 @@ export default function useLogin() {
 
   const onSuccess = async (content: { data: { token: string } }) => {
     const token = content.data.token;
+    const decoded = decode(token) as { id: string };
+
+    const userId = decoded.id;
+
+    const { user }: { user: UserModel } = await getUser(userId);
+
     setToken(token);
+    setUser(user);
 
     if (saveData) await set("@saveData", "true");
     router.push("/student/home");
