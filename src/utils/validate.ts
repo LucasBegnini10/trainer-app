@@ -7,3 +7,10 @@ export const emailIsValid = (email: string) => {
 
   return regex.test(email);
 };
+
+export const passwordIsValid = (pass: string) => {
+  const regex =
+    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+  return regex.test(pass);
+};

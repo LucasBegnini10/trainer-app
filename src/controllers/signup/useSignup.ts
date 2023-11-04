@@ -1,8 +1,10 @@
 import { useToast } from "native-base";
-import { emailIsValid, isEmpty } from "../../utils/validate";
+import { emailIsValid, isEmpty, passwordIsValid } from "../../utils/validate";
 import { useState } from "react";
 import { signUpMutation } from "../../services/auth/authMutation";
 import { router } from "expo-router";
+import { onlyNumbers } from "../../utils/string";
+import { applyMask } from "../../utils/mask";
 
 const defaultStateInvalid = { invalid: false, error: "" };
 const intialStateInvalid = {
@@ -34,13 +36,80 @@ export default function useSignup() {
   const setEmail = (email: string) =>
     setData((prev) => ({ ...prev, email: email }));
 
-  const setDocument = (document: string) =>
-    setData((prev) => ({ ...prev, document: document }));
+  const setDocument = (document: string) => {
+    const unmasked = onlyNumbers(document);
+    let masked = document;
+
+    if (unmasked.length === 11) {
+      masked = applyMask.cpf(unmasked);
+    } else if (unmasked.length === 14) {
+      masked = applyMask.cnpj(unmasked);
+    }
+
+    setData((prev) => ({ ...prev, document: masked }));
+  };
 
   const setPassword = (password: string) =>
     setData((prev) => ({ ...prev, password: password }));
 
   const toogleSeePassword = () => setSeePassword((prev) => !prev);
+
+  const handleSignup = () => {
+    if (validateFields()) {
+      mutation.mutate({
+        ...data,
+        document: onlyNumbers(data["document"]),
+      });
+    }
+  };
+
+  const onSuccess = (content: { status: number }) => {
+    if (content.status === 201) {
+      toast.show({
+        description: "Conta criada com sucesso",
+        bgColor: "green.500",
+      });
+      router.push({
+        pathname: "/login",
+        params: {
+          email: data["email"],
+        },
+      });
+    } else {
+      toast.show({
+        description: "Ocorreu um erro. Tente novamente mais tarde",
+        bgColor: "red.500",
+      });
+    }
+  };
+
+  const onError = (err: { status: number; data: unknown }) => {
+    console.log("err.data =>", err.data);
+    const actions = {
+      422: () => {
+        setInvalid((prev) => ({
+          ...prev,
+          document: {
+            invalid: true,
+            error: "Documento já existente",
+          },
+          email: {
+            invalid: true,
+            error: "E-mail já existente",
+          },
+        }));
+        toast.show({
+          description: "Dados já cadastrados",
+          bgColor: "red.500",
+        });
+      },
+    };
+
+    const action = actions[err.status];
+    action && action();
+  };
+
+  const mutation = signUpMutation(onSuccess, onError);
 
   const validateFields = () => {
     if (isEmpty(data["name"])) {
@@ -118,63 +187,25 @@ export default function useSignup() {
       return false;
     }
     resetInvalid();
+    if (!passwordIsValid(data["password"])) {
+      setInvalid((prev) => ({
+        ...prev,
+        password: {
+          error:
+            "A senha precisa conter pelo menos 8 caracteres, 1 número, 1 maiúscula, 1 minúscula e 1 caractere especial",
+          invalid: true,
+        },
+      }));
+      toast.show({
+        description: "Oops! Preencha a senha corretamente",
+        bgColor: "red.500",
+      });
+      return false;
+    }
+    resetInvalid();
 
     return true;
   };
-
-  const handleSignup = () => {
-    if (validateFields()) {
-      mutation.mutate(data);
-    }
-  };
-
-  const onSuccess = (content: { status: number }) => {
-    if (content.status === 201) {
-      toast.show({
-        description: "Conta criada com sucesso",
-        bgColor: "green.500",
-      });
-      router.push({
-        pathname: "/login",
-        params: {
-          email: data["email"],
-        },
-      });
-    } else {
-      toast.show({
-        description: "Ocorreu um erro. Tente novamente mais tarde",
-        bgColor: "red.500",
-      });
-    }
-  };
-
-  const onError = (err: { status: number; data: unknown }) => {
-    console.log("err.data =>", err.data);
-    const actions = {
-      422: () => {
-        setInvalid((prev) => ({
-          ...prev,
-          document: {
-            invalid: true,
-            error: "Documento já existente",
-          },
-          email: {
-            invalid: true,
-            error: "E-mail já existente",
-          },
-        }));
-        toast.show({
-          description: "Dados já cadastrados",
-          bgColor: "red.500",
-        });
-      },
-    };
-
-    const action = actions[err.status];
-    action && action();
-  };
-
-  const mutation = signUpMutation(onSuccess, onError);
 
   return {
     invalid,
