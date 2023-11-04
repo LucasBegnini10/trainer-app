@@ -1,9 +1,18 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Avatar, HStack, Heading, VStack, Text, IconButton } from "native-base";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useUserStore } from "../../../stores/useUserStore";
+import { router } from "expo-router";
 
 export default function Header() {
   const insets = useSafeAreaInsets();
+  const clear = useUserStore((state) => state.clear);
+
+  const logout = async () => {
+    await clear();
+    router.replace("/login");
+  };
+
   return (
     <HStack
       bg="white"
@@ -28,6 +37,7 @@ export default function Header() {
         </VStack>
       </HStack>
       <IconButton
+        onPress={logout}
         colorScheme="red"
         _icon={{
           as: Ionicons,

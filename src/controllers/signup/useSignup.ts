@@ -149,6 +149,7 @@ export default function useSignup() {
   };
 
   const onError = (err: { status: number; data: unknown }) => {
+    console.log("err.data =>", err.data);
     const actions = {
       422: () => {
         setInvalid((prev) => ({
