@@ -23,8 +23,8 @@ export default function useLogin() {
   const setToken = useUserStore((state) => state.setToken);
 
   const [seePassword, setSeePassword] = useState(false);
-  const [email, setEmail] = useState((item?.email as string) || "");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState((item?.email as string) || "begninilucas12@gmail.com");
+  const [password, setPassword] = useState("Qyon@2022");
   const [saveData, setSaveData] = useState(false);
   const [invalid, setInvalid] = useState(intialStateInvalid);
 

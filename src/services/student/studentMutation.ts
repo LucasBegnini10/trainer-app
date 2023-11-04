@@ -1,12 +1,12 @@
 import { useMutation } from "@tanstack/react-query";
-import { createTrainerService } from "./trainerService";
+import { createStudentService } from "./studentService";
 
-export function createTrainerMutation(
+export function createStudentMutation(
   cbSuccess: (content) => void,
   cbError: (err) => void
 ) {
   return useMutation({
-    mutationFn: createTrainerService,
+    mutationFn: createStudentService,
     onError: cbError,
     onSuccess: cbSuccess,
   });

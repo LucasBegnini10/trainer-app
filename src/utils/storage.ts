@@ -6,3 +6,5 @@ export const set = async (key: string, value: string) =>
 export const get = async (key: string) => await AsyncStorage.getItem(key);
 
 export const clear = async () => await AsyncStorage.clear();
+
+export const keys = async () => await AsyncStorage.getAllKeys();
