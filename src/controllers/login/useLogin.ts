@@ -3,6 +3,8 @@ import { useState } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import { useToast } from "native-base";
 import { authMutation } from "../../services/auth/authMutation";
+import { useUserStore } from "../../stores/useUserStore";
+import { set } from "../../utils/storage";
 
 const intialStateInvalid = {
   email: {
@@ -18,9 +20,10 @@ const intialStateInvalid = {
 export default function useLogin() {
   const toast = useToast();
   const item = useLocalSearchParams();
+  const setToken = useUserStore((state) => state.setToken);
 
   const [seePassword, setSeePassword] = useState(false);
-  const [email, setEmail] = useState(item?.email as string || "");
+  const [email, setEmail] = useState((item?.email as string) || "");
   const [password, setPassword] = useState("");
   const [saveData, setSaveData] = useState(false);
   const [invalid, setInvalid] = useState(intialStateInvalid);
@@ -89,8 +92,12 @@ export default function useLogin() {
     }
   };
 
-  const onSuccess = () => {
-    console.log("SUCCESSO");
+  const onSuccess = async (content: { data: { token: string } }) => {
+    const token = content.data.token;
+    setToken(token);
+
+    if (saveData) await set("@saveData", "true");
+    router.push("/student/home");
   };
 
   const onError = (err: { status: number }) => {
