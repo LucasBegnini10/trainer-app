@@ -8,3 +8,18 @@ export const getUser = async (id: string) => {
       throw err?.response || err;
     });
 };
+
+interface IUpdateUser {
+  document: string;
+  name: string;
+  email: string;
+}
+
+export const updateUserSerice = async (userUpdate: IUpdateUser) => {
+  return await api
+    .patch(`/users/${userUpdate.email}`)
+    .then((res) => res?.data || res)
+    .catch((err) => {
+      throw err?.response || err;
+    });
+};

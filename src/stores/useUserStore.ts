@@ -7,6 +7,7 @@ import { clear } from "../utils/storage";
 interface UserStoreType {
   user: UserModel;
   token: string;
+  getId: () => string;
   setToken: (token: string) => void;
   setUser: (user: UserModel) => void;
   clear: () => Promise<void>;
@@ -14,7 +15,7 @@ interface UserStoreType {
 
 export const useUserStore = create<UserStoreType>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       user: null,
       token: null,
       setToken: (token: string) => set((state) => ({ ...state, token: token })),
@@ -26,6 +27,9 @@ export const useUserStore = create<UserStoreType>()(
           token: null,
         }));
       },
+      getId: () => {
+        return ""
+      }
     }),
     {
       name: "user-store",

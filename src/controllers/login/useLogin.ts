@@ -102,13 +102,11 @@ export default function useLogin() {
 
   const onSuccess = async (content: { data: { token: string } }) => {
     const token = content.data.token;
-    const decoded = decode(token) as { id: string };
+    setToken(token);
 
-    const userId = decoded.id;
-
+    const { id: userId } = decode(token) as { id: string };
     const { user }: { user: UserModel } = await getUser(userId);
 
-    setToken(token);
     setUser(user);
 
     if (saveData) await set("@saveData", "true");
