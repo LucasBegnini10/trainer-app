@@ -23,3 +23,12 @@ export const updateUserSerice = async (userUpdate: IUpdateUser) => {
       throw err?.response || err;
     });
 };
+
+export const recoveryPassword = async (email: string) => {
+  return await api
+    .post(`/auth/recovery-password/`, email)
+    .then((res) => res?.data || res)
+    .catch((err) => {
+      throw err?.response || err;
+    });
+};
