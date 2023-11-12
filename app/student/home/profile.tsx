@@ -2,6 +2,7 @@ import { Avatar, Button, Text, VStack, View } from "native-base";
 import InputComponent from "../../../src/components/common/input/input";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import useProfile from "../../../src/controllers/profile/useProfile";
+import UpdatePasswordComp from "../../../src/components/profile/updatePassword";
 
 export default function ProfilePage() {
   const insets = useSafeAreaInsets();
@@ -14,6 +15,7 @@ export default function ProfilePage() {
     setEmail,
     setName,
     loading,
+    updatePassword,
   } = useProfile();
 
   return (
@@ -76,6 +78,7 @@ export default function ProfilePage() {
         borderColor={"primary.800"}
         rounded={"full"}
         w="full"
+        onPress={updatePassword.onShow}
       >
         <Text fontFamily={"Inter-Bold"} color={"primary.800"} fontSize={14}>
           ALTERAR SENHA
@@ -95,6 +98,11 @@ export default function ProfilePage() {
           SAIR
         </Text>
       </Button>
+
+      <UpdatePasswordComp
+        isOpen={updatePassword.showUpdatePassword}
+        onClose={updatePassword.onClose}
+      />
     </View>
   );
 }

@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { recoveryPassword, updateUserSerice } from "./userService";
+import { recoveryPassword, updatePassword, updateUserSerice } from "./userService";
 
 export function updateUserMutation(
   cbSuccess: (content) => void,
@@ -18,6 +18,17 @@ export function recoveryPasswordMutation(
 ) {
   return useMutation({
     mutationFn: recoveryPassword,
+    onError: cbError,
+    onSuccess: cbSuccess,
+  });
+}
+
+export function updatePasswordMutation(
+  cbSuccess: (content) => void,
+  cbError: (err) => void
+) {
+  return useMutation({
+    mutationFn: updatePassword,
     onError: cbError,
     onSuccess: cbSuccess,
   });

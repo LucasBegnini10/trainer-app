@@ -22,6 +22,8 @@ export default function useProfile() {
   const [userData, setUserData] = useState<UserModel>(user);
   const [invalid, setInvalid] = useState(initialStateInvalid);
 
+  const [showUpdatePassword, setShowUpdatePassword] = useState(false)
+
   const setName = (name: string) =>
     setUserData((prev) => ({
       ...prev,
@@ -116,6 +118,9 @@ export default function useProfile() {
     router.replace("/login");
   };
 
+  const onShowUpdatePassword = () => setShowUpdatePassword(true)
+  const onCloseUpdatePassword = () => setShowUpdatePassword(false) 
+
   return {
     userData,
     logout,
@@ -125,5 +130,10 @@ export default function useProfile() {
     setEmail,
     setDocument,
     loading: mutation.isLoading,
+    updatePassword: {
+      onShow: onShowUpdatePassword,
+      onClose: onCloseUpdatePassword,
+      showUpdatePassword
+    }
   };
 }

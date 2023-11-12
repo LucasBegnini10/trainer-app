@@ -32,3 +32,19 @@ export const recoveryPassword = async (email: string) => {
       throw err?.response || err;
     });
 };
+
+export const updatePassword = async (bodyUpdatePassword: {
+  email: string;
+  actualPassword: string;
+  newPassword: string;
+}) => {
+  return await api
+    .post(
+      `users/${bodyUpdatePassword.email}/change-password`,
+      bodyUpdatePassword
+    )
+    .then((res) => res?.data || res)
+    .catch((err) => {
+      throw err?.response || err;
+    });
+};
