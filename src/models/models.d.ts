@@ -6,11 +6,20 @@ export interface UserModel {
   password: string;
   created_at: Date;
   updated_at: Date;
+  Students:   Array<Student> | null;
+  Trainers:   Array<Trainer> | null;
 }
 
-export interface TrainerModel extends Usermodel {}
+export interface Trainer {
+  trainer_id: string;
+  user_id:    string;
+}
 
-export interface StudentModel extends Usermodel {}
+export interface Student {
+  student_id: string;
+  user_id:    string;
+}
+
 
 export interface TrainerStudentsModel {
   trainer_id: string;

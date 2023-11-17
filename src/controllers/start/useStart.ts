@@ -3,10 +3,12 @@ import { useDisclose } from "native-base";
 import { useEffect } from "react";
 import { get } from "../../utils/storage";
 import { useUserStore } from "../../stores/useUserStore";
+import { navigationUserByUser } from "../../utils/navigation";
 
 export default function useStart() {
   const disclose = useDisclose();
   const token = useUserStore((state) => state.token);
+  const user = useUserStore((state) => state.user);
 
   const navigateLogin = () => router.push("/login");
   const navigateSignup = () => router.push("/signup");
@@ -20,8 +22,7 @@ export default function useStart() {
     const userSavedData = saveData && JSON.parse(saveData);
 
     if (userSavedData && token) {
-      //TODO: get user data and type
-      router.push("/student/home");
+      navigationUserByUser(user);
     }
   };
 

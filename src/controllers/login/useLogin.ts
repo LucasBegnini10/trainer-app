@@ -8,6 +8,7 @@ import { set } from "../../utils/storage";
 import { decode } from "../../utils/token";
 import { getUser } from "../../services/user/userService";
 import { UserModel } from "../../models/models";
+import { navigationUserByUser } from "../../utils/navigation";
 
 const intialStateInvalid = {
   email: {
@@ -30,9 +31,9 @@ export default function useLogin() {
 
   const [seePassword, setSeePassword] = useState(false);
   const [email, setEmail] = useState(
-    (item?.email as string) || "begninilucas12@gmail.com"
+    (item?.email as string) || "trainerteste@teste.com"
   );
-  const [password, setPassword] = useState("Qyon@2022");
+  const [password, setPassword] = useState("Treinador@123");
   const [saveData, setSaveData] = useState(false);
   const [invalid, setInvalid] = useState(intialStateInvalid);
 
@@ -107,10 +108,9 @@ export default function useLogin() {
     const { id: userId } = decode(token) as { id: string };
     const { user }: { user: UserModel } = await getUser(userId);
 
-    setUser(user);
-
     if (saveData) await set("@saveData", "true");
-    router.push("/student/home");
+
+    navigationUserByUser(user);
   };
 
   const onError = (err: { status: number }) => {
