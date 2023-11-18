@@ -1,6 +1,7 @@
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Drawer } from "expo-router/drawer";
 import {
+  Avatar,
   Divider,
   HStack,
   Heading,
@@ -17,6 +18,8 @@ import {
 import { TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useUserStore } from "../../../src/stores/useUserStore";
+import { getInitials } from "../../../src/utils/string";
 
 const routes = [
   { name: "index", href: "home", icon: "barbell", title: "Exercícios" },
@@ -26,10 +29,18 @@ const routes = [
     icon: "ios-people-sharp",
     title: "Alunos",
   },
+  {
+    name: "profile",
+    href: "home/profile",
+    icon: "person-circle-outline",
+    title: "Perfil",
+  },
 ];
 
 export default function LayoutHomeTrainer() {
   const insets = useSafeAreaInsets();
+
+  const user = useUserStore((state) => state.user);
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
@@ -39,19 +50,17 @@ export default function LayoutHomeTrainer() {
             <View flex={1}>
               <DrawerContentScrollView {...props}>
                 <VStack px={4}>
-                  <Image
-                    alt="Image user"
-                    source={{
-                      uri: "https://static.vecteezy.com/system/resources/thumbnails/009/292/244/small/default-avatar-icon-of-social-media-user-vector.jpg",
-                    }}
+                  <Avatar
                     style={{
-                      height: 80,
-                      width: 80,
-                      borderRadius: 40,
+                      height: 60,
+                      width: 60,
                       marginBottom: 10,
                     }}
-                  />
-                  <Heading>John Doe</Heading>
+                    bg="primary.800"
+                  >
+                    {getInitials(user.name)}
+                  </Avatar>
+                  <Heading>{user.name}</Heading>
                   <HStack>
                     <Text>Treinador</Text>
                   </HStack>
