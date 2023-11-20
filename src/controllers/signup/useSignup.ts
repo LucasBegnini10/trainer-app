@@ -81,7 +81,6 @@ export default function useSignup() {
   };
 
   const onError = (err: { status: number; data: unknown }) => {
-    console.log("err.data =>", err.data);
     const actions = {
       422: () => {
         setInvalid((prev) => ({
@@ -113,12 +112,12 @@ export default function useSignup() {
       setInvalid((prev) => ({
         ...prev,
         name: {
-          error: "Preencha seu nome",
+          error: "Preencha o campo nome",
           invalid: true,
         },
       }));
       toast.show({
-        description: "Oops! Preencha seu nome",
+        description: "Oops! Preencha o campo nome",
         bgColor: "red.500",
       });
       return false;
@@ -128,12 +127,12 @@ export default function useSignup() {
       setInvalid((prev) => ({
         ...prev,
         email: {
-          error: "Preencha seu e-mail",
+          error: "Preencha o campo e-mail",
           invalid: true,
         },
       }));
       toast.show({
-        description: "Oops! Preencha seu e-mail",
+        description: "Oops! Preencha o campo e-mail",
         bgColor: "red.500",
       });
       return false;
@@ -143,12 +142,12 @@ export default function useSignup() {
       setInvalid((prev) => ({
         ...prev,
         document: {
-          error: "Preencha seu documento",
+          error: "Preencha o campo documento",
           invalid: true,
         },
       }));
       toast.show({
-        description: "Oops! Preencha seu documento",
+        description: "Oops! Preencha o campo documento",
         bgColor: "red.500",
       });
       return false;
@@ -158,12 +157,12 @@ export default function useSignup() {
       setInvalid((prev) => ({
         ...prev,
         password: {
-          error: "Preencha sua senha",
+          error: "Preencha o campo senha",
           invalid: true,
         },
       }));
       toast.show({
-        description: "Oops! Preencha sua senha",
+        description: "Oops! Preencha o campo senha",
         bgColor: "red.500",
       });
       return false;
@@ -224,5 +223,7 @@ export default function useSignup() {
     },
     seePassword,
     toogleSeePassword,
+    validateFields,
+    onError
   };
 }

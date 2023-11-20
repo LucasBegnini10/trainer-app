@@ -15,7 +15,8 @@ import { Ionicons } from "@expo/vector-icons";
 import InputComponent from "../../../src/components/common/input/input";
 
 export default function CreateStudent() {
-  const { user, student, invalid, loading } = useCreateStudent();
+  const { user, student, invalid, loading, handleCreateStudent } =
+    useCreateStudent();
   return (
     <>
       <HeaderCreateStudent user={user} />
@@ -33,6 +34,11 @@ export default function CreateStudent() {
           onChange={student.set.email}
           invalid={invalid.email.invalid}
           error={invalid.email.error}
+          inputProps={{
+            autoCapitalize: "none",
+            type: "text",
+            keyboardType: "email-address",
+          }}
         />
         <InputComponent
           label="Documento"
@@ -43,11 +49,12 @@ export default function CreateStudent() {
         />
         <InputComponent
           label="Senha"
+          onChange={student.set.password}
           value={student.get.password}
           invalid={invalid.password.invalid}
           error={invalid.password.error}
         />
-        <Button mt={4} padding={4} rounded={"full"} w="full" bg="primary.700">
+        <Button isLoading={loading} onPress={handleCreateStudent} mt={4} padding={4} rounded={"full"} w="full" bg="primary.700">
           <Text fontFamily={"Inter-Bold"} color={"white"} fontSize={14}>
             CADASTRAR
           </Text>

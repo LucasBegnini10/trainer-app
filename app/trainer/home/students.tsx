@@ -9,24 +9,40 @@ import {
   Heading,
   Icon,
   Input,
+  Spinner,
+  Text,
   VStack,
+  View,
 } from "native-base";
+import useStudents from "../../../src/controllers/trainer/useStudents";
+import { getInitials } from "../../../src/utils/string";
 
 export default function StudentsList() {
-  
-  const handleGoCreateStudent = () => router.push("/trainer/createStudent")
+  const handleGoCreateStudent = () => router.push("/trainer/createStudent");
+  const { students, isLoading } = useStudents();
 
   return (
     <>
       <FlatList
         px={4}
         contentContainerStyle={{ paddingBottom: 20 }}
-        data={[..."OI TUDO BEM"]}
+        data={students}
+        ListEmptyComponent={
+          <View>
+            {isLoading ? (
+              <Spinner />
+            ) : (
+              <Text color={"gray.600"} mt={2}>
+                Nenhum aluno encontrado.
+              </Text>
+            )}
+          </View>
+        }
         ItemSeparatorComponent={Divider}
         bg="white"
         ListHeaderComponent={
           <Input
-            placeholder="Pesquisar Anuo"
+            placeholder="Pesquisar Aluno"
             w="100%"
             my={6}
             py={3}
@@ -40,12 +56,12 @@ export default function StudentsList() {
             }
           />
         }
-        renderItem={() => {
+        renderItem={({item}) => {
           return (
             <HStack space={4} px={6} py={4} alignItems={"center"} bg="white">
-              <Avatar bg="primary.800">LB</Avatar>
+              <Avatar bg="primary.800">{getInitials(item.name)}</Avatar>
               <VStack space={1}>
-                <Heading fontSize={"md"}>Lucas Begnini</Heading>
+                <Heading fontSize={"md"}>{item.name}</Heading>
               </VStack>
             </HStack>
           );

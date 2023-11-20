@@ -6,8 +6,8 @@ export interface UserModel {
   password: string;
   created_at: Date;
   updated_at: Date;
-  Students:   Array<Student> | null;
-  Trainers:   Array<Trainer> | null;
+  Students:   Student | null;
+  Trainers:   Trainer | null;
 }
 
 export interface Trainer {
