@@ -107,6 +107,7 @@ export default function useLogin() {
 
     const { id: userId } = decode(token) as { id: string };
     const { user }: { user: UserModel } = await getUser(userId);
+    setUser(user);
 
     if (saveData) await set("@saveData", "true");
 
@@ -155,5 +156,6 @@ export default function useLogin() {
     saveData,
     setSaveData,
     loading: mutation.isLoading,
+    onSuccess
   };
 }

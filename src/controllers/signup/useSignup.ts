@@ -2,9 +2,11 @@ import { useToast } from "native-base";
 import { emailIsValid, isEmpty, passwordIsValid } from "../../utils/validate";
 import { useState } from "react";
 import { signUpMutation } from "../../services/auth/authMutation";
-import { router } from "expo-router";
 import { onlyNumbers } from "../../utils/string";
 import { applyMask } from "../../utils/mask";
+import { authService } from "../../services/auth/authService";
+import { createTrainerService } from "../../services/trainer/trainerService";
+import useLogin from "../login/useLogin";
 
 const defaultStateInvalid = { invalid: false, error: "" };
 const intialStateInvalid = {
@@ -23,6 +25,7 @@ const intialStateData = {
 
 export default function useSignup() {
   const toast = useToast();
+  const { onSuccess: successlogin } = useLogin();
 
   const [invalid, setInvalid] = useState(intialStateInvalid);
   const [data, setData] = useState(intialStateData);
@@ -63,24 +66,20 @@ export default function useSignup() {
     }
   };
 
-  const onSuccess = (content: { status: number }) => {
-    if (content.status === 201) {
-      toast.show({
-        description: "Conta criada com sucesso",
-        bgColor: "green.500",
-      });
-      router.push({
-        pathname: "/login",
-        params: {
-          email: data["email"],
-        },
-      });
-    } else {
-      toast.show({
-        description: "Ocorreu um erro. Tente novamente mais tarde",
-        bgColor: "red.500",
-      });
-    }
+  const onSuccess = async () => {
+    toast.show({
+      description: "Conta criada com sucesso",
+      bgColor: "green.500",
+    });
+
+    const {
+      data: { token },
+    } = await authService({ email: data.email, password: data.password });
+
+    console.log({token})
+
+    // await createTrainerService(data.email, token);
+    // successlogin({ data: { token } });
   };
 
   const onError = (err: { status: number; data: unknown }) => {
