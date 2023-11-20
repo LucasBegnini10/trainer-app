@@ -114,8 +114,8 @@ export default function useProfile() {
   const mutation = updateUserMutation(onSuccess, onError);
 
   const logout = async () => {
-    await clear();
     router.replace("/login");
+    await clear();
   };
 
   const onShowUpdatePassword = () => setShowUpdatePassword(true)

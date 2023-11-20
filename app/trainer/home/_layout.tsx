@@ -20,6 +20,8 @@ import { Ionicons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useUserStore } from "../../../src/stores/useUserStore";
 import { getInitials } from "../../../src/utils/string";
+import { router } from "expo-router";
+import { clear } from "../../../src/utils/storage";
 
 const routes = [
   { name: "index", href: "home", icon: "barbell", title: "Exercícios" },
@@ -41,6 +43,11 @@ export default function LayoutHomeTrainer() {
   const insets = useSafeAreaInsets();
 
   const user = useUserStore((state) => state.user);
+
+  const logout = async () => {
+    router.replace("/login");
+    await clear();
+  };
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
@@ -72,7 +79,7 @@ export default function LayoutHomeTrainer() {
               </DrawerContentScrollView>
               <Divider my={4} />
               <View px={4} style={{ paddingBottom: insets.bottom + 20 }}>
-                <TouchableOpacity onPress={() => {}}>
+                <TouchableOpacity onPress={logout}>
                   <HStack space={4} alignItems={"center"}>
                     <Icon
                       as={Ionicons}
