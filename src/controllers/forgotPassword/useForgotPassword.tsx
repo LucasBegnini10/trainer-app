@@ -16,7 +16,7 @@ export default function useForgotPassword() {
     router.push("/login");
   };
 
-  const onError = () => {
+  const onError = (err) => {
     toast.show({
       description:
         "Não foi possível recuperar sua senha. Tente novamente mais tarde",

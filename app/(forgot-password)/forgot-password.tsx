@@ -1,6 +1,7 @@
-import { Button, Center, Image, Link, Text, View } from "native-base";
+import { Button, Center, Image, Text, View } from "native-base";
 import InputComponent from "../../src/components/common/input/input";
 import useForgotPassword from "../../src/controllers/forgotPassword/useForgotPassword";
+import { Link } from "expo-router";
 
 export default function ForgotPassword() {
   const { handleRecoveryPassword, loading, email, setEmail } =

@@ -26,7 +26,7 @@ export const updateUserSerice = async (userUpdate: IUpdateUser) => {
 
 export const recoveryPassword = async (email: string) => {
   return await api
-    .post(`/auth/recovery-password/`, email)
+    .post(`/auth/recovery-password/`, {email})
     .then((res) => res?.data || res)
     .catch((err) => {
       throw err?.response || err;
