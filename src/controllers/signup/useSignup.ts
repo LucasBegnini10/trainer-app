@@ -76,10 +76,8 @@ export default function useSignup() {
       data: { token },
     } = await authService({ email: data.email, password: data.password });
 
-    console.log({token})
-
-    // await createTrainerService(data.email, token);
-    // successlogin({ data: { token } });
+    await createTrainerService(data.email, token);
+    successlogin({ data: { token } });
   };
 
   const onError = (err: { status: number; data: unknown }) => {
