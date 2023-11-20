@@ -18,19 +18,19 @@ export default function Header() {
 
   return (
     <HStack
-      bg="white"
+      bg="brand.bg"
       justifyContent={"space-between"}
       px={8}
       pb={4}
       pt={`${insets.top + 20}px`}
     >
       <HStack alignItems={"center"} space={4}>
-        <Avatar bg="primary.800" size={"md"}>
-          {getInitials(user.name)}
+        <Avatar bg="brand.primary" size={"md"}>
+          <Text>{getInitials(user.name)}</Text>
         </Avatar>
         <VStack>
-          <Heading fontSize={"md"}>{user.name}</Heading>
-          <Text fontSize={"xs"} color="gray.400">
+          <Heading fontSize={"md"} color={"white"}>{user.name}</Heading>
+          <Text fontSize={"xs"} color="white">
             Aluno
           </Text>
         </VStack>

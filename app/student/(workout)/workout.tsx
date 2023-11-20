@@ -23,20 +23,25 @@ export default function Workout() {
   const insets = useSafeAreaInsets();
 
   return (
-    <View style={{ paddingTop: insets.top }}>
+    <View bg="brand.bg" style={{ paddingTop: insets.top }}>
       <HStack alignItems={"center"} space={3} p={3}>
         <IconButton
           onPress={goBack}
-          color="black"
+          color="white"
           size={"sm"}
           _icon={{
-            color: "black",
+            color: "white",
             size: "md",
             as: Ionicons,
             name: "arrow-back",
           }}
+          _pressed={{
+            bg: "brand.gray",
+          }}
         />
-        <Heading>Treino de Peito</Heading>
+        <Heading color="white" fontFamily={"Roboto-Bold"}>
+          Treino de Peito
+        </Heading>
       </HStack>
       <Video
         ref={video}
@@ -70,6 +75,7 @@ export default function Workout() {
       <Divider my={3} />
 
       <HStack
+        bg="brand.bg"
         alignItems={"center"}
         justifyContent={"space-between"}
         w="full"
@@ -78,37 +84,43 @@ export default function Workout() {
         <Button
           py={4}
           px={8}
-          borderColor={"primary.800"}
+          w={"40%"}
+          borderColor={"brand.primary"}
+          borderWidth={1}
           rounded={"full"}
-          bg="white"
+          bg={"brand.bg"}
           leftIcon={
             <Icon
               as={Ionicons}
-              color="primary.800"
+              color="brand.primary"
               name="arrow-back"
               size="sm"
             />
           }
         >
-          <Text fontFamily={"Roboto-Bold"} color={"primary.800"} fontSize={14}>
+          <Text
+            fontFamily={"Roboto-Bold"}
+            color={"brand.primary"}
+            fontSize={14}
+          >
             ANTERIOR
           </Text>
         </Button>
         <Button
           py={4}
           px={8}
+          w={"40%"}
           rounded={"full"}
-          bg="primary.700"
           rightIcon={
             <Icon
               as={Ionicons}
-              color="white"
+              color="brand.bg"
               name="arrow-forward"
               size="sm"
             />
           }
         >
-          <Text fontFamily={"Roboto-Bold"} color={"white"} fontSize={14}>
+          <Text fontFamily={"Roboto-Bold"} color={"brand.bg"} fontSize={14}>
             PRÓXIMO
           </Text>
         </Button>
@@ -120,6 +132,7 @@ export default function Workout() {
 const ListExercises = () => {
   return (
     <FlatList
+      bg="brand.bg"
       data={[1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5]}
       renderItem={() => <ExerciseItem name="Supino Reto" />}
     />
@@ -128,8 +141,10 @@ const ListExercises = () => {
 
 export const WorkoutDescription = () => (
   <VStack p={4}>
-    <Heading>Treino de Peito</Heading>
-    <Text mt={2} color="grey">
+    <Heading color={"white"} fontFamily={"Roboto-Bold"}>
+      Treino de Peito
+    </Heading>
+    <Text mt={2} color="white">
       Contrary to popular belief, Lorem Ipsum is not simply random text. It has
       roots in a piece of classical Latin literature from 45 BC, making it over
       2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney

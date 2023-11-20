@@ -1,5 +1,4 @@
 import { Ionicons } from "@expo/vector-icons";
-import { useLocalSearchParams } from "expo-router";
 import {
   Avatar,
   Button,
@@ -22,28 +21,31 @@ export default function WorkoutDetails() {
   const { goBack, goWorkout } = useWorkoutDetails();
 
   return (
-    <View style={{ paddingTop: insets.top }}>
+    <View bg={"brand.bg"} style={{ paddingTop: insets.top }}>
       <HStack alignItems={"center"} space={3} p={3}>
         <IconButton
           onPress={goBack}
-          color="black"
+          color="white"
           size={"sm"}
           _icon={{
-            color: "black",
+            color: "white",
             size: "md",
             as: Ionicons,
             name: "arrow-back",
           }}
+          _pressed={{
+            bg: "brand.gray"
+          }}
         />
-        <Heading>Treino de Peito</Heading>
+        <Heading color="white" fontFamily={"Roboto-Bold"}>Treino de Peito</Heading>
       </HStack>
       <FlatList
         contentContainerStyle={{
-          backgroundColor: "#f1f1f1",
+          backgroundColor: "#373542",
           paddingBottom: 160,
         }}
         ListHeaderComponent={
-          <View>
+          <View bg={"brand.bg"}>
             <Image
               source={{
                 uri: "https://p2.trrsf.com/image/fget/cf/1200/630/middle/images.terra.com/2023/04/05/75886402-treino-de-forca-1.jpg",
@@ -64,12 +66,14 @@ export default function WorkoutDetails() {
             px={6}
             py={4}
             alignItems={"center"}
-            bg="white"
+            bg="brand.bg"
           >
-            <Avatar bg="primary.800">SP</Avatar>
+            <Avatar bg="brand.primary">
+              <Text fontSize={"md"}>SP</Text>
+            </Avatar>
             <VStack space={1}>
-              <Heading fontSize={"md"}>Supino Reto</Heading>
-              <Text fontSize={"xs"} color="grey">
+              <Heading fontSize={"md"} color={"white"} fontFamily={"Roboto-Bold"}>Supino Reto</Heading>
+              <Text fontSize={"xs"} color="white">
                 Descriçāo do Treino
               </Text>
             </VStack>
@@ -79,12 +83,11 @@ export default function WorkoutDetails() {
       <Center position="absolute" bottom={24} w="full">
         <Button
           padding={4}
-          rounded={"full"}
           w="80"
-          bg="primary.700"
+          rounded={"full"}
           onPress={goWorkout}
         >
-          <Text fontFamily={"Roboto-Bold"} color={"white"} fontSize={14}>
+          <Text fontFamily={"Roboto-Bold"} color={"brand.bg"} fontSize={16}>
             INICIAR
           </Text>
         </Button>

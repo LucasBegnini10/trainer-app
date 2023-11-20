@@ -38,7 +38,7 @@ export default function Layout() {
       <QueryClientProvider client={queryClient}>
         <NativeBaseProvider colorModeManager={colorModeManager} theme={theme}>
           <StatusBar style="auto" />
-          <Slot />
+          <Slot/>
         </NativeBaseProvider>
       </QueryClientProvider>
     </SafeAreaProvider>

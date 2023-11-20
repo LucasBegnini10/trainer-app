@@ -53,12 +53,12 @@ export default function TabsComponent({ tabs }: TabProps) {
           });
           const color =
             index === i
-              ? useColorModeValue("#000", "#e5e5e5")
-              : useColorModeValue("#1f2937", "#a1a1aa");
+              ? "white"
+              : "white";
           const borderColor =
             index === i
-              ? "cyan.500"
-              : useColorModeValue("coolGray.200", "gray.400");
+              ? "brand.primary"
+              : "brand.bg";
           return (
             <Box
               key={i}
@@ -70,13 +70,13 @@ export default function TabsComponent({ tabs }: TabProps) {
             >
               <Pressable
                 onPress={() => {
-                  console.log(i);
                   setIndex(i);
                 }}
               >
                 <Animated.Text
                   style={{
                     color,
+                    fontWeight: "bold",
                   }}
                 >
                   {route.title}

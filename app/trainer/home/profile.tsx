@@ -26,13 +26,10 @@ export default function ProfilePage() {
       flex={1}
       alignItems={"center"}
       justifyContent={"center"}
-      bg="white"
+      bg="brand.bg"
       px={4}
     >
-      <Avatar
-        bg="green.500"
-        size={"xl"}
-      >
+      <Avatar bg="brand.primary" size={"xl"}>
         {getInitials(userData.name)}
       </Avatar>
 
@@ -60,27 +57,21 @@ export default function ProfilePage() {
       <Button
         isLoading={loading}
         onPress={handleUpdateUser}
-        bg={"primary.800"}
         mt={6}
-        padding={4}
-        rounded={"full"}
-        w="full"
       >
-        <Text fontFamily={"Roboto-Bold"} color={"white"} fontSize={14}>
+        <Text fontFamily={"Roboto-Bold"} color={"brand.bg"} fontSize={14}>
           SALVAR
         </Text>
       </Button>
 
       <Button
         mt={6}
-        padding={4}
-        variant={"outline"}
-        borderColor={"primary.800"}
-        rounded={"full"}
-        w="full"
+        borderColor={"brand.primary"}
+        borderWidth={1}
+        bg="brand.bg"
         onPress={updatePassword.onShow}
       >
-        <Text fontFamily={"Roboto-Bold"} color={"primary.800"} fontSize={14}>
+        <Text fontFamily={"Roboto-Bold"} color={"brand.primary"} fontSize={14}>
           ALTERAR SENHA
         </Text>
       </Button>
@@ -89,9 +80,7 @@ export default function ProfilePage() {
         mt={20}
         variant={"outline"}
         borderColor={"red.700"}
-        padding={4}
-        rounded={"full"}
-        w="full"
+        bg="brand.bg"
         onPress={logout}
       >
         <Text fontFamily={"Roboto-Bold"} color={"red.700"} fontSize={14}>

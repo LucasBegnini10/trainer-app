@@ -20,7 +20,7 @@ interface CardProps {
 
 export default function Card(props: CardProps) {
   return (
-    <Button variant={"unstyled"} p={0} onPress={props.onClick}>
+    <Button bg="white" padding={0} onPress={props.onClick}>
       <Box alignItems="center">
         <Box
           rounded="lg"

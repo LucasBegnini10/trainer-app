@@ -16,6 +16,9 @@ export default function LayoutHome() {
           key={item.name}
           name={item.name}
           options={{
+            tabBarStyle: {
+              backgroundColor: "#12111f"
+            },
             href: item.href,
             tabBarShowLabel: false,
             headerShown: item.showHeader,
@@ -28,7 +31,7 @@ export default function LayoutHome() {
                   as={Ionicons}
                   name={item.icon}
                   size={"lg"}
-                  color={focused ? "primary.800" : "gray.800"}
+                  color={focused ? "brand.primary" : "white"}
                 />
               );
             },
