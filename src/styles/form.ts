@@ -28,12 +28,12 @@ export const styles = StyleSheet.create({
   },
 
   title: {
-    fontFamily: "Inter-Bold",
+    fontFamily: "Roboto-Bold",
     fontSize: 22,
   },
 
   subtitle: {
-    fontFamily: "Inter-Regular",
+    fontFamily: "Roboto-Regular",
     fontSize: 14,
   },
 
@@ -45,7 +45,7 @@ export const styles = StyleSheet.create({
   },
 
   textActions: {
-    fontFamily: "Inter-Regular",
+    fontFamily: "Roboto-Regular",
     fontSize: 12.5,
   },
 });

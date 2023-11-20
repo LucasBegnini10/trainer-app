@@ -15,7 +15,7 @@ export default function StartPage() {
   const { disclose, navigateLogin, navigateSignup } = useStart();
 
   return (
-    <Center flex={1} px={10}>
+    <Center bg="brand.bg" flex={1} px={10}>
       <View flex={1} justifyContent={"flex-end"}>
         <Image
           source={require("../../assets/logo.png")}
@@ -26,39 +26,42 @@ export default function StartPage() {
       <View flex={1} pb={10} w={"full"} justifyContent={"flex-end"}>
         <Button
           padding={4}
-          rounded={"full"}
-          bg="primary.700"
           onPress={disclose.onOpen}
         >
-          <Text fontFamily={"Inter-Bold"} color={"white"} fontSize={14}>
-            COMEÇAR
+          <Text  color={"brand.bg"} fontFamily={"Xspace-Regular"} fontSize={14}>
+            COMERÇAR
           </Text>
         </Button>
       </View>
       <Actionsheet isOpen={disclose.isOpen} onClose={disclose.onClose}>
-        <Actionsheet.Content>
+        <Actionsheet.Content bg="brand.gray">
           <Actionsheet.Item
+            bg="brand.gray"
             onPress={navigateLogin}
-            rounded={"full"}
             startIcon={
               <Icon
                 as={Ionicons}
                 name="enter-outline"
                 size="md"
-                color="primary.700"
+                color="brand.primary"
               />
             }
           >
-            Fazer Login
+            <Text fontSize={"md"} color={"white"}>Fazer Login</Text>
           </Actionsheet.Item>
           <Actionsheet.Item
-          onPress={navigateSignup}
+            bg="brand.gray"
+            onPress={navigateSignup}
             startIcon={
-              <Icon as={Ionicons} name="person" size="md" color="primary.700" />
+              <Icon
+                as={Ionicons}
+                name="person"
+                size="md"
+                color="brand.primary"
+              />
             }
-            rounded={"full"}
           >
-            Criar conta
+            <Text fontSize={"md"} color={"white"}>Criar Conta</Text>
           </Actionsheet.Item>
         </Actionsheet.Content>
       </Actionsheet>

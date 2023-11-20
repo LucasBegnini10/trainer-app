@@ -26,11 +26,17 @@ export default function LoginPage() {
     saveData,
     setSaveData,
     toogleSeePassword,
-    loading
+    loading,
   } = useLogin();
 
   return (
-    <View flex={1} justifyContent={"center"} px={4} style={{ gap: 20 }}>
+    <View
+      flex={1}
+      bg="brand.bg"
+      justifyContent={"center"}
+      px={4}
+      style={{ gap: 20 }}
+    >
       <Center mb={4}>
         <Image
           alt="Logo"
@@ -39,34 +45,39 @@ export default function LoginPage() {
           h={32}
         />
       </Center>
-      <Text fontFamily={"Inter-Medium"} color="primary.600" fontSize={22}>
+      <Text color="brand.primary" fontFamily={"Roboto-Bold"} fontSize={22}>
         Bem vindo(a) de volta
       </Text>
       <InputComponent
-        label="E-mail"
+        label="Digite seu e-mail"
         onChange={setEmail}
         value={email}
         invalid={invalid.email.invalid}
         error={invalid.email.error}
         inputProps={{
-          rounded: "full",
           autoCapitalize: "none",
           textContentType: "emailAddress",
         }}
-        placeholder="seuemail@email.com"
+        placeholder="E-mail"
       />
       <InputComponent
         invalid={invalid.password.invalid}
         error={invalid.password.error}
-        label="Senha"
+        label="Digite sua senha"
         onChange={setPassword}
         value={password}
         secure={!seePassword}
-        placeholder="*************"
-        inputProps={{ autoCapitalize: "none", rounded: "full" }}
+        placeholder="Senha"
+        inputProps={{ autoCapitalize: "none" }}
         icon={
           <IconButton
-            icon={<Icon as={Ionicons} name={seePassword ? "eye" : "eye-off"} />}
+            icon={
+              <Icon
+                color={"white"}
+                as={Ionicons}
+                name={seePassword ? "eye" : "eye-off"}
+              />
+            }
             borderRadius="full"
             onPress={toogleSeePassword}
           />
@@ -74,34 +85,32 @@ export default function LoginPage() {
       />
       <Row alignItems={"center"} justifyContent={"space-between"}>
         <Row space={2}>
-          <Checkbox value={saveData ? "false" : "true"} onChange={setSaveData}>
-            <Text>Salvar dados</Text>
+          <Checkbox
+            borderColor={"brand.bg"}
+            _checked={{ bg: "brand.primary", borderColor: "brand.primary" }}
+            value={saveData ? "false" : "true"}
+            _pressed={{backgroundColor: "brand.secondary"}}
+            onChange={setSaveData}
+          >
+            <Text color={"white"}>Salvar dados</Text>
           </Checkbox>
         </Row>
         <View>
           <Link href={"/forgot-password"}>
-            <Text color={"primary.800"}>Esqueci minha senha</Text>
+            <Text color={"white"}>Esqueci minha senha</Text>
           </Link>
         </View>
       </Row>
-      <Button
-        mt={4}
-        padding={4}
-        rounded={"full"}
-        w="full"
-        bg="primary.700"
-        onPress={handleLogin}
-        isLoading={loading}
-      >
-        <Text fontFamily={"Inter-Bold"} color={"white"} fontSize={14}>
+      <Button mt={4} onPress={handleLogin} isLoading={loading}>
+        <Text fontFamily={"Roboto-Bold"} color={"brand.bg"} fontSize={14}>
           LOGIN
         </Text>
       </Button>
       <Center>
-        <Text>
+        <Text color="white">
           Ainda não possui conta?{" "}
           <Link href={"/signup"}>
-            <Text color="primary.800">Cadastre-se</Text>
+            <Text color="brand.primary">Cadastre-se</Text>
           </Link>
         </Text>
       </Center>

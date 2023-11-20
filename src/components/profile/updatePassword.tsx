@@ -52,7 +52,7 @@ export default function UpdatePasswordComp({
               rounded={"full"}
               w="full"
             >
-              <Text fontFamily={"Inter-Bold"} color={"white"} fontSize={14}>
+              <Text fontFamily={"Roboto-Bold"} color={"white"} fontSize={14}>
                 ALTERAR SENHA
               </Text>
             </Button>

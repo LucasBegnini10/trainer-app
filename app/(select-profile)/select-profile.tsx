@@ -11,7 +11,7 @@ export default function SelectProfile() {
           h={32}
         />
       </Center>
-      <Text fontFamily={"Inter-Medium"} color="primary.600" fontSize={22}>
+      <Text fontFamily={"Roboto-Medium"} color="primary.600" fontSize={22}>
         Selecione seu perfil
       </Text>
     </View>

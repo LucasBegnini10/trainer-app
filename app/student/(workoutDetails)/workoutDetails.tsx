@@ -84,7 +84,7 @@ export default function WorkoutDetails() {
           bg="primary.700"
           onPress={goWorkout}
         >
-          <Text fontFamily={"Inter-Bold"} color={"white"} fontSize={14}>
+          <Text fontFamily={"Roboto-Bold"} color={"white"} fontSize={14}>
             INICIAR
           </Text>
         </Button>

@@ -55,7 +55,7 @@ export default function CreateStudent() {
           error={invalid.password.error}
         />
         <Button isLoading={loading} onPress={handleCreateStudent} mt={4} padding={4} rounded={"full"} w="full" bg="primary.700">
-          <Text fontFamily={"Inter-Bold"} color={"white"} fontSize={14}>
+          <Text fontFamily={"Roboto-Bold"} color={"white"} fontSize={14}>
             CADASTRAR
           </Text>
         </Button>

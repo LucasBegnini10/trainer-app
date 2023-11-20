@@ -3,19 +3,22 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
-import { NativeBaseProvider, theme } from "native-base";
+import { NativeBaseProvider } from "native-base";
 import { colorModeManager } from "../src/utils/colorModeManager";
 import { Slot } from "expo-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import {theme} from "../src/theme/theme"
 
 SplashScreen.preventAutoHideAsync();
 export default function Layout() {
   const [fontsLoaded] = useFonts({
-    "Inter-Light": require("../assets/Inter/static/Inter-Light.ttf"),
-    "Inter-Regular": require("../assets/Inter/static/Inter-Regular.ttf"),
-    "Inter-Medium": require("../assets/Inter/static/Inter-Medium.ttf"),
-    "Inter-Bold": require("../assets/Inter/static/Inter-Bold.ttf"),
-    "Inter-Black": require("../assets/Inter/static/Inter-Black.ttf"),
+    "Roboto-Light": require("../assets/Roboto/Roboto-Light.ttf"),
+    "Roboto-Regular": require("../assets/Roboto/Roboto-Regular.ttf"),
+    "Roboto-Medium": require("../assets/Roboto/Roboto-Medium.ttf"),
+    "Roboto-Bold": require("../assets/Roboto/Roboto-Bold.ttf"),
+    "Roboto-Black": require("../assets/Roboto/Roboto-Black.ttf"),
+    "Xspace-Regular": require("../assets/Xspace-Regular/Xspace-Regular.otf"),
+
   });
 
   const queryClient = new QueryClient();

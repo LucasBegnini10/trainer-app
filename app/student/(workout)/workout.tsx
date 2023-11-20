@@ -90,7 +90,7 @@ export default function Workout() {
             />
           }
         >
-          <Text fontFamily={"Inter-Bold"} color={"primary.800"} fontSize={14}>
+          <Text fontFamily={"Roboto-Bold"} color={"primary.800"} fontSize={14}>
             ANTERIOR
           </Text>
         </Button>
@@ -108,7 +108,7 @@ export default function Workout() {
             />
           }
         >
-          <Text fontFamily={"Inter-Bold"} color={"white"} fontSize={14}>
+          <Text fontFamily={"Roboto-Bold"} color={"white"} fontSize={14}>
             PRÓXIMO
           </Text>
         </Button>

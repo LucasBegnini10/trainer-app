@@ -1,4 +1,4 @@
-import { FormControl, Input } from "native-base";
+import { FormControl, Input, Text } from "native-base";
 import { IInputProps } from "native-base/lib/typescript/components/primitives/Input/types";
 
 export interface InputProps {
@@ -17,15 +17,25 @@ export interface InputProps {
 export default function InputComponent(props: InputProps) {
   return (
     <FormControl isInvalid={props.invalid}>
-      <FormControl.Label>{props.label}</FormControl.Label>
+      <FormControl.Label>
+        <Text color={"white"}>{props.label}</Text>
+      </FormControl.Label>
       <Input
         fontSize={14}
         py={3}
         value={props.value}
+        bg="brand.gray"
+        borderColor={"brand.gray"}
         onChangeText={props.onChange}
+        color={"white"}
+        _focus={{
+          borderColor: "brand.primary",
+          bg: "brand.gray"
+        }}
         placeholder={props.placeholder}
         secureTextEntry={props.secure}
         InputRightElement={props.icon}
+        rounded={"lg"}
         {...props.inputProps}
       />
       {props.hint ? (

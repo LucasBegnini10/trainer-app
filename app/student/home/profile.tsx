@@ -66,7 +66,7 @@ export default function ProfilePage() {
         rounded={"full"}
         w="full"
       >
-        <Text fontFamily={"Inter-Bold"} color={"white"} fontSize={14}>
+        <Text fontFamily={"Roboto-Bold"} color={"white"} fontSize={14}>
           SALVAR
         </Text>
       </Button>
@@ -80,7 +80,7 @@ export default function ProfilePage() {
         w="full"
         onPress={updatePassword.onShow}
       >
-        <Text fontFamily={"Inter-Bold"} color={"primary.800"} fontSize={14}>
+        <Text fontFamily={"Roboto-Bold"} color={"primary.800"} fontSize={14}>
           ALTERAR SENHA
         </Text>
       </Button>
@@ -94,7 +94,7 @@ export default function ProfilePage() {
         w="full"
         onPress={logout}
       >
-        <Text fontFamily={"Inter-Bold"} color={"red.700"} fontSize={14}>
+        <Text fontFamily={"Roboto-Bold"} color={"red.700"} fontSize={14}>
           SAIR
         </Text>
       </Button>

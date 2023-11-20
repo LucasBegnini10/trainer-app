@@ -19,11 +19,17 @@ export default function SignUpPage() {
     invalid,
     seePassword,
     toogleSeePassword,
-    loading
+    loading,
   } = useSignup();
 
   return (
-    <View flex={1} justifyContent={"center"} px={4} style={{ gap: 20 }}>
+    <View
+      flex={1}
+      bg={"brand.bg"}
+      justifyContent={"center"}
+      px={4}
+      style={{ gap: 20 }}
+    >
       <Center mb={4}>
         <Image
           alt="Logo"
@@ -32,7 +38,7 @@ export default function SignUpPage() {
           h={32}
         />
       </Center>
-      <Text fontFamily={"Inter-Medium"} color="primary.600" fontSize={22}>
+      <Text fontFamily={"Roboto-Bold"} color="brand.primary" fontSize={22}>
         Bem vindo(a) treinador(a)!
       </Text>
       <InputComponent
@@ -42,7 +48,6 @@ export default function SignUpPage() {
         error={invalid.name.error}
         label="Nome"
         inputProps={{
-          rounded: "full",
           autoCapitalize: "words",
           textContentType: "name",
         }}
@@ -55,7 +60,6 @@ export default function SignUpPage() {
         error={invalid.email.error}
         label="E-mail"
         inputProps={{
-          rounded: "full",
           autoCapitalize: "none",
           textContentType: "emailAddress",
         }}
@@ -67,9 +71,7 @@ export default function SignUpPage() {
         invalid={invalid.document.invalid}
         error={invalid.document.error}
         label="Documento (CPF/CNPJ)"
-        inputProps={{
-          rounded: "full",
-        }}
+        inputProps={{}}
         placeholder="###.###.###-##"
       />
 
@@ -84,7 +86,7 @@ export default function SignUpPage() {
         inputProps={{ autoCapitalize: "none", rounded: "full" }}
         icon={
           <IconButton
-            icon={<Icon as={Ionicons} name={seePassword ? "eye" : "eye-off"} />}
+            icon={<Icon color="brand.primary" as={Ionicons} name={seePassword ? "eye" : "eye-off"} />}
             borderRadius="full"
             onPress={toogleSeePassword}
           />
@@ -93,21 +95,17 @@ export default function SignUpPage() {
       <Button
         onPress={handleSignup}
         mt={4}
-        padding={4}
-        rounded={"full"}
-        w="full"
-        bg="primary.700"
         isLoading={loading}
       >
-        <Text fontFamily={"Inter-Bold"} color={"white"} fontSize={14}>
+        <Text fontFamily={"Roboto-Bold"} color={"brand.bg"} fontSize={14}>
           CADASTRAR
         </Text>
       </Button>
       <Center>
-        <Text>
+        <Text color={"white"}>
           Já possui uma conta?{" "}
           <Link href={"/login"}>
-            <Text color="primary.800">Faça login</Text>
+            <Text color="brand.primary">Faça login</Text>
           </Link>
         </Text>
       </Center>
