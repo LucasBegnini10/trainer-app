@@ -15,7 +15,7 @@ import {
   DrawerContentScrollView,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import { TouchableOpacity } from "react-native";
+import { Button, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useUserStore } from "../../../src/stores/useUserStore";
@@ -54,7 +54,7 @@ export default function LayoutHomeTrainer() {
       <Drawer
         drawerContent={(props) => {
           return (
-            <View flex={1}>
+            <View flex={1} bg="brand.gray">
               <DrawerContentScrollView {...props}>
                 <VStack px={4}>
                   <Avatar
@@ -63,13 +63,15 @@ export default function LayoutHomeTrainer() {
                       width: 60,
                       marginBottom: 10,
                     }}
-                    bg="primary.800"
+                    bg="brand.primary"
                   >
                     {getInitials(user.name)}
                   </Avatar>
-                  <Heading>{user.name}</Heading>
+                  <Heading color={"white"} fontFamily={"Roboto-Bold"}>
+                    {user.name}
+                  </Heading>
                   <HStack>
-                    <Text>Treinador</Text>
+                    <Text color={"white"}>Treinador</Text>
                   </HStack>
                 </VStack>
                 <Divider my={4} />
@@ -101,6 +103,12 @@ export default function LayoutHomeTrainer() {
               key={route.name}
               name={route.name}
               options={{
+                headerStyle: {
+                  backgroundColor: "#12111f",
+                },
+                headerTitleStyle: {
+                  color: "white",
+                },
                 drawerType: "front",
                 drawerIcon(props) {
                   return (
@@ -112,7 +120,10 @@ export default function LayoutHomeTrainer() {
                     />
                   );
                 },
+
                 drawerLabel: route.title,
+                drawerActiveTintColor: "#ffb81a",
+                drawerInactiveTintColor: "white",
                 title: route.title,
               }}
             />

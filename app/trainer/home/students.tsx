@@ -24,6 +24,7 @@ export default function StudentsList() {
   return (
     <>
       <FlatList
+        bg={"brand.bg"}
         px={4}
         contentContainerStyle={{ paddingBottom: 20 }}
         data={students}
@@ -39,7 +40,6 @@ export default function StudentsList() {
           </View>
         }
         ItemSeparatorComponent={Divider}
-        bg="white"
         ListHeaderComponent={
           <Input
             placeholder="Pesquisar Aluno"
@@ -72,6 +72,7 @@ export default function StudentsList() {
         renderInPortal={false}
         shadow={2}
         right={"10"}
+        w={"12%"}
         bottom={30}
         size="lg"
         icon={<Icon color="white" as={AntDesign} name="plus" size="md" />}
