@@ -8,18 +8,16 @@ import {
   View,
 } from "native-base";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { UserModel } from "../../../src/models/models";
 import useCreateStudent from "../../../src/controllers/trainer/useCreateStudent";
 import { router } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import InputComponent from "../../../src/components/common/input/input";
 
 export default function CreateStudent() {
-  const { user, student, invalid, loading, handleCreateStudent } =
-    useCreateStudent();
+  const { student, invalid, loading, handleCreateStudent } = useCreateStudent();
   return (
-    <>
-      <HeaderCreateStudent user={user} />
+    <View bg="brand.bg" h={"full"}>
+      <HeaderCreateStudent />
       <VStack space={2} mt={4} px={"4"}>
         <InputComponent
           label="Nome"
@@ -54,17 +52,17 @@ export default function CreateStudent() {
           invalid={invalid.password.invalid}
           error={invalid.password.error}
         />
-        <Button isLoading={loading} onPress={handleCreateStudent} mt={4} padding={4} rounded={"full"} w="full" bg="primary.700">
-          <Text fontFamily={"Roboto-Bold"} color={"white"} fontSize={14}>
+        <Button isLoading={loading} onPress={handleCreateStudent} mt={4}>
+          <Text fontFamily={"Roboto-Bold"} color={"brand.bg"} fontSize={14}>
             CADASTRAR
           </Text>
         </Button>
       </VStack>
-    </>
+    </View>
   );
 }
 
-const HeaderCreateStudent = ({ user }: { user: UserModel }) => {
+const HeaderCreateStudent = () => {
   const insets = useSafeAreaInsets();
 
   const goBack = () => router.back();
@@ -72,22 +70,22 @@ const HeaderCreateStudent = ({ user }: { user: UserModel }) => {
   return (
     <HStack
       px={"4"}
-      bg="white"
+      bg="brand.bg"
       justifyContent={"space-between"}
       pt={`${insets.top + 20}px`}
     >
       <IconButton
         onPress={goBack}
-        color="black"
+        color="white"
         size={"sm"}
         _icon={{
-          color: "black",
+          color: "white",
           size: "md",
           as: Ionicons,
           name: "arrow-back",
         }}
       />
-      <Heading>Cadastrar Alunos</Heading>
+      <Heading color={"white"} fontFamily={"Roboto-Bold"}>Cadastrar Alunos</Heading>
       <View w="12" />
     </HStack>
   );
