@@ -25,7 +25,17 @@
     "web": {
       "favicon": "./assets/logo.png"
     },
-    "plugins": ["expo-router"]
+    "plugins": [
+      "expo-router",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "O aplicativo Treinador necessita de permissão para acessar sua galeria.",
+          "cameraPermission": "O aplicativo Treinador necessita de permissão para acessar sua câmera.",
+          "microphonePermission": "O aplicativo Treinador necessita de permissão para acessar seu microfone."
+        }
+      ]
+    ]
   },
   "scheme": "your-app-scheme"
 }
