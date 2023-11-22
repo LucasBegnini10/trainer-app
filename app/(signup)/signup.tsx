@@ -83,7 +83,7 @@ export default function SignUpPage() {
         value={get.password}
         secure={!seePassword}
         placeholder="*************"
-        inputProps={{ autoCapitalize: "none", rounded: "full" }}
+        inputProps={{ autoCapitalize: "none", }}
         icon={
           <IconButton
             icon={<Icon color="brand.primary" as={Ionicons} name={seePassword ? "eye" : "eye-off"} />}

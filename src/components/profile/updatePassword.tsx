@@ -21,10 +21,10 @@ export default function UpdatePasswordComp({
   } = useUpdatePassword(onClose);
 
   return (
-    <Actionsheet isOpen={isOpen} onClose={onClose}>
-      <Actionsheet.Content>
+    <Actionsheet  isOpen={isOpen} onClose={onClose}>
+      <Actionsheet.Content bg={"brand.bg"}>
         <Box w="100%" h={400} px={4}>
-          <Heading textAlign={"center"}>Alterar senha</Heading>
+          <Heading textAlign={"center"} color={"white"} fontFamily={"Roboto-Bold"}>Alterar senha</Heading>
 
           <VStack mt={2} space={3}>
             <InputComponent
@@ -47,12 +47,8 @@ export default function UpdatePasswordComp({
               onPress={handleUdpatePassword}
               isLoading={loading}
               mt={6}
-              padding={4}
-              bgColor={"primary.800"}
-              rounded={"full"}
-              w="full"
             >
-              <Text fontFamily={"Roboto-Bold"} color={"white"} fontSize={14}>
+              <Text fontFamily={"Roboto-Bold"} color={"brand.bg"} fontSize={14}>
                 ALTERAR SENHA
               </Text>
             </Button>

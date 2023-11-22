@@ -28,7 +28,7 @@ export default function StartPage() {
           padding={4}
           onPress={disclose.onOpen}
         >
-          <Text  color={"brand.bg"} fontFamily={"Xspace-Regular"} fontSize={14}>
+          <Text  color={"brand.bg"} fontFamily={"Roboto-Bold"} fontSize={14}>
             COMERÇAR
           </Text>
         </Button>

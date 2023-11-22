@@ -16,7 +16,7 @@ import InputComponent from "../../../src/components/common/input/input";
 import { ResizeMode, Video } from "expo-av";
 
 export default function CreateExercisePage() {
-  const { pickVideo, exercise, invalid, setExercise, handleCreateExercice, } = useCreateExercise();
+  const { pickVideo, exercise, invalid, setExercise, handleCreateExercice, loading } = useCreateExercise();
 
   return (
     <View bg={"brand.bg"} h={"full"}>
@@ -67,7 +67,7 @@ export default function CreateExercisePage() {
           </>
         ) : null}
 
-        <Button onPress={handleCreateExercice} isLoading={false} mt={4}>
+        <Button onPress={handleCreateExercice} isLoading={loading} mt={4}>
           <Text fontFamily={"Roboto-Bold"} color={"brand.bg"} fontSize={14}>
             CRIAR EXERCÍCIO
           </Text>
