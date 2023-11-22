@@ -28,7 +28,7 @@ export const createTrainerStudentAssign = async (studentEmail: string) => {
 
 export const getStudentsByTrainerId = async (trainerId : string) => {
   return await api
-  .get("/trainers/students/" + trainerId)
+  .get(`/trainers/${trainerId}/students/`)
   .then((res) => res)
   .catch((err) => {
     throw err?.response || err;
