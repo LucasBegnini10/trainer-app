@@ -9,3 +9,8 @@ export const getInitials = (text: string) => {
 
 export const onlyNumbers = (str: string): string =>
   str.replace(/[^\d]/g, "");
+
+  export const limitString = (str: string, limit = 80) => {
+    if(str.length > limit) return `${str.substring(0, limit)}...`
+    return str
+  }
