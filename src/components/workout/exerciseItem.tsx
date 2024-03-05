@@ -14,11 +14,13 @@ export default function ExerciseItem(props: ExerciceProp) {
       px={6}
       py={4}
       alignItems={"center"}
-      bg="white"
+      bg="brand.gray"
     >
-      <Avatar bg="primary.800">{getInitials(props.name)}</Avatar>
+      <Avatar bg="brand.primary">
+        <Text color={"brand.bg"}>{getInitials(props.name)}</Text>
+      </Avatar>
       <VStack space={1}>
-        <Heading fontSize={"md"}>{props.name}</Heading>
+        <Heading fontSize={"md"} color={"white"} fontFamily={"Roboto-Bold"}>{props.name}</Heading>
         {props.description ? (
           <Text fontSize={"xs"} color="grey">
             {props.description}

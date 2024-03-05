@@ -6,8 +6,8 @@ import {
   Icon,
   IconButton,
   Image,
+  ScrollView,
   Text,
-  View,
 } from "native-base";
 import { Ionicons } from "@expo/vector-icons";
 import useSignup from "../../src/controllers/signup/useSignup";
@@ -23,12 +23,14 @@ export default function SignUpPage() {
   } = useSignup();
 
   return (
-    <View
+    <ScrollView
       flex={1}
       bg={"brand.bg"}
-      justifyContent={"center"}
-      px={4}
-      style={{ gap: 20 }}
+      contentContainerStyle={{
+        justifyContent: "center",
+        gap: 20
+      }}
+      p={4}
     >
       <Center mb={4}>
         <Image
@@ -101,7 +103,7 @@ export default function SignUpPage() {
           CADASTRAR
         </Text>
       </Button>
-      <Center>
+      <Center mb={10}>
         <Text color={"white"}>
           Já possui uma conta?{" "}
           <Link href={"/login"}>
@@ -109,6 +111,6 @@ export default function SignUpPage() {
           </Link>
         </Text>
       </Center>
-    </View>
+    </ScrollView>
   );
 }

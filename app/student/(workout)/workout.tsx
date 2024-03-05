@@ -79,6 +79,7 @@ export default function Workout() {
         alignItems={"center"}
         justifyContent={"space-between"}
         w="full"
+        mt={3}
         px={7}
       >
         <Button
