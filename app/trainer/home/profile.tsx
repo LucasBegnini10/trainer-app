@@ -1,4 +1,4 @@
-import { Avatar, Button, Text, VStack, View } from "native-base";
+import { Avatar, Button, ScrollView, Text, VStack, View } from "native-base";
 import InputComponent from "../../../src/components/common/input/input";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import useProfile from "../../../src/controllers/profile/useProfile";
@@ -20,12 +20,14 @@ export default function ProfilePage() {
   } = useProfile();
 
   return (
-    <View
+    <ScrollView
       style={{ paddingTop: insets.top }}
+      contentContainerStyle={{
+        alignItems: "center",
+        justifyContent: "center",
+      }}
       w={"full"}
       flex={1}
-      alignItems={"center"}
-      justifyContent={"center"}
       bg="brand.bg"
       px={4}
     >
@@ -54,11 +56,7 @@ export default function ProfilePage() {
         />
       </VStack>
 
-      <Button
-        isLoading={loading}
-        onPress={handleUpdateUser}
-        mt={6}
-      >
+      <Button isLoading={loading} onPress={handleUpdateUser} mt={6}>
         <Text fontFamily={"Roboto-Bold"} color={"brand.bg"} fontSize={14}>
           SALVAR
         </Text>
@@ -78,6 +76,7 @@ export default function ProfilePage() {
 
       <Button
         mt={20}
+        mb={10}
         variant={"outline"}
         borderColor={"red.700"}
         bg="brand.bg"
@@ -92,6 +91,6 @@ export default function ProfilePage() {
         isOpen={updatePassword.showUpdatePassword}
         onClose={updatePassword.onClose}
       />
-    </View>
+    </ScrollView>
   );
 }
