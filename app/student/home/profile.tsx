@@ -1,4 +1,4 @@
-import { Avatar, Button, Text, VStack, View } from "native-base";
+import { Avatar, Button, ScrollView, Text, VStack, View } from "native-base";
 import InputComponent from "../../../src/components/common/input/input";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import useProfile from "../../../src/controllers/profile/useProfile";
@@ -20,12 +20,14 @@ export default function ProfilePage() {
   } = useProfile();
 
   return (
-    <View
+    <ScrollView
       style={{ paddingTop: insets.top }}
+      contentContainerStyle={{
+        alignItems: "center",
+        justifyContent: "center",
+      }}
       w={"full"}
       flex={1}
-      alignItems={"center"}
-      justifyContent={"center"}
       bg="brand.bg"
       px={4}
     >
@@ -77,7 +79,9 @@ export default function ProfilePage() {
       </Button>
 
       <Button
-        mt={20}
+      mt={6}
+      mb={10}
+
         variant={"outline"}
         borderColor={"red.700"}
         bg="brand.bg"
@@ -92,6 +96,6 @@ export default function ProfilePage() {
         isOpen={updatePassword.showUpdatePassword}
         onClose={updatePassword.onClose}
       />
-    </View>
+    </ScrollView>
   );
 }

@@ -75,7 +75,7 @@ export default function ProfilePage() {
       </Button>
 
       <Button
-        mt={20}
+        mt={6}
         mb={10}
         variant={"outline"}
         borderColor={"red.700"}
