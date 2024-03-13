@@ -11,17 +11,12 @@ import { useQueryClient } from "@tanstack/react-query";
 export default function useCreateStudent() {
   const user = useUserStore((state) => state.user);
   const toast = useToast();
-  const queryClient = useQueryClient()
-  const trainerId = user.Trainers.trainer_id
-
-  const { data, loading, invalid, validateFields, onError } = useSignup();
+  const queryClient = useQueryClient();
+  const trainerId = user.Trainers.trainer_id;
+const { data, loading, invalid, validateFields, onError } = useSignup();
 
   const handleCreateStudent = async () => {
     if (validateFields()) {
-      console.log("body =>", {
-        ...data.get,
-        document: onlyNumbers(data.get.document),
-      });
       mutation.mutate({
         ...data.get,
         document: onlyNumbers(data.get.document),
@@ -38,7 +33,7 @@ export default function useCreateStudent() {
       bgColor: "green.500",
     });
 
-    queryClient.invalidateQueries({queryKey: ["students", trainerId]})
+    queryClient.invalidateQueries({ queryKey: ["students", trainerId] });
 
     router.push("/trainer/home/students");
   };

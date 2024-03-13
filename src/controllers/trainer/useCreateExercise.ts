@@ -106,6 +106,11 @@ export default function useCreateExercise() {
 
   const handleCreateExercice = () => {
     if (validateFields()) {
+      console.log({
+        description: exercise.description,
+        file: exercise.blob,
+        name: exercise.name,
+      })
       mutation.mutate({
         description: exercise.description,
         file: exercise.blob,

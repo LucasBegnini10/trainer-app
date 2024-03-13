@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from "react";
-import { Student, UserModel } from "../../models/models";
+import { useEffect, useState } from "react";
+import { UserModel } from "../../models/models";
 import { getStudentsQuery } from "../../services/trainer/trainerQuery";
 import { useUserStore } from "../../stores/useUserStore";
 import { isEmpty } from "../../utils/validate";
@@ -20,7 +20,7 @@ export default function useStudents() {
   }, [students]);
 
   useEffect(() => {
-    filterStudents()
+    filterStudents();
   }, [key]);
 
   const filterStudents = () => {
@@ -33,12 +33,12 @@ export default function useStudents() {
 
       setStudentsFiltered(studentsFilts);
     }
-  }
+  };
 
   return {
     students: studentsFiltered,
     isLoading,
     setKey,
-    key
+    key,
   };
 }

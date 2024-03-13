@@ -8,7 +8,6 @@ import {
   HStack,
   Heading,
   Icon,
-  Input,
   Spinner,
   Text,
   VStack,
@@ -62,7 +61,7 @@ export default function StudentsList() {
         }
         renderItem={({ item }) => {
           return (
-            <HStack space={4} px={6} py={4} alignItems={"center"} bg="brand.bg">
+            <HStack space={4} p={4} alignItems={"center"} bg="brand.bg">
               <Avatar bg="brand.primary">
                 {
                   <Text color={"brand.bg"} fontSize={"lg"}>
@@ -91,7 +90,7 @@ export default function StudentsList() {
         renderInPortal={false}
         shadow={2}
         right={"10"}
-        w={"12%"}
+        w={"12"}
         bottom={30}
         size="lg"
         icon={<Icon color="white" as={AntDesign} name="plus" size="md" />}

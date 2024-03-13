@@ -60,7 +60,7 @@ export default function HomeTrainer() {
         right={"10"}
         bottom={30}
         size="lg"
-        w={"12%"}
+        width={"12"}
         icon={<Icon color="white" as={AntDesign} name="plus" size="md" />}
       />
     </>

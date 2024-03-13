@@ -3,7 +3,7 @@ import {
   HStack,
   Heading,
   IconButton,
-  Image,
+  ScrollView,
   Text,
   VStack,
   View,
@@ -19,9 +19,9 @@ export default function CreateExercisePage() {
   const { pickVideo, exercise, invalid, setExercise, handleCreateExercice, loading } = useCreateExercise();
 
   return (
-    <View bg={"brand.bg"} h={"full"}>
+    <ScrollView bg={"brand.bg"} flex={1}>
       <HeaderCreateExercise />
-      <VStack space={2} mt={4} px={"4"}>
+      <VStack space={2} my={4} px={"4"}>
         <InputComponent
           label="Nome do Exercício"
           value={exercise.name}
@@ -73,7 +73,7 @@ export default function CreateExercisePage() {
           </Text>
         </Button>
       </VStack>
-    </View>
+    </ScrollView>
   );
 }
 
