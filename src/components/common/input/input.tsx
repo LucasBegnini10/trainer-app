@@ -12,6 +12,8 @@ export interface InputProps {
   secure?: boolean;
   placeholder?: string;
   inputProps?: IInputProps;
+  disabled?: boolean;
+  readonly?: boolean;
 }
 
 export default function InputComponent(props: InputProps) {
@@ -21,6 +23,7 @@ export default function InputComponent(props: InputProps) {
         <Text color={"white"}>{props.label}</Text>
       </FormControl.Label>
       <Input
+        isDisabled={props.disabled}
         fontSize={14}
         py={3}
         value={props.value}
@@ -28,6 +31,7 @@ export default function InputComponent(props: InputProps) {
         borderColor={"brand.gray"}
         onChangeText={props.onChange}
         color={"white"}
+        isReadOnly={props.readonly}
         _focus={{
           borderColor: "brand.primary",
           bg: "brand.gray"

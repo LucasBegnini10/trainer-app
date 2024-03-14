@@ -16,10 +16,20 @@ import {
 import useStudents from "../../../src/controllers/trainer/useStudents";
 import { getInitials } from "../../../src/utils/string";
 import InputComponent from "../../../src/components/common/input/input";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import UserInfos from "../../../src/components/user/user-infos";
 
 export default function StudentsList() {
   const handleGoCreateStudent = () => router.push("/trainer/createStudent");
-  const { students, isLoading, key, setKey } = useStudents();
+  const {
+    students,
+    isLoading,
+    key,
+    setKey,
+    showStudentDetails,
+    studentDetails,
+    onCloseStudentDetails,
+  } = useStudents();
 
   return (
     <>
@@ -42,12 +52,11 @@ export default function StudentsList() {
         ItemSeparatorComponent={Divider}
         ListHeaderComponent={
           <InputComponent
-      
             placeholder="Pesquisar Aluno"
             onChange={setKey}
             value={key}
             inputProps={{
-                my: "4",
+              my: "4",
               leftElement: (
                 <Icon
                   as={<Ionicons name="search" />}
@@ -59,29 +68,39 @@ export default function StudentsList() {
             }}
           />
         }
-        renderItem={({ item }) => {
+        renderItem={({ item: user }) => {
           return (
-            <HStack space={4} p={4} alignItems={"center"} bg="brand.bg">
-              <Avatar bg="brand.primary">
-                {
-                  <Text color={"brand.bg"} fontSize={"lg"}>
-                    {getInitials(item.name)}
+            <TouchableOpacity onPress={() => showStudentDetails(user)}>
+              <HStack
+                space={4}
+                p={4}
+                alignItems={"center"}
+                bg="brand.bg"
+                rounded={"lg"}
+                borderWidth={1}
+                borderColor={"brand.gray"}
+              >
+                <Avatar bg="brand.primary">
+                  {
+                    <Text color={"brand.bg"} fontSize={"lg"}>
+                      {getInitials(user.name)}
+                    </Text>
+                  }
+                </Avatar>
+                <VStack space={1}>
+                  <Heading
+                    fontSize={"md"}
+                    fontFamily={"Roboto-Medium"}
+                    color={"white"}
+                  >
+                    {user.name}
+                  </Heading>
+                  <Text color={"white"} fontSize={"sm"}>
+                    {user.email}
                   </Text>
-                }
-              </Avatar>
-              <VStack space={1}>
-                <Heading
-                  fontSize={"md"}
-                  fontFamily={"Roboto-Medium"}
-                  color={"white"}
-                >
-                  {item.name}
-                </Heading>
-                <Text color={"white"} fontSize={"sm"}>
-                  {item.email}
-                </Text>
-              </VStack>
-            </HStack>
+                </VStack>
+              </HStack>
+            </TouchableOpacity>
           );
         }}
       />
@@ -94,6 +113,12 @@ export default function StudentsList() {
         bottom={30}
         size="lg"
         icon={<Icon color="white" as={AntDesign} name="plus" size="md" />}
+      />
+
+      <UserInfos
+        isOpen={studentDetails.open}
+        onClose={onCloseStudentDetails}
+        user={studentDetails.student}
       />
     </>
   );
