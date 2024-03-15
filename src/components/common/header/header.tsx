@@ -28,10 +28,10 @@ export default function Header() {
         <Avatar bg="brand.primary" size={"md"}>
           <Text>{getInitials(user.name)}</Text>
         </Avatar>
-        <VStack>
-          <Heading fontSize={"md"} color={"white"}>{user.name}</Heading>
-          <Text fontSize={"xs"} color="white">
-            Aluno
+        <VStack space={0.5}>
+          <Heading fontSize={"md"} fontWeight={"bold"} color={"white"}>{user.name}</Heading>
+          <Text fontSize={"xs"}  color="gray.100">
+            {user.email}
           </Text>
         </VStack>
       </HStack>
