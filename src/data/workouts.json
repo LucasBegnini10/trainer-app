@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "name": "Treino A",
+    "description": "Treino focado em força e hipertrofia para membros superiores.",
+    "schedule_description": "Segundas, Quartas e Sextas - 08:00 às 09:00",
+    "logo_url": "https://boaforma.abril.com.br/wp-content/uploads/sites/2/2023/11/banco-supino.jpg?quality=90&strip=info&w=720&h=440&crop=1",
+    "trainer_id": "T001",
+    "student_id": "S001",
+    "created_at": "2024-03-01T00:00:00.000Z",
+    "updated_at": "2024-03-10T00:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "name": "Treino B",
+    "description": "Treino de resistência e cardio focado em perda de peso.",
+    "schedule_description": "Terças e Quintas - 07:00 às 08:00",
+    "logo_url": "https://boaforma.abril.com.br/wp-content/uploads/sites/2/2023/11/banco-supino.jpg?quality=90&strip=info&w=720&h=440&crop=1",
+    "trainer_id": "T002",
+    "student_id": "S002",
+    "created_at": "2024-03-02T00:00:00.000Z",
+    "updated_at": "2024-03-11T00:00:00.000Z"
+  },
+  {
+    "id": 3,
+    "name": "Treino J",
+    "description": "Treino de flexibilidade e equilíbrio, focado em yoga e pilates.",
+    "schedule_description": "Sábados - 10:00 às 11:00",
+    "logo_url": "https://boaforma.abril.com.br/wp-content/uploads/sites/2/2023/11/banco-supino.jpg?quality=90&strip=info&w=720&h=440&crop=1",
+    "trainer_id": "T010",
+    "student_id": "S010",
+    "created_at": "2024-03-09T00:00:00.000Z",
+    "updated_at": "2024-03-14T00:00:00.000Z"
+  },
+  {
+    "id": 4,
+    "name": "Treino C",
+    "description": "Treino avançado de crossfit para alta intensidade.",
+    "schedule_description": "Segundas, Quartas e Sextas - 06:00 às 07:00",
+    "logo_url": "https://boaforma.abril.com.br/wp-content/uploads/sites/2/2023/11/banco-supino.jpg?quality=90&strip=info&w=720&h=440&crop=1",
+    "trainer_id": "T003",
+    "student_id": "S003",
+    "created_at": "2024-03-03T00:00:00.000Z",
+    "updated_at": "2024-03-12T00:00:00.000Z"
+  },
+  {
+    "id": 5,
+    "name": "Treino D",
+    "description": "Treino funcional ao ar livre para todos os níveis.",
+    "schedule_description": "Terças e Quintas - 18:00 às 19:00",
+    "logo_url": "https://boaforma.abril.com.br/wp-content/uploads/sites/2/2023/11/banco-supino.jpg?quality=90&strip=info&w=720&h=440&crop=1",
+    "trainer_id": "T004",
+    "student_id": "S004",
+    "created_at": "2024-03-04T00:00:00.000Z",
+    "updated_at": "2024-03-13T00:00:00.000Z"
+  },
+  {
+    "id": 6,
+    "name": "Treino E",
+    "description": "Sessões de spinning para melhoria cardiovascular.",
+    "schedule_description": "Diariamente - 07:00 às 08:00",
+    "logo_url": "https://boaforma.abril.com.br/wp-content/uploads/sites/2/2023/11/banco-supino.jpg?quality=90&strip=info&w=720&h=440&crop=1",
+    "trainer_id": "T005",
+    "student_id": "S005",
+    "created_at": "2024-03-05T00:00:00.000Z",
+    "updated_at": "2024-03-14T00:00:00.000Z"
+  },
+  {
+    "id": 7,
+    "name": "Treino F",
+    "description": "Treino de natação para todas as idades, foco em técnicas e resistência.",
+    "schedule_description": "Segundas, Quartas e Sextas - 17:00 às 18:00",
+    "logo_url": "https://boaforma.abril.com.br/wp-content/uploads/sites/2/2023/11/banco-supino.jpg?quality=90&strip=info&w=720&h=440&crop=1",
+    "trainer_id": "T006",
+    "student_id": "S006",
+    "created_at": "2024-03-06T00:00:00.000Z",
+    "updated_at": "2024-03-15T00:00:00.000Z"
+  },
+  {
+    "id": 8,
+    "name": "Treino G",
+    "description": "Musculação orientada para idosos, foco em mobilidade e força.",
+    "schedule_description": "Terças e Quintas - 09:00 às 10:00",
+    "logo_url": "https://boaforma.abril.com.br/wp-content/uploads/sites/2/2023/11/banco-supino.jpg?quality=90&strip=info&w=720&h=440&crop=1",
+    "trainer_id": "T007",
+    "student_id": "S007",
+    "created_at": "2024-03-07T00:00:00.000Z",
+    "updated_at": "2024-03-16T00:00:00.000Z"
+  },
+  {
+    "id": 9,
+    "name": "Treino H",
+    "description": "Pilates solo para iniciantes, melhorando postura e flexibilidade.",
+    "schedule_description": "Sábados - 08:00 às 09:00",
+    "logo_url": "https://boaforma.abril.com.br/wp-content/uploads/sites/2/2023/11/banco-supino.jpg?quality=90&strip=info&w=720&h=440&crop=1",
+    "trainer_id": "T008",
+    "student_id": "S008",
+    "created_at": "2024-03-08T00:00:00.000Z",
+    "updated_at": "2024-03-17T00:00:00.000Z"
+  },
+  {
+    "id": 10,
+    "name": "Treino I",
+    "description": "Boxe para defesa pessoal e condicionamento físico.",
+    "schedule_description": "Segundas, Quartas e Sextas - 19:00 às 20:00",
+    "logo_url": "https://boaforma.abril.com.br/wp-content/uploads/sites/2/2023/11/banco-supino.jpg?quality=90&strip=info&w=720&h=440&crop=1",
+    "trainer_id": "T009",
+    "student_id": "S009",
+    "created_at": "2024-03-09T00:00:00.000Z",
+    "updated_at": "2024-03-18T00:00:00.000Z"
+  }
+]

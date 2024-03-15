@@ -16,39 +16,30 @@ interface CardProps {
   description?: string;
   img?: string;
   onClick?: () => void;
+  time?: string;
 }
 
 export default function Card(props: CardProps) {
   return (
-    <Button bg="white" padding={0} onPress={props.onClick}>
+    <Button bg="brand.gray" padding={0} onPress={props.onClick}>
       <Box alignItems="center">
         <Box
           rounded="lg"
           overflow="hidden"
-          borderColor="coolGray.200"
+          borderColor="brand.gray"
           borderWidth="1"
-          _dark={{
-            borderColor: "coolGray.600",
-            backgroundColor: "gray.700",
-          }}
-          _web={{
-            shadow: 2,
-            borderWidth: 0,
-          }}
-          _light={{
-            backgroundColor: "gray.50",
-          }}
+          backgroundColor={"brand.bg"}
         >
           <Box>
             <AspectRatio w="100%" ratio={16 / 9}>
               <Image
                 source={{
-                  uri: "https://www.holidify.com/images/cmsuploads/compressed/Bangalore_citycover_20190613234056.jpg",
+                  uri: props.img
                 }}
-                alt="image"
+                alt="Imagem do Treino"
               />
             </AspectRatio>
-            <Center
+            {/* <Center
               bg="violet.500"
               _dark={{
                 bg: "violet.400",
@@ -64,33 +55,24 @@ export default function Card(props: CardProps) {
               py="1.5"
             >
               PHOTOS
-            </Center>
+            </Center> */}
           </Box>
           <Stack p="4" space={3}>
             <Stack space={2}>
-              <Heading size="md" ml="-1">
-                The Garden City
+              <Heading size="md" color={"white"} fontWeight={"bold"} ml="-1">
+                {props.title}
               </Heading>
               <Text
                 fontSize="xs"
-                _light={{
-                  color: "violet.500",
-                }}
-                _dark={{
-                  color: "violet.400",
-                }}
-                fontWeight="500"
+                color={"brand.primary"}
+                fontWeight="600"
                 ml="-0.5"
                 mt="-1"
               >
-                The Silicon Valley of India.
+                {props.subtitle}
               </Text>
             </Stack>
-            <Text fontWeight="400">
-              Bengaluru (also called Bangalore) is the center of India's
-              high-tech industry. The city is also known for its parks and
-              nightlife.
-            </Text>
+            <Text fontWeight="400" color={"white"}>{props.description}</Text>
             <HStack
               alignItems="center"
               space={4}
@@ -98,13 +80,11 @@ export default function Card(props: CardProps) {
             >
               <HStack alignItems="center">
                 <Text
-                  color="coolGray.600"
-                  _dark={{
-                    color: "warmGray.200",
-                  }}
+                  color="coolGray.300"
                   fontWeight="400"
+                  fontSize={"xs"}
                 >
-                  6 mins ago
+                  {props.time}
                 </Text>
               </HStack>
             </HStack>
