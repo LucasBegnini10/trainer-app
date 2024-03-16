@@ -6,6 +6,7 @@ import {
   HStack,
   Heading,
   Icon,
+  IconButton,
   Image,
   Text,
   VStack,
@@ -14,6 +15,7 @@ import {
 import {
   DrawerContentScrollView,
   DrawerItemList,
+  DrawerToggleButton,
 } from "@react-navigation/drawer";
 import { Button, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -22,6 +24,7 @@ import { useUserStore } from "../../../src/stores/useUserStore";
 import { getInitials } from "../../../src/utils/string";
 import { router } from "expo-router";
 import { clear } from "../../../src/utils/storage";
+import { DrawerActions, useNavigation } from "@react-navigation/native";
 
 const routes = [
   { name: "index", href: "home", icon: "barbell", title: "Exercícios" },
@@ -48,6 +51,8 @@ export default function LayoutHomeTrainer() {
     router.replace("/login");
     await clear();
   };
+
+  const navigation = useNavigation();
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
@@ -103,6 +108,25 @@ export default function LayoutHomeTrainer() {
               key={route.name}
               name={route.name}
               options={{
+                headerLeft: () => (
+                  <IconButton
+                    icon={
+                      <Icon
+                        color="brand.primary"
+                        as={Ionicons}
+                        name={"menu-outline"}
+                        size={6}
+                      />
+                    }
+                    _pressed={{
+                      bg: "brand.gray",
+                    }}
+                    onPress={() =>
+                      navigation.dispatch(DrawerActions.toggleDrawer())
+                    }
+                    m={2}
+                  />
+                ),
                 headerStyle: {
                   backgroundColor: "#12111f",
                 },

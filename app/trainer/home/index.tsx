@@ -14,11 +14,12 @@ import {
   View,
 } from "native-base";
 import useHomeTrainer from "../../../src/controllers/home/trainer/useHome";
-import { getInitials, limitString } from "../../../src/utils/string";
+import { getInitials } from "../../../src/utils/string";
+import { TouchableOpacity } from "react-native";
 
 export default function HomeTrainer() {
-
-  const {goToCreateExercice, exercises, isLoading} = useHomeTrainer() 
+  const { goToCreateExercice, exercises, isLoading, goToUpdateExercise } =
+    useHomeTrainer();
 
   return (
     <>
@@ -27,7 +28,7 @@ export default function HomeTrainer() {
         contentContainerStyle={{ paddingBottom: 20 }}
         px={4}
         data={exercises}
-        ItemSeparatorComponent={Divider}
+        ItemSeparatorComponent={() => <View my={2}/>}
         ListEmptyComponent={
           <View>
             {isLoading ? (
@@ -39,17 +40,40 @@ export default function HomeTrainer() {
             )}
           </View>
         }
-        renderItem={({item}) => {
+        ListHeaderComponent={<View my={2} />}
+        renderItem={({ item: exercise }) => {
           return (
-            <HStack space={4} px={6} py={4} alignItems={"center"}>
-              <Avatar bg="brand.primary">
-                <Text color={"brand.bg"}>{getInitials(item.name)}</Text>
-              </Avatar>
-              <VStack space={1}>
-                <Heading fontSize={"md"} fontFamily={"Roboto-Medium"} color={"white"}>{item.name}</Heading>
-                <Text fontSize={"sm"} color={"white"}>{limitString(item.description, 40)}</Text>
-              </VStack>
-            </HStack>
+            <TouchableOpacity onPress={() => goToUpdateExercise(exercise)}>
+              <HStack
+                space={4}
+                p={4}
+                alignItems={"center"}
+                bg="brand.bg"
+                rounded={"lg"}
+                borderWidth={1}
+                borderColor={"brand.gray"}
+              >
+                <Avatar bg="brand.primary">
+                  {
+                    <Text color={"brand.bg"} fontSize={"lg"}>
+                      {getInitials(exercise.name)}
+                    </Text>
+                  }
+                </Avatar>
+                <VStack space={1}>
+                  <Heading
+                    fontSize={"md"}
+                    fontFamily={"Roboto-Medium"}
+                    color={"white"}
+                  >
+                    {exercise.name}
+                  </Heading>
+                  <Text color={"white"} fontSize={"sm"}>
+                    {exercise.description}
+                  </Text>
+                </VStack>
+              </HStack>
+            </TouchableOpacity>
           );
         }}
       />

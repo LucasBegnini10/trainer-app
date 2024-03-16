@@ -32,14 +32,14 @@ export default function InputComponent(props: InputProps) {
         onChangeText={props.onChange}
         color={"white"}
         isReadOnly={props.readonly}
-        _focus={{
-          borderColor: "brand.primary",
-          bg: "brand.gray"
-        }}
         placeholder={props.placeholder}
         secureTextEntry={props.secure}
         InputRightElement={props.icon}
         rounded={"lg"}
+        _focus={{
+          borderColor: "brand.primary",
+          bg: "brand.gray",
+        }}
         {...props.inputProps}
       />
       {props.hint ? (

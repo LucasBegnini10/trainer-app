@@ -36,3 +36,12 @@ export const getExercises = async (trainerId: string, name?: string) => {
       throw err?.response || err;
     });
 };
+
+export const getExerciseById = async (id: string) => {
+  return await api
+    .get(`/exercises/${id}`)
+    .then((res) => res)
+    .catch((err) => {
+      throw err?.response || err;
+    });
+};

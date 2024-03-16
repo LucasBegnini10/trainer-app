@@ -49,7 +49,7 @@ export default function StudentsList() {
             )}
           </View>
         }
-        ItemSeparatorComponent={Divider}
+        ItemSeparatorComponent={() => <View my={2}/>}
         ListHeaderComponent={
           <InputComponent
             placeholder="Pesquisar Aluno"
