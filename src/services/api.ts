@@ -3,7 +3,7 @@ import { get, keys } from "../utils/storage";
 
 const api = axios.create({
   baseURL: "http://localhost:3000/api/v1",
-  timeout: 8000,
+  timeout: 10000,
 });
 
 api.interceptors.request.use(

@@ -24,7 +24,7 @@ const initialStateExercise  = {
 
   name: "",
   description: "",
-  file: null,
+  file: {} as ImagePicker.ImagePickerAsset,
   blob: null as Blob | null,
 
 }
@@ -106,14 +106,9 @@ export default function useCreateExercise() {
 
   const handleCreateExercice = () => {
     if (validateFields()) {
-      console.log({
-        description: exercise.description,
-        file: exercise.blob,
-        name: exercise.name,
-      })
       mutation.mutate({
         description: exercise.description,
-        file: exercise.blob,
+        file: exercise.file,
         name: exercise.name,
       });
     }
@@ -125,12 +120,10 @@ export default function useCreateExercise() {
       bgColor: "green.500",
     });
     resetExercise()
-    // Reset cache exercises
     router.push("/trainer/home")
   };
 
   const onError = (err) => {
-    console.log("Error =>", err.data.errors)
     toast.show({
       description:"Não foi possível. Tente novamente!",
       bgColor: "red.500"
