@@ -20,7 +20,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import UserInfos from "../../../src/components/user/user-infos";
 
 export default function StudentsList() {
-  const handleGoCreateStudent = () => router.push("/trainer/createStudent");
+  const handleGoCreateStudent = () => router.push("/trainer/student/create");
   const {
     students,
     isLoading,

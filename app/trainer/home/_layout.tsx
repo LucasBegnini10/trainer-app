@@ -17,7 +17,7 @@ import {
   DrawerItemList,
   DrawerToggleButton,
 } from "@react-navigation/drawer";
-import { Button, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useUserStore } from "../../../src/stores/useUserStore";
@@ -27,7 +27,14 @@ import { clear } from "../../../src/utils/storage";
 import { DrawerActions, useNavigation } from "@react-navigation/native";
 
 const routes = [
-  { name: "index", href: "home", icon: "barbell", title: "Exercícios" },
+  {
+    name: "index",
+    href: "index",
+    icon: "rocket",
+    title: "Treinos",
+  },
+
+  { name: "exercises", href: "home/exercises", icon: "barbell", title: "Exercícios" },
   {
     name: "students",
     href: "home/students",
