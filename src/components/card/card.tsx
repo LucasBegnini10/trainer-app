@@ -2,7 +2,6 @@ import {
   Box,
   AspectRatio,
   Image,
-  Center,
   Stack,
   Heading,
   Text,
@@ -10,7 +9,7 @@ import {
   Button,
 } from "native-base";
 
-interface CardProps {
+export interface CardProps {
   title?: string;
   subtitle?: string;
   description?: string;

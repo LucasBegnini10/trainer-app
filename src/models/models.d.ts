@@ -4,8 +4,8 @@ export interface UserModel {
   document: string;
   email: string;
   password: string;
-  created_at: Date;
-  updated_at: Date;
+  created_at: string;
+  updated_at: string;
   Students:   Student | null;
   Trainers:   Trainer | null;
 }
@@ -24,7 +24,7 @@ export interface Student {
 export interface TrainerStudentsModel {
   trainer_id: string;
   student_id: string;
-  created_at: Date;
+  created_at: string;
 }
 
 export interface ExercisesModel {
@@ -33,8 +33,8 @@ export interface ExercisesModel {
   description: string;
   video_url: string;
   trainer_id: string;
-  created_at: Date;
-  updated_at: Date;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface WorkoutExercisesModel {
@@ -47,12 +47,12 @@ export interface WorkoutModel {
   id: number;
   name: string;
   description: string;
-  schedule_description: string;
+  schedule_description: number[];
   logo_url: string;
   trainer_id: string;
   student_id: string;
-  created_at: Date;
-  updated_at: Date;
+  created_at: string;
+  updated_at: string;
 }
 
 export interface WorkoutTrackerModel {
@@ -60,8 +60,8 @@ export interface WorkoutTrackerModel {
   status: StatusWorkoutTracker;
   tired_level: number | null;
   feedback: string | null;
-  time_started: Date | null;
-  time_finished: Date | null;
+  time_started: string | null;
+  time_finished: string | null;
   trainer_id: string;
   student_id: string;
 }
