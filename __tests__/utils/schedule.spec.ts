@@ -30,4 +30,10 @@ describe('formatScheduleArrayToString', () => {
     const result = formatScheduleArrayToString(scheduleDescription);
     expect(result).toEqual('Segunda, Terça e Quarta');
   });
+
+  it('should return sortered days', () => {
+    const scheduleDescription: number[] = [3, 1, 5];
+    const result = formatScheduleArrayToString(scheduleDescription);
+    expect(result).toEqual('Segunda, Quarta e Sexta');
+  });
 });
