@@ -3,8 +3,14 @@ import workouts from "../../../data/workouts.json";
 import { WorkoutModel } from "../../../models/models";
 import { CardProps } from "../../../components/card/card";
 import { formatScheduleArrayToString } from "../../../utils/schedule";
+import { format } from "date-fns";
+import { useMemo, useState } from "react";
 
 export default function useHome() {
+  const [loading, setLoading] = useState(false);
+
+  const changeDay = () => {};
+
   const navigationWorkout = () =>
     router.push({
       pathname: "/student/workoutDetails",
@@ -20,6 +26,10 @@ export default function useHome() {
       description: workout.description,
       img: workout.logo_url,
       subtitle: formatScheduleArrayToString(workout.schedule_description),
+      time: `Publicado em ${format(
+        new Date(workout.created_at),
+        "dd/MM/yyyy"
+      )}`,
     };
   };
 
@@ -27,5 +37,7 @@ export default function useHome() {
     navigationWorkout,
     workouts,
     formatWorkoutToCard,
+    changeDay,
+    loading,
   };
 }

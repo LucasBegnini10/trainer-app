@@ -1,4 +1,4 @@
-const daysOfWeekMapping = {
+export const daysOfWeekMapping = {
   0: "Domingo",
   1: "Segunda",
   2: "Terça",
@@ -7,6 +7,9 @@ const daysOfWeekMapping = {
   5: "Sexta",
   6: "Sábado",
 };
+
+export const FIRST_KEY_DAY = 0;
+export const LAST_KEY_DAY = 6;
 
 export const formatScheduleArrayToString = (scheduleDescription: number[]) => {
   if (scheduleDescription.length === 0) return "";
@@ -35,3 +38,11 @@ export const formatScheduleArrayToString = (scheduleDescription: number[]) => {
 
 const sortDaysOfWeek = (daysOfWeek: number[]) =>
   daysOfWeek.sort((a, b) => a - b);
+
+export const getInitialIndexByWeekDay = (option: number) => {
+  const setSameIndexOptions = [0, 1, 5, 6]
+
+  if(setSameIndexOptions.includes(option)) return option;
+
+  return 3
+}

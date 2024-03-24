@@ -8,6 +8,7 @@ import {
   HStack,
   Button,
 } from "native-base";
+import { IButtonProps } from "native-base/lib/typescript/components/primitives/Button/types";
 
 export interface CardProps {
   title?: string;
@@ -16,11 +17,21 @@ export interface CardProps {
   img?: string;
   onClick?: () => void;
   time?: string;
+  buttonProps?: IButtonProps;
 }
 
 export default function Card(props: CardProps) {
   return (
-    <Button bg="brand.gray" padding={0} onPress={props.onClick}>
+    <Button
+      bg="brand.bg"
+      padding={0}
+      px={6}
+      _pressed={{
+        bg: "brand.bg",
+      }}
+      onPress={props.onClick}
+      {...props.buttonProps}
+    >
       <Box alignItems="center">
         <Box
           rounded="lg"
@@ -33,7 +44,7 @@ export default function Card(props: CardProps) {
             <AspectRatio w="100%" ratio={16 / 9}>
               <Image
                 source={{
-                  uri: props.img
+                  uri: props.img,
                 }}
                 alt="Imagem do Treino"
               />
@@ -71,18 +82,16 @@ export default function Card(props: CardProps) {
                 {props.subtitle}
               </Text>
             </Stack>
-            <Text fontWeight="400" color={"white"}>{props.description}</Text>
+            <Text fontWeight="400" color={"white"}>
+              {props.description}
+            </Text>
             <HStack
               alignItems="center"
               space={4}
               justifyContent="space-between"
             >
               <HStack alignItems="center">
-                <Text
-                  color="coolGray.300"
-                  fontWeight="400"
-                  fontSize={"xs"}
-                >
+                <Text color="coolGray.300" fontWeight="400" fontSize={"xs"}>
                   {props.time}
                 </Text>
               </HStack>
