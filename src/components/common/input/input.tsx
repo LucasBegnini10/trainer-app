@@ -1,4 +1,4 @@
-import { FormControl, Input, Text } from "native-base";
+import { FormControl, Input, Text, TextArea } from "native-base";
 import { IInputProps } from "native-base/lib/typescript/components/primitives/Input/types";
 
 export interface InputProps {
@@ -14,6 +14,7 @@ export interface InputProps {
   inputProps?: IInputProps;
   disabled?: boolean;
   readonly?: boolean;
+  textarea?: boolean;
 }
 
 export default function InputComponent(props: InputProps) {
@@ -22,26 +23,51 @@ export default function InputComponent(props: InputProps) {
       <FormControl.Label>
         <Text color={"white"}>{props.label}</Text>
       </FormControl.Label>
-      <Input
-        isDisabled={props.disabled}
-        fontSize={14}
-        py={3}
-        value={props.value}
-        bg="brand.gray"
-        borderColor={"brand.gray"}
-        onChangeText={props.onChange}
-        color={"white"}
-        isReadOnly={props.readonly}
-        placeholder={props.placeholder}
-        secureTextEntry={props.secure}
-        InputRightElement={props.icon}
-        rounded={"lg"}
-        _focus={{
-          borderColor: "brand.primary",
-          bg: "brand.gray",
-        }}
-        {...props.inputProps}
-      />
+      {props.textarea ? (
+        <TextArea
+          autoCompleteType={"off"}
+          isDisabled={props.disabled}
+          fontSize={14}
+          py={3}
+          value={props.value}
+          bg="brand.gray"
+          borderColor={"brand.gray"}
+          onChangeText={props.onChange}
+          color={"white"}
+          isReadOnly={props.readonly}
+          placeholder={props.placeholder}
+          secureTextEntry={props.secure}
+          InputRightElement={props.icon}
+          rounded={"lg"}
+          _focus={{
+            borderColor: "brand.primary",
+            bg: "brand.gray",
+          }}
+          {...props.inputProps}
+        />
+      ) : (
+        <Input
+          isDisabled={props.disabled}
+          fontSize={14}
+          py={3}
+          value={props.value}
+          bg="brand.gray"
+          borderColor={"brand.gray"}
+          onChangeText={props.onChange}
+          color={"white"}
+          isReadOnly={props.readonly}
+          placeholder={props.placeholder}
+          secureTextEntry={props.secure}
+          InputRightElement={props.icon}
+          rounded={"lg"}
+          _focus={{
+            borderColor: "brand.primary",
+            bg: "brand.gray",
+          }}
+          {...props.inputProps}
+        />
+      )}
+
       {props.hint ? (
         <FormControl.HelperText>{props.hint}</FormControl.HelperText>
       ) : null}

@@ -32,6 +32,7 @@ export default function UpdateExercise() {
         <InputComponent
           label="Descrição do Exercício"
           value={exercise?.description}
+          textarea
           onChange={(e) => setExercise((prev) => ({ ...prev, description: e }))}
           // invalid={invalid.name.error}
           // error={invalid.name.msg}
@@ -59,7 +60,7 @@ export default function UpdateExercise() {
               source={{
                 uri: exercise?.video_url,
               }}
-              style={{ width: "100%", height: "45%" }}
+              style={{ width: "100%", height: "35%" }}
               useNativeControls
               resizeMode={ResizeMode.COVER}
               isLooping

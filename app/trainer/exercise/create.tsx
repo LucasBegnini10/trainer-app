@@ -30,13 +30,14 @@ export default function CreateExercisePage() {
           error={invalid.name.msg}
         />
         <InputComponent
+          textarea
           label="Descrição do Exercício"
           value={exercise.description}
           onChange={(e) => setExercise((prev) => ({ ...prev, description: e }))}
           invalid={invalid.name.error}
           error={invalid.name.msg}
           inputProps={{
-              multiline: true
+            multiline: true,
           }}
         />
 
@@ -54,20 +55,20 @@ export default function CreateExercisePage() {
 
         {exercise?.file ? (
           <>
-          <View my={0}/>
-          <Video
-            source={{
-              uri: exercise.file?.uri,
-            }}
-            style={{ width: "100%", height: "45%" }}
-            useNativeControls
-            resizeMode={ResizeMode.COVER}
-            isLooping
-          />
+            <View my={0} />
+            <Video
+              source={{
+                uri: exercise.file?.uri,
+              }}
+              style={{ width: "100%", height: "40%" }}
+              useNativeControls
+              resizeMode={ResizeMode.COVER}
+              isLooping
+            />
           </>
         ) : null}
 
-        <Button onPress={handleCreateExercice} isLoading={loading} mt={4}>
+        <Button onPress={handleCreateExercice} isLoading={loading}>
           <Text fontFamily={"Roboto-Bold"} color={"brand.bg"} fontSize={14}>
             CRIAR EXERCÍCIO
           </Text>

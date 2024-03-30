@@ -1,7 +1,10 @@
 import { AntDesign } from "@expo/vector-icons";
 import { Fab, FlatList, Icon, Text, View } from "native-base";
+import useWorkouts, { UseWorkoutsType } from "../../../src/controllers/trainer/useWorkouts";
 
 export default function Workouts() {
+  const { goToCreateWorkout } : UseWorkoutsType = useWorkouts();
+
   return (
     <>
       <FlatList
@@ -21,7 +24,7 @@ export default function Workouts() {
 
       <Fab
         renderInPortal={false}
-        onPress={() => null}
+        onPress={goToCreateWorkout}
         shadow={2}
         right={"10"}
         bottom={30}
