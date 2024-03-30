@@ -1,4 +1,3 @@
-import { router } from "expo-router";
 import workouts from "../../../data/workouts.json";
 import { WorkoutModel } from "../../../models/models";
 import { CardProps } from "../../../components/card/card";
@@ -11,14 +10,9 @@ export default function useHome() {
 
   const changeDay = () => {};
 
-  const navigationWorkout = () =>
-    router.push({
-      pathname: "/student/workoutDetails",
-      params: {
-        id: 123,
-        name: "Treino de Peito",
-      },
-    });
+  const navigationWorkout = () => {
+    console.log("navegando para workout")
+  }
 
   const formatWorkoutToCard = (workout: WorkoutModel): CardProps => {
     return {

@@ -1,5 +1,5 @@
 import { AntDesign } from "@expo/vector-icons";
-import { Fab, FlatList, Icon, Text } from "native-base";
+import { Fab, FlatList, Icon, Text, View } from "native-base";
 
 export default function Workouts() {
   return (
@@ -9,6 +9,13 @@ export default function Workouts() {
         contentContainerStyle={{ paddingBottom: 20 }}
         px={4}
         data={[]}
+        ListEmptyComponent={
+          <View>
+            <Text color={"gray.600"} mt={2}>
+              Nenhum treino encontrado.
+            </Text>
+          </View>
+        }
         renderItem={({ item }) => <Text>{item.name}</Text>}
       />
 
