@@ -1,11 +1,11 @@
-import workouts from "../../../data/workouts.json";
-import { WorkoutModel } from "../../../models/models";
-import { CardProps } from "../../../components/card/card";
-import { formatScheduleArrayToString } from "../../../utils/schedule";
+import workouts from "../../data/workouts.json";
+import { WorkoutModel } from "../../models/models";
+import { CardProps } from "../../components/card/card";
+import { formatScheduleArrayToString } from "../../utils/schedule";
 import { format } from "date-fns";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 
-export default function useHome() {
+export default function useWorkoutList() {
   const [loading, setLoading] = useState(false);
 
   const changeDay = () => {};

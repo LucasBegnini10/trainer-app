@@ -13,13 +13,13 @@ import {
   VStack,
   View,
 } from "native-base";
-import useHomeTrainer from "../../../src/controllers/home/trainer/useHome";
+import useExerciseList from "../../../src/controllers/trainer/useExerciseList";
 import { getInitials } from "../../../src/utils/string";
 import { TouchableOpacity } from "react-native";
 
 export default function HomeTrainer() {
   const { goToCreateExercice, exercises, isLoading, goToUpdateExercise } =
-    useHomeTrainer();
+    useExerciseList();
 
   return (
     <>
@@ -28,7 +28,7 @@ export default function HomeTrainer() {
         contentContainerStyle={{ paddingBottom: 20 }}
         px={4}
         data={exercises}
-        ItemSeparatorComponent={() => <View my={2}/>}
+        ItemSeparatorComponent={() => <View my={2} />}
         ListEmptyComponent={
           <View>
             {isLoading ? (

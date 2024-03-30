@@ -1,7 +1,7 @@
 import { FlatList, Icon,  VStack, View } from "native-base";
 import Card from "../../../src/components/card/card";
 import { Ionicons } from "@expo/vector-icons";
-import useHome from "../../../src/controllers/home/student/useHome";
+import useWorkoutList from "../../../src/controllers/student/useWorkoutList"; 
 import InputComponent from "../../../src/components/common/input/input";
 import { WorkoutModel } from "../../../src/models/models";
 import FilterDayWeek from "../../../src/components/filter-day-week/FilterDayWeek";
@@ -14,7 +14,7 @@ export default function HomeIndex() {
     formatWorkoutToCard,
     changeDay,
     loading,
-  } = useHome();
+  } = useWorkoutList();
 
   return (
     <FlatList
