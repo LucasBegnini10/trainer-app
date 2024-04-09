@@ -3,7 +3,9 @@ import {
   Divider,
   HStack,
   Heading,
+  Icon,
   IconButton,
+  Row,
   ScrollView,
   Text,
   VStack,
@@ -16,7 +18,6 @@ import { Ionicons } from "@expo/vector-icons";
 import useCreateWorkout, {
   CreateWorkoutType,
 } from "../../../src/controllers/trainer/useCreateWorkout";
-import { SelectUserList } from "../../../src/components/workout/selectUserList";
 import { SelectExerciseList } from "../../../src/components/workout/selectExerciseList";
 
 export default function CreateWorkout() {
@@ -26,6 +27,7 @@ export default function CreateWorkout() {
     workout,
     exercisesSelected,
     studentsSelected,
+    goToSelectUsers
   }: CreateWorkoutType = useCreateWorkout();
 
   return (
@@ -51,12 +53,25 @@ export default function CreateWorkout() {
           // }}
         />
 
-        <SelectUserList
-          students={students}
-          studentsSelected={studentsSelected.get}
-          set={studentsSelected.set}
-          remove={studentsSelected.remove}
-        />
+        <VStack>
+          <Row alignItems={"center"} justifyContent={"space-between"}>
+            <Text color={"white"}>
+              Alunos selecionados ({studentsSelected.get.length})
+            </Text>
+            <IconButton
+              onPress={goToSelectUsers}
+              _pressed={{ bg: "brand.gray" }}
+              icon={
+                <Icon
+                  as={Ionicons}
+                  name={"open-outline"}
+                  color={"brand.primary"}
+                />
+              }
+            />
+          </Row>
+        </VStack>
+
         <Divider bg={"brand.gray"} />
 
         <SelectExerciseList

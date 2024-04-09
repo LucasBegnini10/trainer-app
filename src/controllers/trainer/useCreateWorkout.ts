@@ -2,6 +2,7 @@ import { useState } from "react";
 import useExerciseList from "./useExerciseList";
 import useStudents from "./useStudents";
 import { ExercisesModel, UserModel, WorkoutModel } from "../../models/models";
+import { router } from "expo-router";
 
 export default function useCreateWorkout() {
   const { students } = useStudents();
@@ -35,6 +36,10 @@ export default function useCreateWorkout() {
     );
   };
 
+  const goToSelectUsers = () => {
+    router.push("/trainer/workout/selectUsers");
+  };
+
   return {
     students,
     exercises,
@@ -52,6 +57,7 @@ export default function useCreateWorkout() {
       set: handleSetExerciseSelected,
       remove: handleRemoveExerciseSelected,
     },
+    goToSelectUsers,
   };
 }
 
