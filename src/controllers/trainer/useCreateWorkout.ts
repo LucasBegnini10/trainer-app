@@ -2,7 +2,6 @@ import { useState } from "react";
 import useExerciseList from "./useExerciseList";
 import useStudents from "./useStudents";
 import { ExercisesModel, UserModel, WorkoutModel } from "../../models/models";
-import { daysOfWeekMapping } from "../../utils/schedule";
 
 export default function useCreateWorkout() {
   const { students } = useStudents();
@@ -15,29 +14,6 @@ export default function useCreateWorkout() {
   const [exercisesSelected, setExercisesSelected] = useState(
     [] as Array<ExercisesModel>
   );
-
-  const daysOfWeekOptions = Object.entries(daysOfWeekMapping);
-
-  const toggleOptionDayOfWeek = (day: string) => {
-    const dayInt = parseInt(day);
-    setWorkout((prev) => {
-      const scheduleDescription = prev.schedule_description || [];
-
-      if (scheduleDescription.includes(dayInt)) {
-        return {
-          ...prev,
-          schedule_description: scheduleDescription.filter(
-            (item) => item !== dayInt
-          ),
-        };
-      }
-
-      return {
-        ...prev,
-        schedule_description: [...scheduleDescription, dayInt],
-      };
-    });
-  };
 
   const handleSetStudentSelected = (student: UserModel) => {
     setStudentsSelected((prev) => [...new Set([...prev, student])]);
@@ -75,11 +51,6 @@ export default function useCreateWorkout() {
       get: exercisesSelected,
       set: handleSetExerciseSelected,
       remove: handleRemoveExerciseSelected,
-    },
-    scheduleDescription: {
-      options: daysOfWeekOptions,
-      toggle: toggleOptionDayOfWeek,
-      state: workout.schedule_description,
     },
   };
 }
