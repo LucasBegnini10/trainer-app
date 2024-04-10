@@ -1,30 +1,55 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useExerciseList from "./useExerciseList";
-import useStudents from "./useStudents";
-import { ExercisesModel, UserModel, WorkoutModel } from "../../models/models";
-import { router } from "expo-router";
+import { ExercisesModel, WorkoutModel } from "../../models/models";
+import { router, useNavigation } from "expo-router";
+import { useStudentsWorkoutStore } from "../../stores/useStudentsWorkoutStore";
+import { Alert } from "react-native";
 
 export default function useCreateWorkout() {
-  const { students } = useStudents();
-  const { exercises } = useExerciseList();
-
+  const { students: studentsSelected, clear: clearStudentsSelected } =
+    useStudentsWorkoutStore();
   const [workout, setWorkout] = useState({} as WorkoutModel);
-  const [studentsSelected, setStudentsSelected] = useState(
-    [] as Array<UserModel>
-  );
+
+  const { exercises } = useExerciseList();
   const [exercisesSelected, setExercisesSelected] = useState(
     [] as Array<ExercisesModel>
   );
 
-  const handleSetStudentSelected = (student: UserModel) => {
-    setStudentsSelected((prev) => [...new Set([...prev, student])]);
-  };
+  const navigation = useNavigation();
 
-  const handleRemoveStudentSelected = (student: UserModel) => {
-    setStudentsSelected((prev) =>
-      prev.filter((item) => item.id !== student.id)
-    );
-  };
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("beforeRemove", (e) => {
+      e.preventDefault();
+
+      const goBack = () => {
+        clearStudentsSelected();
+        setWorkout({} as WorkoutModel);
+
+        navigation.dispatch(e.data.action);
+      };
+
+      Alert.alert(
+        "Atenção",
+        "Deseja realmente sair sem salvar? Você possui dados não salvos e os perderá se sair.",
+        [
+          {
+            style: "default",
+            text: "Cancelar",
+            onPress: () => {},
+            isPreferred: true,
+          },
+          {
+            style: "destructive",
+            text: "Sair sem salvar",
+            onPress: goBack,
+          },
+        ],
+        { cancelable: false }
+      );
+    });
+
+    return unsubscribe
+  }, []);
 
   const handleSetExerciseSelected = (exercise: ExercisesModel) => {
     setExercisesSelected((prev) => [...new Set([...prev, exercise])]);
@@ -37,27 +62,24 @@ export default function useCreateWorkout() {
   };
 
   const goToSelectUsers = () => {
-    router.push("/trainer/workout/selectUsers");
+    router.push("/trainer/workout/selectStudentsWorkout");
   };
 
   return {
-    students,
     exercises,
     workout: {
       get: workout,
       set: setWorkout,
-    },
-    studentsSelected: {
-      get: studentsSelected,
-      set: handleSetStudentSelected,
-      remove: handleRemoveStudentSelected,
     },
     exercisesSelected: {
       get: exercisesSelected,
       set: handleSetExerciseSelected,
       remove: handleRemoveExerciseSelected,
     },
-    goToSelectUsers,
+    selectStudents: {
+      go: goToSelectUsers,
+      students: studentsSelected,
+    },
   };
 }
 

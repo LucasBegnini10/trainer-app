@@ -23,11 +23,9 @@ import { SelectExerciseList } from "../../../src/components/workout/selectExerci
 export default function CreateWorkout() {
   const {
     exercises,
-    students,
     workout,
     exercisesSelected,
-    studentsSelected,
-    goToSelectUsers
+    selectStudents,
   }: CreateWorkoutType = useCreateWorkout();
 
   return (
@@ -56,10 +54,10 @@ export default function CreateWorkout() {
         <VStack>
           <Row alignItems={"center"} justifyContent={"space-between"}>
             <Text color={"white"}>
-              Alunos selecionados ({studentsSelected.get.length})
+              Alunos selecionados ({selectStudents.students.length})
             </Text>
             <IconButton
-              onPress={goToSelectUsers}
+              onPress={selectStudents.go}
               _pressed={{ bg: "brand.gray" }}
               icon={
                 <Icon
