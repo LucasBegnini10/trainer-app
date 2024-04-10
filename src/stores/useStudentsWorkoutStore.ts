@@ -17,46 +17,38 @@ interface StudentWorkoutStoreModel {
   clear: () => void;
 }
 
-export const useStudentsWorkoutStore = create<StudentWorkoutStoreModel>()(
-  persist(
-    (set, get) => ({
-      students: [] as StudentsWorkout[],
-      studentsHashMap: {} as Record<string, StudentsWorkout>,
-      getStudent: (id: string) => get().studentsHashMap[id],
-      addStudent: (student: StudentsWorkout) =>
-        set((state) => {
-          const students = [...new Set([...state.students, student])];
-          const studentsHashMap = {
-            ...state.studentsHashMap,
-            [student.id]: student,
-          };
-          return { ...state, students, studentsHashMap };
-        }),
-      setScheduleId: (schedule_id: number[], studentId: string) =>
-        set((state) => {
-          const student = state.studentsHashMap[studentId];
-          if (!student) return;
-          student.schedule_id = schedule_id;
-          const studentsHashMap = {
-            ...state.studentsHashMap,
-            [student.id]: student,
-          };
-          return { ...state, studentsHashMap };
-        }),
-      removeStudent: (id: string) =>
-        set((state) => {
-          const students = state.students.filter(
-            (student) => student.id !== id
-          );
-          const studentsHashMap = { ...state.studentsHashMap };
-          delete studentsHashMap[id];
-          return { ...state, students, studentsHashMap };
-        }),
-      clear: () => set({ students: [], studentsHashMap: {} }),
-    }),
-    {
-      name: "students-workout-store",
-      storage: createJSONStorage(() => AsyncStorage),
-    }
-  )
+export const useStudentsWorkoutStore = create<StudentWorkoutStoreModel>(
+  (set, get) => ({
+    students: [] as StudentsWorkout[],
+    studentsHashMap: {} as Record<string, StudentsWorkout>,
+    getStudent: (id: string) => get().studentsHashMap[id],
+    addStudent: (student: StudentsWorkout) =>
+      set((state) => {
+        const students = [...new Set([...state.students, student])];
+        const studentsHashMap = {
+          ...state.studentsHashMap,
+          [student.id]: student,
+        };
+        return { ...state, students, studentsHashMap };
+      }),
+    setScheduleId: (schedule_id: number[], studentId: string) =>
+      set((state) => {
+        const student = state.studentsHashMap[studentId];
+        if (!student) return;
+        student.schedule_id = schedule_id;
+        const studentsHashMap = {
+          ...state.studentsHashMap,
+          [student.id]: student,
+        };
+        return { ...state, studentsHashMap };
+      }),
+    removeStudent: (id: string) =>
+      set((state) => {
+        const students = state.students.filter((student) => student.id !== id);
+        const studentsHashMap = { ...state.studentsHashMap };
+        delete studentsHashMap[id];
+        return { ...state, students, studentsHashMap };
+      }),
+    clear: () => set({ students: [], studentsHashMap: {} }),
+  })
 );
