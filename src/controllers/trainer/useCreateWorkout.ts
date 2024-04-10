@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
-import useExerciseList from "./useExerciseList";
-import { ExercisesModel, WorkoutModel } from "../../models/models";
+import { WorkoutModel } from "../../models/models";
 import { router, useNavigation } from "expo-router";
 import { useStudentsWorkoutStore } from "../../stores/useStudentsWorkoutStore";
 import { Alert } from "react-native";
+import { useExerciseWorkoutStore } from "../../stores/useExercisesWorkoutStore";
 
 export default function useCreateWorkout() {
   const { students: studentsSelected, clear: clearStudentsSelected } =
     useStudentsWorkoutStore();
-  const [workout, setWorkout] = useState({} as WorkoutModel);
 
-  const { exercises } = useExerciseList();
-  const [exercisesSelected, setExercisesSelected] = useState(
-    [] as Array<ExercisesModel>
-  );
+  const { exercises: exercisesSelected, clear: clearExercisesSelected } =
+    useExerciseWorkoutStore();
+
+  const [workout, setWorkout] = useState({} as WorkoutModel);
 
   const navigation = useNavigation();
 
@@ -23,6 +22,7 @@ export default function useCreateWorkout() {
 
       const goBack = () => {
         clearStudentsSelected();
+        clearExercisesSelected();
         setWorkout({} as WorkoutModel);
 
         navigation.dispatch(e.data.action);
@@ -48,36 +48,28 @@ export default function useCreateWorkout() {
       );
     });
 
-    return unsubscribe
+    return unsubscribe;
   }, []);
 
-  const handleSetExerciseSelected = (exercise: ExercisesModel) => {
-    setExercisesSelected((prev) => [...new Set([...prev, exercise])]);
-  };
-
-  const handleRemoveExerciseSelected = (exercise: ExercisesModel) => {
-    setExercisesSelected((prev) =>
-      prev.filter((item) => item.id !== exercise.id)
-    );
-  };
-
-  const goToSelectUsers = () => {
+  const goToSelectStudents = () => {
     router.push("/trainer/workout/selectStudentsWorkout");
   };
 
+  const goToSelectExercises = () => {
+    router.push("/trainer/workout/selectExercisesWorkout");
+  };
+
   return {
-    exercises,
     workout: {
       get: workout,
       set: setWorkout,
     },
-    exercisesSelected: {
-      get: exercisesSelected,
-      set: handleSetExerciseSelected,
-      remove: handleRemoveExerciseSelected,
+    selectExercises: {
+      go: goToSelectExercises,
+      exercises: exercisesSelected,
     },
     selectStudents: {
-      go: goToSelectUsers,
+      go: goToSelectStudents,
       students: studentsSelected,
     },
   };

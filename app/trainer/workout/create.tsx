@@ -18,15 +18,10 @@ import { Ionicons } from "@expo/vector-icons";
 import useCreateWorkout, {
   CreateWorkoutType,
 } from "../../../src/controllers/trainer/useCreateWorkout";
-import { SelectExerciseList } from "../../../src/components/workout/selectExerciseList";
 
 export default function CreateWorkout() {
-  const {
-    exercises,
-    workout,
-    exercisesSelected,
-    selectStudents,
-  }: CreateWorkoutType = useCreateWorkout();
+  const { workout, selectExercises, selectStudents }: CreateWorkoutType =
+    useCreateWorkout();
 
   return (
     <ScrollView bg={"brand.bg"} flex={1}>
@@ -72,12 +67,24 @@ export default function CreateWorkout() {
 
         <Divider bg={"brand.gray"} />
 
-        <SelectExerciseList
-          exercises={exercises}
-          exercisesSelected={exercisesSelected.get}
-          set={exercisesSelected.set}
-          remove={exercisesSelected.remove}
-        />
+        <VStack>
+          <Row alignItems={"center"} justifyContent={"space-between"}>
+            <Text color={"white"}>
+              Exercícios selecionados ({selectExercises.exercises.length})
+            </Text>
+            <IconButton
+              onPress={selectExercises.go}
+              _pressed={{ bg: "brand.gray" }}
+              icon={
+                <Icon
+                  as={Ionicons}
+                  name={"open-outline"}
+                  color={"brand.primary"}
+                />
+              }
+            />
+          </Row>
+        </VStack>
 
         <Button
           mt={4}
