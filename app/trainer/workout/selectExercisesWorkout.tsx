@@ -14,19 +14,15 @@ import {
 } from "native-base";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { getInitials, limitString } from "../../../src/utils/string";
-import { daysOfWeekMapping } from "../../../src/utils/schedule";
 import { useState } from "react";
-import { useExerciseWorkoutStore } from "../../../src/stores/useExercisesWorkoutStore";
 import { ExercisesModel } from "../../../src/models/models";
 import useSelectExercisesWorkout from "../../../src/controllers/trainer/useSelectExercisesWorkout";
 
 export default function SelectExercisesWorkout() {
   const {
     addExercise,
-    clear, 
     exercisesHashMap, 
     exercises, 
-    getExercise,
     removeExercise,
     isLoading
   } = useSelectExercisesWorkout();
@@ -55,7 +51,6 @@ export default function SelectExercisesWorkout() {
       ItemSeparatorComponent={() => <View my={2} />}
       renderItem={({ item: exercise }) => {
         const isChecked = Boolean(exercisesHashMap[exercise.id]);
-        const isExpanded = Boolean(expandedList[exercise.id]);
 
         return (
           <VStack
@@ -157,7 +152,7 @@ const Header = () => {
         _pressed={{ bg: "brand.grey" }}
       />
       <Heading fontFamily={"Roboto-Bold"} color={"white"}>
-        Selecionar Alunos
+        Selecionar Exercícios
       </Heading>
       <View w="12" />
     </HStack>

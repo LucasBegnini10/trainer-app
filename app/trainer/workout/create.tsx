@@ -5,6 +5,7 @@ import {
   Heading,
   Icon,
   IconButton,
+  Image,
   Row,
   ScrollView,
   Text,
@@ -18,10 +19,18 @@ import { Ionicons } from "@expo/vector-icons";
 import useCreateWorkout, {
   CreateWorkoutType,
 } from "../../../src/controllers/trainer/useCreateWorkout";
+import { ResizeMode } from "expo-av";
 
 export default function CreateWorkout() {
-  const { workout, selectExercises, selectStudents }: CreateWorkoutType =
-    useCreateWorkout();
+  const {
+    workout,
+    selectExercises,
+    selectStudents,
+    invalid,
+    handleCreateWorkout,
+    pickImage,
+    file,
+  }: CreateWorkoutType = useCreateWorkout();
 
   return (
     <ScrollView bg={"brand.bg"} flex={1}>
@@ -29,21 +38,18 @@ export default function CreateWorkout() {
       <VStack space={2} my={4} px={"4"}>
         <InputComponent
           label="Nome do Treino"
-          // value={exercise.name}
-          // onChange={(e) => setExercise((prev) => ({ ...prev, name: e }))}
-          // invalid={invalid.name.error}
-          // error={invalid.name.msg}
+          value={workout.get.name}
+          onChange={(e) => workout.set((prev) => ({ ...prev, name: e }))}
+          invalid={invalid.name?.error}
+          error={invalid.name?.msg}
         />
         <InputComponent
           textarea
           label="Descrição do Treino"
-          // value={exercise.description}
-          // onChange={(e) => setExercise((prev) => ({ ...prev, description: e }))}
-          // invalid={invalid.name.error}
-          // error={invalid.name.msg}
-          // inputProps={{
-          //     multiline: true
-          // }}
+          value={workout.get.description}
+          onChange={(e) => workout.set((prev) => ({ ...prev, description: e }))}
+          invalid={invalid.workout?.error}
+          error={invalid.workout?.msg}
         />
 
         <VStack>
@@ -88,33 +94,30 @@ export default function CreateWorkout() {
 
         <Button
           mt={4}
-          // onPress={pickVideo}
+          onPress={pickImage}
           bg={"brand.bg"}
           borderColor={"brand.primary"}
           borderWidth={"1"}
         >
           <Text fontFamily={"Roboto-Medium"} color={"brand.primary"}>
-            {"ESCOLHAR IMAGEM DO TREINO"}
+            {(file.uri ? "TROCAR" : "ESCOLHAR") + " IMAGEM DO TREINO"}
           </Text>
         </Button>
 
-        {/* {exercise?.file ? (
-          <>
-          <View my={0}/>
-          <Video
-            source={{
-              uri: exercise.file?.uri,
-            }}
-            style={{ width: "100%", height: "45%" }}
-            useNativeControls
-            resizeMode={ResizeMode.COVER}
-            isLooping
-          />
-          </>
-        ) : null} */}
+        {file.uri ? (
+          <View mt={2}>
+            <Image
+              source={{ uri: file.uri }}
+              alt={"Imagem do treino"}
+              resizeMode={ResizeMode.COVER}
+              height={200}
+              width={"100%"}
+            />
+          </View>
+        ) : null}
 
         <Button
-          // onPress={handleCreateExercice}
+          onPress={handleCreateWorkout}
           // isLoading={loading}
           mt={4}
         >

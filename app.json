@@ -12,9 +12,14 @@
       "resizeMode": "contain",
       "backgroundColor": "#12111f"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "O aplicativo Treinador necessita de permissão para acessar sua câmera."
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -32,7 +37,9 @@
         {
           "photosPermission": "O aplicativo Treinador necessita de permissão para acessar sua galeria.",
           "cameraPermission": "O aplicativo Treinador necessita de permissão para acessar sua câmera.",
-          "microphonePermission": "O aplicativo Treinador necessita de permissão para acessar seu microfone."
+          "microphonePermission": "O aplicativo Treinador necessita de permissão para acessar seu microfone.",
+          "mediaLibraryWriteOnlyPermission": "O aplicativo Treinador necessita de permissão para salvar fotos e vídeos.",
+          "mediaLibraryPermission": "O aplicativo Treinador necessita de permissão para acessar sua galeria."
         }
       ]
     ]
