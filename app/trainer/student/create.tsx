@@ -1,23 +1,13 @@
-import {
-  Button,
-  HStack,
-  Heading,
-  IconButton,
-  Text,
-  VStack,
-  View,
-} from "native-base";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Button, Text, VStack, View } from "native-base";
 import useCreateStudent from "../../../src/controllers/trainer/useCreateStudent";
-import { router } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
 import InputComponent from "../../../src/components/common/input/input";
+import HeaderDefault from "../../../src/components/common/header/headerDefault";
 
 export default function CreateStudent() {
   const { student, invalid, loading, handleCreateStudent } = useCreateStudent();
   return (
     <View bg="brand.bg" h={"full"}>
-      <HeaderCreateStudent />
+      <HeaderDefault title={"Cadastrar Alunos"} />
       <VStack space={2} mt={4} px={"4"}>
         <InputComponent
           label="Nome"
@@ -61,32 +51,3 @@ export default function CreateStudent() {
     </View>
   );
 }
-
-const HeaderCreateStudent = () => {
-  const insets = useSafeAreaInsets();
-
-  const goBack = () => router.back();
-
-  return (
-    <HStack
-      px={"4"}
-      bg="brand.bg"
-      justifyContent={"space-between"}
-      pt={`${insets.top + 20}px`}
-    >
-      <IconButton
-        onPress={goBack}
-        color="white"
-        size={"sm"}
-        _icon={{
-          color: "white",
-          size: "md",
-          as: Ionicons,
-          name: "arrow-back",
-        }}
-      />
-      <Heading color={"white"} fontFamily={"Roboto-Bold"}>Cadastrar Alunos</Heading>
-      <View w="12" />
-    </HStack>
-  );
-};

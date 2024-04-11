@@ -23,6 +23,7 @@ import { getInitials } from "../../../src/utils/string";
 import { daysOfWeekMapping } from "../../../src/utils/schedule";
 import { useState } from "react";
 import { UserModel } from "../../../src/models/models";
+import HeaderDefault from "../../../src/components/common/header/headerDefault";
 
 export default function SelectStudentsWorkout() {
   const {
@@ -223,40 +224,7 @@ export default function SelectStudentsWorkout() {
           )}
         </View>
       }
-      ListHeaderComponent={<Header />}
+      ListHeaderComponent={<HeaderDefault title={"Selecionar Alunos"} />}
     />
   );
 }
-
-const Header = () => {
-  const insets = useSafeAreaInsets();
-
-  const goBack = () => router.back();
-
-  return (
-    <HStack
-      px={"4"}
-      mb={"4"}
-      bg="brand.bg"
-      justifyContent={"space-between"}
-      pt={`${insets.top + 20}px`}
-    >
-      <IconButton
-        onPress={goBack}
-        color="white"
-        size={"sm"}
-        _icon={{
-          color: "white",
-          size: "md",
-          as: Ionicons,
-          name: "arrow-back",
-        }}
-        _pressed={{ bg: "brand.grey" }}
-      />
-      <Heading fontFamily={"Roboto-Bold"} color={"white"}>
-        Selecionar Alunos
-      </Heading>
-      <View w="12" />
-    </HStack>
-  );
-};

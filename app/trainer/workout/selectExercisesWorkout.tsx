@@ -1,22 +1,19 @@
-import { Ionicons } from "@expo/vector-icons";
-import { router } from "expo-router";
 import {
   Avatar,
   Checkbox,
   FlatList,
   HStack,
   Heading,
-  IconButton,
   Spinner,
   Text,
   VStack,
   View,
 } from "native-base";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { getInitials, limitString } from "../../../src/utils/string";
 import { useState } from "react";
 import { ExercisesModel } from "../../../src/models/models";
 import useSelectExercisesWorkout from "../../../src/controllers/trainer/useSelectExercisesWorkout";
+import HeaderDefault from "../../../src/components/common/header/headerDefault";
 
 export default function SelectExercisesWorkout() {
   const {
@@ -121,40 +118,7 @@ export default function SelectExercisesWorkout() {
           )}
         </View>
       }
-      ListHeaderComponent={<Header />}
+      ListHeaderComponent={<HeaderDefault title={"Selecionar Exercícios"} />}
     />
   );
 }
-
-const Header = () => {
-  const insets = useSafeAreaInsets();
-
-  const goBack = () => router.back();
-
-  return (
-    <HStack
-      px={"4"}
-      mb={"4"}
-      bg="brand.bg"
-      justifyContent={"space-between"}
-      pt={`${insets.top + 20}px`}
-    >
-      <IconButton
-        onPress={goBack}
-        color="white"
-        size={"sm"}
-        _icon={{
-          color: "white",
-          size: "md",
-          as: Ionicons,
-          name: "arrow-back",
-        }}
-        _pressed={{ bg: "brand.grey" }}
-      />
-      <Heading fontFamily={"Roboto-Bold"} color={"white"}>
-        Selecionar Exercícios
-      </Heading>
-      <View w="12" />
-    </HStack>
-  );
-};
