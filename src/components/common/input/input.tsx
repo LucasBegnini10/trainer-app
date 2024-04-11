@@ -31,7 +31,7 @@ export default function InputComponent(props: InputProps) {
           py={3}
           value={props.value}
           bg="brand.gray"
-          borderColor={"brand.gray"}
+          borderColor={ props.invalid  ? "red.600" : "brand.gray"}
           onChangeText={props.onChange}
           color={"white"}
           isReadOnly={props.readonly}
