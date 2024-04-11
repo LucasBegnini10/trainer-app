@@ -29,7 +29,6 @@ export default function CreateWorkout() {
     invalid,
     handleCreateWorkout,
     pickImage,
-    file,
   }: CreateWorkoutType = useCreateWorkout();
 
   return (
@@ -39,7 +38,7 @@ export default function CreateWorkout() {
         <InputComponent
           label="Nome do Treino"
           value={workout.get.name}
-          onChange={(e) => workout.set((prev) => ({ ...prev, name: e }))}
+          onChange={(e) => workout.set({key: "name", value: e})}
           invalid={invalid.name?.error}
           error={invalid.name?.msg}
         />
@@ -47,7 +46,7 @@ export default function CreateWorkout() {
           textarea
           label="Descrição do Treino"
           value={workout.get.description}
-          onChange={(e) => workout.set((prev) => ({ ...prev, description: e }))}
+          onChange={(e) => workout.set({key: "description", value: e})}
           invalid={invalid.workout?.error}
           error={invalid.workout?.msg}
         />
@@ -100,14 +99,15 @@ export default function CreateWorkout() {
           borderWidth={"1"}
         >
           <Text fontFamily={"Roboto-Medium"} color={"brand.primary"}>
-            {(file.uri ? "TROCAR" : "ESCOLHAR") + " IMAGEM DO TREINO"}
+            {(workout.get.file?.uri ? "TROCAR" : "ESCOLHAR") +
+              " IMAGEM DO TREINO"}
           </Text>
         </Button>
 
-        {file.uri ? (
+        {workout.get.file?.uri ? (
           <View mt={2}>
             <Image
-              source={{ uri: file.uri }}
+              source={{ uri: workout.get.file?.uri }}
               alt={"Imagem do treino"}
               resizeMode={ResizeMode.COVER}
               height={200}

@@ -6,9 +6,12 @@ import { Alert, Linking } from "react-native";
 import { useExerciseWorkoutStore } from "../../stores/useExercisesWorkoutStore";
 import { useToast } from "native-base";
 import * as ImagePicker from "expo-image-picker";
+import { useCreateWorkoutStore } from "../../stores/useCreateWorkoutStore";
 
 export default function useCreateWorkout() {
   const toast = useToast();
+  const navigation = useNavigation();
+
   const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions();
 
   const { students: studentsSelected, clear: clearStudentsSelected } =
@@ -17,16 +20,11 @@ export default function useCreateWorkout() {
   const { exercises: exercisesSelected, clear: clearExercisesSelected } =
     useExerciseWorkoutStore();
 
-  const [workout, setWorkout] = useState({} as WorkoutModel);
-  const [file, setFile] = useState({
-    uri: "",
-    blob: new Blob(),
-  });
+  const { clear: clearWorkout, setWorkout, workout } = useCreateWorkoutStore();
+
   const [invalid, setInvalid] = useState(
     {} as { [key: string]: { error: boolean; msg: string } }
   );
-
-  const navigation = useNavigation();
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("beforeRemove", (e) => {
@@ -35,7 +33,7 @@ export default function useCreateWorkout() {
       const goBack = () => {
         clearStudentsSelected();
         clearExercisesSelected();
-        setWorkout({} as WorkoutModel);
+        clearWorkout();
 
         navigation.dispatch(e.data.action);
       };
@@ -97,13 +95,7 @@ export default function useCreateWorkout() {
     });
 
     if (!result.canceled) {
-      const response = await fetch(result.assets[0].uri);
-      const blob = await response.blob();
-      
-      setFile({
-        uri: result.assets[0].uri,
-        blob,
-      });
+      setWorkout({ ...workout, file: result.assets[0] });
     }
   };
 
@@ -151,7 +143,8 @@ export default function useCreateWorkout() {
   return {
     workout: {
       get: workout,
-      set: setWorkout,
+      set: (data: { key: string; value: string }) =>
+        setWorkout({ ...workout, [data.key]: data.value }),
     },
     selectExercises: {
       go: goToSelectExercises,
@@ -164,7 +157,6 @@ export default function useCreateWorkout() {
     invalid,
     handleCreateWorkout,
     pickImage,
-    file,
   };
 }
 
