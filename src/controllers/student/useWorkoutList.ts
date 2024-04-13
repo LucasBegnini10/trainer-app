@@ -4,14 +4,18 @@ import { CardProps } from "../../components/card/card";
 import { formatScheduleArrayToString } from "../../utils/schedule";
 import { format } from "date-fns";
 import { useState } from "react";
+import { router } from "expo-router";
 
 export default function useWorkoutList() {
   const [loading, setLoading] = useState(false);
 
   const changeDay = () => {};
 
-  const navigationWorkout = () => {
-    console.log("navegando para workout")
+  const navigationWorkout = (workout: WorkoutModel) => {
+    router.push({
+      pathname: "/student/workout/details/[id]",
+      params: { id: workout.id },
+    });
   }
 
   const formatWorkoutToCard = (workout: WorkoutModel): CardProps => {

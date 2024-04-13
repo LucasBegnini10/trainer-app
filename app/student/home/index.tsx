@@ -29,7 +29,7 @@ export default function HomeIndex() {
         }
 
         const params = formatWorkoutToCard(workout as WorkoutModel);
-        return <Card {...params} onClick={() => navigationWorkout()} />;
+        return <Card {...params} onClick={() => navigationWorkout(workout as WorkoutModel)} />;
       }}
       ListHeaderComponent={
         <VStack>
