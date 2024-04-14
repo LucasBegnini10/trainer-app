@@ -2,8 +2,7 @@ import {
   Button,
   HStack,
   Heading,
-  Icon,
-  IconButton,
+  ScrollView,
   Text,
   VStack,
   View,
@@ -12,12 +11,13 @@ import useDoWorkout from "../../../../src/controllers/student/useDoWorkout";
 import { ResizeMode, Video } from "expo-av";
 
 export default function DoWorkout() {
-  const { goBack, goNext, exercise, currentIndex, workout } = useDoWorkout();
+  const { goBack, goNext, exercise, currentIndex, workout, playerRef } = useDoWorkout();
 
   return (
     <>
       <View flex={0.6} bg={"brand.bg"} position={"relative"}>
         <Video
+          ref={playerRef}
           source={{
             uri: exercise.video_url,
           }}
@@ -28,9 +28,9 @@ export default function DoWorkout() {
           shouldPlay
         />
       </View>
-      <VStack bg={"brand.bg"} flex={0.4}>
-        <VStack flex={0.6} p={4} space={4}>
-          <HStack alignItems={"start"} space={2}>
+      <VStack bg={"brand.bg"} flex={0.4} space={2}>
+        <ScrollView flex={0.6} p={4}>
+          <HStack mb={2} alignItems={"start"} space={2}>
             <Heading flex={0.7} color={"white"}>
               {exercise.name}
             </Heading>
@@ -41,16 +41,15 @@ export default function DoWorkout() {
           <Text fontSize={"md"} color={"gray.400"}>
             {exercise.description}
           </Text>
-        </VStack>
+          <View mt={10}/>
+        </ScrollView>
         <HStack
-          roundedTopLeft={"lg"}
-          roundedTopRight={"lg"}
           bg={"brand.bg"}
           flex={0.4}
           alignItems={"center"}
           justifyContent={"center"}
           space={2}
-          px={2}
+          p={2}
         >
           <Button
             flex={0.5}

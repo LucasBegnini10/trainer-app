@@ -17,6 +17,7 @@
     ],
     "ios": {
       "supportsTablet": true,
+      "requireFullScreen": true,
       "infoPlist": {
         "NSCameraUsageDescription": "O aplicativo Treinador necessita de permissão para acessar sua câmera."
       }
@@ -40,6 +41,12 @@
           "microphonePermission": "O aplicativo Treinador necessita de permissão para acessar seu microfone.",
           "mediaLibraryWriteOnlyPermission": "O aplicativo Treinador necessita de permissão para salvar fotos e vídeos.",
           "mediaLibraryPermission": "O aplicativo Treinador necessita de permissão para acessar sua galeria."
+        }
+      ],
+      [
+        "expo-screen-orientation",
+        {
+          "initialOrientation": "DEFAULT"
         }
       ]
     ]

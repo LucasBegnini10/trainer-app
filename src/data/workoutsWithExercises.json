@@ -23,7 +23,7 @@
       {
         "id": 2,
         "name": "Supino Inclinado",
-        "description": "O supino reto é um exercício que trabalha principalmente o peitoral maior, o deltoide anterior e o tríceps braquial.",
+        "description": "O supino inclinado é um exercício que trabalha principalmente o peitoral maior, o deltoide anterior e o tríceps braquial.",
         "video_url": "https://d2bv76wrblsv2x.cloudfront.net/supino_inclinado.mp4",
         "trainer_id": "T001",
         "created_at": "2024-03-01T00:00:00.000Z",
@@ -32,7 +32,7 @@
       {
         "id": 3,
         "name": "Crucifixo",
-        "description": "O supino reto é um exercício que trabalha principalmente o peitoral maior, o deltoide anterior e o tríceps braquial.",
+        "description": "O crucifixo é um exercício que trabalha principalmente o peitoral maior, o deltoide anterior e o tríceps braquial.",
         "video_url": "https://d2bv76wrblsv2x.cloudfront.net/crucifixo.mp4",
         "trainer_id": "T001",
         "created_at": "2024-03-01T00:00:00.000Z",
@@ -41,7 +41,7 @@
       {
         "id": 4,
         "name": "Desenvolvimento com Halteres",
-        "description": "O supino reto é um exercício que trabalha principalmente o peitoral maior, o deltoide anterior e o tríceps braquial.",
+        "description": "O desenvolvimento com halteres é um exercício que trabalha principalmente o deltoide anterior, o deltoide lateral e o tríceps braquial. O desenvolvimento com halteres é um exercício que trabalha principalmente o deltoide anterior, o deltoide lateral e o tríceps braquial.",
         "video_url": "https://d2bv76wrblsv2x.cloudfront.net/desenvolvimento.mp4",
         "trainer_id": "T001",
         "created_at": "2024-03-01T00:00:00.000Z",
