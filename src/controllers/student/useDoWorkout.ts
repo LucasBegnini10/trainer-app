@@ -7,9 +7,28 @@ import * as ScreenOrientation from "expo-screen-orientation";
 import { Video } from "expo-av";
 import { Alert } from "react-native";
 
+const labelTired = {
+  0: "Não estou cansado",
+  1: "Um pouco cansado",
+  2: "Cansado",
+  3: "Muito cansado",
+};
+
+const iconTired = {
+  0: "😀",
+  1: "😐",
+  2: "😩",
+  3: "🥵",
+};
+
 export default function useDoWorkout() {
   useKeepAwake();
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [feedback, setFeedback] = useState({
+    isOpen: false,
+    message: "",
+    tiredLevel: 0,
+  });
   const exercise = workout.exercises[currentIndex];
   const navigation = useNavigation();
   const playerRef = useRef<Video>(null);
@@ -42,7 +61,7 @@ export default function useDoWorkout() {
 
   const goNext = () => {
     if (currentIndex === workout.exercises.length - 1)
-      router.push("/student/home");
+      setFeedback((prev) => ({ ...prev, isOpen: true }));
     else setCurrentIndex((prev) => prev + 1);
   };
 
@@ -92,5 +111,23 @@ export default function useDoWorkout() {
     return unsubscribe;
   }, []);
 
-  return { goBack, goNext, exercise, workout, currentIndex, playerRef };
+  return {
+    goBack,
+    goNext,
+    exercise,
+    workout,
+    currentIndex,
+    playerRef,
+    isLast: currentIndex === workout.exercises.length - 1,
+    feedback: {
+      ...feedback,
+      onClose: () => setFeedback((prev) => ({ ...prev, isOpen: false })),
+      setTiredLevel: (tiredLevel: number) => {
+        console.log(tiredLevel);
+        setFeedback((prev) => ({ ...prev, tiredLevel }));
+      },
+      labelTired: labelTired[feedback.tiredLevel],
+      iconTired: iconTired[feedback.tiredLevel],
+    },
+  };
 }
