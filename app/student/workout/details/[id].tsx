@@ -26,7 +26,7 @@ export default function WorkoutDetails() {
 
   return (
     <>
-      <View flex={0.45} position={"relative"}>
+      <View flex={0.35} position={"relative"}>
         <Image
           bg={"brand.bg"}
           source={{ uri: workout.logo_url }}
@@ -54,7 +54,7 @@ export default function WorkoutDetails() {
           left={"3%"}
         />
       </View>
-      <ScrollView bg={"brand.bg"} flex={1} p={4}>
+      <ScrollView bg={"brand.bg"} flex={0.25} p={4}>
         <VStack space={2}>
           <Text fontSize={"xs"} color={"brand.primary"}>
             {formatScheduleArrayToString(workout.student)}
@@ -96,58 +96,57 @@ export default function WorkoutDetails() {
             </VStack>
           </HStack>
         </VStack>
-
-        <Actionsheet
-          {...panResponder.panHandlers}
-          disableOverlay={!maxHeightActive}
-          isOpen={true}
-          onClose={() => {}}
-        >
-          <Actionsheet.Content height={height} bg={"brand.gray"}>
-            <View style={{ flex: 1 }} w={"full"}>
-              <FlatList
-                flex={1}
-                bg={"brand.gray"}
-                w={"full"}
-                keyExtractor={(item, index) => String(index)}
-                data={workout.exercises}
-                renderItem={({ item }) => {
-                  return (
-                    <Actionsheet.Item
-                      bg={"brand.gray"}
-                      _text={{ color: "white" }}
-                    >
-                      {item.name}
-                    </Actionsheet.Item>
-                  );
-                }}
-                ListHeaderComponent={
-                  <Heading
-                    color={"white"}
-                    fontWeight={"bold"}
-                    textAlign={"center"}
-                    fontSize={"xl"}
-                    py={2}
-                  >
-                    Exercícios
-                  </Heading>
-                }
-              />
-              <View p={2}>
-                <Button
-                  onPress={goToDoWorkout}
-                  rounded={"full"}
-                  color={"brand.primary"}
-                >
-                  <Text fontSize={"xl"} color={"brand.bg"}>
-                    Iniciar Treino
-                  </Text>
-                </Button>
-              </View>
-            </View>
-          </Actionsheet.Content>
-        </Actionsheet>
       </ScrollView>
+      <Actionsheet
+        {...panResponder.panHandlers}
+        disableOverlay={!maxHeightActive}
+        isOpen={true}
+        onClose={() => {}}
+      >
+        <Actionsheet.Content height={height} bg={"brand.gray"}>
+          <View style={{ flex: 1 }} w={"full"}>
+            <FlatList
+              flex={1}
+              bg={"brand.gray"}
+              w={"full"}
+              keyExtractor={(item, index) => String(index)}
+              data={workout.exercises}
+              renderItem={({ item }) => {
+                return (
+                  <Actionsheet.Item
+                    bg={"brand.gray"}
+                    _text={{ color: "white" }}
+                  >
+                    {item.name}
+                  </Actionsheet.Item>
+                );
+              }}
+              ListHeaderComponent={
+                <Heading
+                  color={"white"}
+                  fontWeight={"bold"}
+                  textAlign={"center"}
+                  fontSize={"xl"}
+                  py={2}
+                >
+                  Exercícios
+                </Heading>
+              }
+            />
+            <View p={2}>
+              <Button
+                onPress={goToDoWorkout}
+                rounded={"full"}
+                color={"brand.primary"}
+              >
+                <Text fontSize={"xl"} color={"brand.bg"}>
+                  Iniciar Treino
+                </Text>
+              </Button>
+            </View>
+          </View>
+        </Actionsheet.Content>
+      </Actionsheet>
     </>
   );
 }

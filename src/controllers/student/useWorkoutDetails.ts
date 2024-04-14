@@ -1,15 +1,15 @@
 import { router, useLocalSearchParams } from "expo-router";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Dimensions, PanResponder } from "react-native";
 
-const HEIGHTS = {
-  min: "260",
-  breakpointToDown: "400",
-  max: "520",
-  maxToFreeze: "450",
-};
-
 const HEIGHT_SCREEN = Dimensions.get("window").height;
+
+const HEIGHTS = {
+  min: String(HEIGHT_SCREEN * 0.4),
+  breakpointToDown: String(HEIGHT_SCREEN * 0.65),
+  max: String(HEIGHT_SCREEN * 0.7),
+  maxToFreeze: String(HEIGHT_SCREEN * 0.4),
+};
 
 export default function useWorkoutDetails() {
   const local = useLocalSearchParams();
