@@ -1,9 +1,11 @@
 import { router } from "expo-router";
 import Workouts from "../../data/workoutsWithExercises.json";
 import { useState } from "react";
+import { useKeepAwake } from "expo-keep-awake";
 const workout = Workouts[0];
 
 export default function useDoWorkout() {
+  useKeepAwake()
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const exercise = workout.exercises[currentIndex];
