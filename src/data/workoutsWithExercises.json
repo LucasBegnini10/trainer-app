@@ -15,7 +15,7 @@
         "id": 1,
         "name": "Supino Reto",
         "description": "O supino reto é um exercício que trabalha principalmente o peitoral maior, o deltoide anterior e o tríceps braquial.",
-        "video_url": "https://www.youtube.com/watch?v=b_WvXDvPkd8",
+        "video_url": "https://d2bv76wrblsv2x.cloudfront.net/uuidois.mp4",
         "trainer_id": "T001",
         "created_at": "2024-03-01T00:00:00.000Z",
         "updated_at": "2024-03-10T00:00:00.000Z"
@@ -24,7 +24,7 @@
         "id": 2,
         "name": "Supino Inclinado",
         "description": "O supino reto é um exercício que trabalha principalmente o peitoral maior, o deltoide anterior e o tríceps braquial.",
-        "video_url": "https://www.youtube.com/watch?v=b_WvXDvPkd8",
+        "video_url": "https://d2bv76wrblsv2x.cloudfront.net/supino_inclinado.mp4",
         "trainer_id": "T001",
         "created_at": "2024-03-01T00:00:00.000Z",
         "updated_at": "2024-03-10T00:00:00.000Z"
@@ -33,7 +33,7 @@
         "id": 3,
         "name": "Crucifixo",
         "description": "O supino reto é um exercício que trabalha principalmente o peitoral maior, o deltoide anterior e o tríceps braquial.",
-        "video_url": "https://www.youtube.com/watch?v=b_WvXDvPkd8",
+        "video_url": "https://d2bv76wrblsv2x.cloudfront.net/crucifixo.mp4",
         "trainer_id": "T001",
         "created_at": "2024-03-01T00:00:00.000Z",
         "updated_at": "2024-03-10T00:00:00.000Z"
@@ -42,7 +42,7 @@
         "id": 4,
         "name": "Desenvolvimento com Halteres",
         "description": "O supino reto é um exercício que trabalha principalmente o peitoral maior, o deltoide anterior e o tríceps braquial.",
-        "video_url": "https://www.youtube.com/watch?v=b_WvXDvPkd8",
+        "video_url": "https://d2bv76wrblsv2x.cloudfront.net/desenvolvimento.mp4",
         "trainer_id": "T001",
         "created_at": "2024-03-01T00:00:00.000Z",
         "updated_at": "2024-03-10T00:00:00.000Z"

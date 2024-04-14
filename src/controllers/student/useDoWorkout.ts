@@ -8,5 +8,15 @@ export default function useDoWorkout() {
 
   const exercise = workout.exercises[currentIndex];
 
-  return { goBack: () => router.back(), exercise, workout, currentIndex };
+  const goBack = () => {
+    if (!currentIndex) router.back();
+    else setCurrentIndex((prev) => prev - 1);
+  };
+
+  const goNext = () => {
+    if (currentIndex === workout.exercises.length - 1) router.push("/student/home")
+    else setCurrentIndex((prev) => prev + 1);
+  }
+
+  return { goBack, goNext, exercise, workout, currentIndex };
 }

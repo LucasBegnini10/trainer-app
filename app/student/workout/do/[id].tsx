@@ -9,48 +9,32 @@ import {
   View,
 } from "native-base";
 import useDoWorkout from "../../../../src/controllers/student/useDoWorkout";
-import { Ionicons } from "@expo/vector-icons";
 import { ResizeMode, Video } from "expo-av";
 
 export default function DoWorkout() {
-  const { goBack, exercise, currentIndex, workout } = useDoWorkout();
+  const { goBack, goNext, exercise, currentIndex, workout } = useDoWorkout();
 
   return (
     <>
       <View flex={0.6} bg={"brand.bg"} position={"relative"}>
         <Video
           source={{
-            uri: "https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
+            uri: exercise.video_url,
           }}
           style={{ width: "100%", height: "100%" }}
           useNativeControls
           resizeMode={ResizeMode.COVER}
           isLooping
-        />
-        <IconButton
-          onPress={goBack}
-          size={"sm"}
-          bg={"brand.bg"}
-          _icon={{
-            color: "brand.primary",
-            size: "md",
-            as: Ionicons,
-            name: "arrow-back",
-          }}
-          _pressed={{
-            bg: "brand.secondary",
-          }}
-          rounded={"full"}
-          position={"absolute"}
-          top={"20%"}
-          left={"3%"}
+          shouldPlay
         />
       </View>
       <VStack bg={"brand.bg"} flex={0.4}>
         <VStack flex={0.6} p={4} space={4}>
-          <HStack alignItems={"center"} justifyContent={"space-between"}>
-            <Heading color={"white"}>{exercise.name}</Heading>
-            <Text fontSize="sm" color={"brand.primary"}>
+          <HStack alignItems={"start"} space={2}>
+            <Heading flex={0.7} color={"white"}>
+              {exercise.name}
+            </Heading>
+            <Text flex={0.3} fontSize="sm" color={"brand.primary"}>
               Exercício {currentIndex + 1} de {workout.exercises.length}
             </Text>
           </HStack>
@@ -71,13 +55,22 @@ export default function DoWorkout() {
           <Button
             flex={0.5}
             rounded={"full"}
-            bg={"bg.gray"}
-            borderColor={"brand.primary"}
             borderWidth={1}
+            onPress={goBack}
+            variant={"ghost"}
+            bg={"transparent"}
+            borderColor={"brand.primary"}
           >
-            <Heading color={"brand.primary"} fontSize={"lg"}>Voltar</Heading>
+            <Heading color={"brand.primary"} fontSize={"lg"}>
+              Voltar
+            </Heading>
           </Button>
-          <Button flex={0.5} rounded={"full"} color={"brand.primary"}>
+          <Button
+            onPress={goNext}
+            flex={0.5}
+            rounded={"full"}
+            color={"brand.primary"}
+          >
             <Heading fontSize={"lg"}>Avançar</Heading>
           </Button>
         </HStack>
