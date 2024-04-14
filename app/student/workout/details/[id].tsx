@@ -19,7 +19,8 @@ import { formatScheduleArrayToString } from "../../../../src/utils/schedule";
 import { format } from "date-fns";
 
 export default function WorkoutDetails() {
-  const { goBack, height, panResponder } = useWorkoutDetails();
+  const { goBack, height, panResponder, maxHeightActive, goToDoWorkout } =
+    useWorkoutDetails();
 
   const workout = Workouts[0];
 
@@ -98,7 +99,7 @@ export default function WorkoutDetails() {
 
         <Actionsheet
           {...panResponder.panHandlers}
-          disableOverlay
+          disableOverlay={!maxHeightActive}
           isOpen={true}
           onClose={() => {}}
         >
@@ -134,16 +135,9 @@ export default function WorkoutDetails() {
               />
               <View p={2}>
                 <Button
+                  onPress={goToDoWorkout}
                   rounded={"full"}
                   color={"brand.primary"}
-                  endIcon={
-                    <Icon
-                      size={"xl"}
-                      as={Ionicons}
-                      name="play"
-                      color={"brand.bg"}
-                    />
-                  }
                 >
                   <Text fontSize={"xl"} color={"brand.bg"}>
                     Iniciar Treino

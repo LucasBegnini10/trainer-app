@@ -1,5 +1,5 @@
 import { router, useLocalSearchParams } from "expo-router";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Dimensions, PanResponder } from "react-native";
 
 const HEIGHTS = {
@@ -20,9 +20,9 @@ export default function useWorkoutDetails() {
 
   const panResponder = useRef(
     PanResponder.create({
-      onStartShouldSetPanResponder: (evt, gestureState) => true,
-      onStartShouldSetPanResponderCapture: (evt, gestureState) => true,
-      onMoveShouldSetPanResponder: (evt, gestureState) => true,
+      onStartShouldSetPanResponder: (evt, gestureState) => false,
+      onMoveShouldSetPanResponder: (evt, gestureState) => false,
+      onStartShouldSetPanResponderCapture: (evt, gestureState) => false,
       onMoveShouldSetPanResponderCapture: (evt, gestureState) => true,
       onPanResponderGrant: (evt, gestureState) => {},
       onPanResponderMove: (evt, gestureState) => {
@@ -33,8 +33,6 @@ export default function useWorkoutDetails() {
       onPanResponderTerminationRequest: (evt, gestureState) => true,
       onPanResponderRelease: (evt, gestureState) => {
         const height = HEIGHT_SCREEN - gestureState.moveY;
-
-        console.log("height -->", height)
 
         if (height <= +HEIGHTS.breakpointToDown) {
           setHeight(HEIGHTS.min);
@@ -47,9 +45,17 @@ export default function useWorkoutDetails() {
     })
   ).current;
 
+  const goToDoWorkout = () =>
+    router.push({
+      pathname: "/student/workout/do/[id]",
+      params: { id: workoutId },
+    });
+
   return {
     goBack,
     height,
+    maxHeightActive: height === HEIGHTS.max,
     panResponder,
+    goToDoWorkout,
   };
 }

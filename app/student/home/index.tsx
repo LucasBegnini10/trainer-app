@@ -18,9 +18,10 @@ export default function HomeIndex() {
 
   return (
     <FlatList
+      key={"WORKOUTS"}
       contentContainerStyle={{ paddingBottom: 20 }}
       bg={"brand.bg"}
-      data={loading ? Array.from({ length: 5 }) : workouts}
+      data={workouts}
       ItemSeparatorComponent={() => <View py={2} />}
       keyExtractor={(item, index) => `WORKOUTS_${index}`}
       renderItem={({ item: workout }) => {
@@ -29,7 +30,7 @@ export default function HomeIndex() {
         }
 
         const params = formatWorkoutToCard(workout as WorkoutModel);
-        return <Card {...params} onClick={() => navigationWorkout(workout as WorkoutModel)} />;
+        return <Card key={workout.id} {...params} onClick={() => navigationWorkout(workout as WorkoutModel)} />;
       }}
       ListHeaderComponent={
         <VStack>

@@ -33,6 +33,7 @@ function FilterDayWeek({ onChange }: FilterDayWeekProps) {
 
   return (
     <FlatList
+      key={"DAYS_OF_WEEK"}
       ref={flatListRef}
       py={2}
       pl={6}
@@ -50,7 +51,7 @@ function FilterDayWeek({ onChange }: FilterDayWeekProps) {
         const active = key === `${dayFilter}`;
 
         return (
-          <Pressable onPress={() => handleChangeDay(Number(key))}>
+          <Pressable key={key} onPress={() => handleChangeDay(Number(key))}>
             <Badge
               key={key}
               borderWidth={1}
