@@ -2,8 +2,8 @@ import axios from "axios";
 import { get } from "../utils/storage";
 
 const api = axios.create({
-  baseURL: "http://localhost:3000/api/v1",
-  timeout: 10000,
+  baseURL: "https://trainer-be.onrender.com/api/v1",
+  timeout: 30000,
 });
 
 api.interceptors.request.use(

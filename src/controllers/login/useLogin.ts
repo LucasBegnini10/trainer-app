@@ -30,10 +30,8 @@ export default function useLogin() {
   ]);
 
   const [seePassword, setSeePassword] = useState(false);
-  const [email, setEmail] = useState(
-    (item?.email as string) || "trainerteste@teste.com"
-  );
-  const [password, setPassword] = useState("Treinador@123");
+  const [email, setEmail] = useState((item?.email as string) || "");
+  const [password, setPassword] = useState("");
   const [saveData, setSaveData] = useState(false);
   const [invalid, setInvalid] = useState(intialStateInvalid);
 
@@ -156,6 +154,6 @@ export default function useLogin() {
     saveData,
     setSaveData,
     loading: mutation.isLoading,
-    onSuccess
+    onSuccess,
   };
 }
