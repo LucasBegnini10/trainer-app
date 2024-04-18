@@ -7,12 +7,16 @@ import { useExerciseWorkoutStore } from "../../stores/useExercisesWorkoutStore";
 import { useToast } from "native-base";
 import * as ImagePicker from "expo-image-picker";
 import { useCreateWorkoutStore } from "../../stores/useCreateWorkoutStore";
+import { createWorkoutMutation } from "../../services/workout/workoutMutation";
+import { AxiosResponse } from "axios";
 
 export default function useCreateWorkout() {
   const toast = useToast();
   const navigation = useNavigation();
 
   const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions();
+  const [loadingStudentsAndExercies, setLoadingStudentsAndExercies] =
+    useState(false);
 
   const { students: studentsSelected, clear: clearStudentsSelected } =
     useStudentsWorkoutStore();
@@ -125,11 +129,46 @@ export default function useCreateWorkout() {
         bgColor: "red.500",
       });
 
-    return error;
+    return !error;
   };
+
+  const onSuccess = async (data: AxiosResponse<any, any>) => {
+    if (![200, 201].includes(data.status)) return onError(data);
+    console.log("data.data ==>", data);
+
+    // setLoadingStudentsAndExercies(true);
+    // await Promise.all([
+    //   putWorkoutsStudents({
+    //     add: studentsSelected.map((student) => ({
+    //       student_id: student.id,
+    //       schedule: student.schedule_id,
+    //     })),
+    //     remove: [],
+    //     workout_id: data.data.
+    //   }),
+    // ]);
+
+    // setLoadingStudentsAndExercies(false);
+  };
+
+  const onError = (error: AxiosResponse<any, any>) => {
+    toast.show({
+      title: "Erro",
+      description: "Ocorreu um erro ao criar o treino",
+      bgColor: "red.500",
+    });
+  };
+
+  const { mutate, isLoading } = createWorkoutMutation(onSuccess, onError);
 
   const handleCreateWorkout = () => {
     if (!validateFields()) return;
+
+    mutate({
+      name: workout.name,
+      description: workout.description,
+      logo: workout.file,
+    });
   };
 
   const goToSelectStudents = () => {
@@ -157,6 +196,7 @@ export default function useCreateWorkout() {
     invalid,
     handleCreateWorkout,
     pickImage,
+    isLoading: isLoading || loadingStudentsAndExercies,
   };
 }
 

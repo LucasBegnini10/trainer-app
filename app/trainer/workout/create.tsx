@@ -26,6 +26,7 @@ export default function CreateWorkout() {
     invalid,
     handleCreateWorkout,
     pickImage,
+    isLoading
   }: CreateWorkoutType = useCreateWorkout();
 
   return (
@@ -115,7 +116,7 @@ export default function CreateWorkout() {
 
         <Button
           onPress={handleCreateWorkout}
-          // isLoading={loading}
+          isLoading={isLoading}
           mt={4}
         >
           <Text fontFamily={"Roboto-Bold"} color={"brand.bg"} fontSize={14}>

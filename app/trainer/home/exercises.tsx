@@ -68,8 +68,8 @@ export default function HomeTrainer() {
                   >
                     {exercise.name}
                   </Heading>
-                  <Text color={"white"} fontSize={"sm"}>
-                    {exercise.description}
+                  <Text ellipsizeMode="tail" color={"white"} numberOfLines={1} fontSize={"sm"}>
+                    {exercise.description + exercise.description  + exercise.description }
                   </Text>
                 </VStack>
               </HStack>

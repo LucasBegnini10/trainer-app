@@ -4,7 +4,10 @@ export const getInitials = (text: string) => {
   const first = words[0];
   const last = words?.[words.length - 1];
 
-  return `${first?.[0]}${last?.[0] || first?.[1]}`;
+  const firstLetter = String(first?.[0]).toUpperCase();
+  const lastLetter = String(last?.[0] || first?.[1]).toUpperCase();
+
+  return `${firstLetter}${lastLetter}`;
 };
 
 export const onlyNumbers = (str: string): string =>

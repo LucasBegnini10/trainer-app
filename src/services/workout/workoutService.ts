@@ -19,6 +19,8 @@ export const createWorkout = async (data: ICreateWorkout) => {
     type: data.logo.type,
   });
 
+  console.log("formData ==>", formData)
+
   return await api
     .post("/workouts/create", formData, {
       headers: {
