@@ -11,5 +11,5 @@ export default function IndexPage() {
     ]);
   }, []);
 
-  return isLogged ? <StartPage /> : <StartPage />;
+  return <StartPage />
 }
