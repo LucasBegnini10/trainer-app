@@ -7,12 +7,14 @@ import { Slot } from "expo-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { theme } from "../src/theme/theme";
 import useFontSetup from "../src/setup/useFontSetup";
+import useNotificationSetup from "../src/setup/useNotificationSetup";
 
 SplashScreen.preventAutoHideAsync();
 export default function Layout() {
   const queryClient = new QueryClient();
 
   const { fontsLoaded, onLayoutRootView } = useFontSetup();
+  const { expoPushToken } = useNotificationSetup();
 
   if (!fontsLoaded) return null;
 

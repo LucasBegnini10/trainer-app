@@ -26,7 +26,10 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/logo.png",
         "backgroundColor": "#12111f"
-      }
+      },
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "favicon": "./assets/logo.png"
@@ -49,7 +52,15 @@
           "initialOrientation": "DEFAULT"
         }
       ]
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "6aa6185d-4b2d-4bca-a210-9a6c08dbc5db"
+      }
+    }
   },
   "scheme": "your-app-scheme"
 }
