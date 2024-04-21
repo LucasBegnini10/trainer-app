@@ -23,7 +23,6 @@ export default function Workouts() {
 
   return (
     <FlatList
-      key={"WORKOUTS"}
       contentContainerStyle={{ paddingBottom: 20 }}
       bg={"brand.bg"}
       data={workouts}

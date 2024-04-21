@@ -18,22 +18,15 @@ import HeaderDefault from "../../../src/components/common/header/headerDefault";
 export default function SelectExercisesWorkout() {
   const {
     addExercise,
-    exercisesHashMap, 
-    exercises, 
+    exercisesHashMap,
+    exercises,
     removeExercise,
-    isLoading
+    isLoading,
   } = useSelectExercisesWorkout();
-
-  const [expandedList, setExpandedList] = useState({});
-
 
   const onChangeCheckbox = (val: boolean, exercise: ExercisesModel) => {
     if (val) {
       addExercise({ ...exercise });
-      setExpandedList((prev) => ({
-        ...prev,
-        [exercise.id]: true,
-      }));
     } else {
       removeExercise(exercise.id);
     }
@@ -58,7 +51,7 @@ export default function SelectExercisesWorkout() {
             p={"4"}
           >
             <HStack alignItems={"center"} justifyContent={"space-between"}>
-              <HStack space={4} alignItems={"center"}>
+              <HStack space={4} alignItems={"center"} flex={0.7}>
                 <Avatar bg="brand.primary">
                   {
                     <Text color={"brand.bg"} fontSize={"lg"}>
@@ -79,7 +72,7 @@ export default function SelectExercisesWorkout() {
                   </Text>
                 </VStack>
               </HStack>
-              <HStack alignItems={"center"} space={2}>
+              <HStack alignItems={"center"} space={2} flex={0.05}>
                 <Checkbox
                   value="1"
                   isChecked={isChecked}
@@ -113,12 +106,14 @@ export default function SelectExercisesWorkout() {
             <Spinner color={"brand.primary"} />
           ) : (
             <Text color={"gray.600"} mt={2}>
-              Nenhum aluno encontrado.
+              Nenhum exercício encontrado.
             </Text>
           )}
         </View>
       }
-      ListHeaderComponent={<HeaderDefault title={"Selecionar Exercícios"} />}
+      ListHeaderComponent={
+        <HeaderDefault style={{ mb: 4 }} title={"Selecionar Exercícios"} />
+      }
     />
   );
 }

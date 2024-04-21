@@ -1,9 +1,15 @@
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import { HStack, Heading, IconButton, View } from "native-base";
+import { InterfaceHStackProps } from "native-base/lib/typescript/components/primitives/Stack/HStack";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-export default function HeaderDefault({title}){
+interface HeaderDefaulType {
+  title: string;
+  style?: InterfaceHStackProps
+}
+
+export default function HeaderDefault({title, style}: HeaderDefaulType){
   const insets = useSafeAreaInsets();
 
   const goBack = () => router.back();
@@ -14,6 +20,7 @@ export default function HeaderDefault({title}){
       bg="brand.bg"
       justifyContent={"space-between"}
       pt={`${insets.top + 20}px`}
+      {...style}
     >
       <IconButton
         onPress={goBack}

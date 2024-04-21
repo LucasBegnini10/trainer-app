@@ -83,7 +83,7 @@ export const putWorkoutsStudents = async (body: PutWorkoutStudentsType) => {
 interface PutWorkoutExerciseType {
   workout_id: number;
   add: number[];
-  remove: any[];
+  remove: number[];
 }
 
 export const putWorkoutsExercises = async (body: PutWorkoutExerciseType) => {

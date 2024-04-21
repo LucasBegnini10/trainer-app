@@ -1,5 +1,4 @@
 import { Ionicons } from "@expo/vector-icons";
-import { router } from "expo-router";
 import {
   Avatar,
   Badge,
@@ -17,7 +16,6 @@ import {
   VStack,
   View,
 } from "native-base";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import useSelectStudentsWorkout from "../../../src/controllers/trainer/useSelectStudentsWorkout";
 import { getInitials } from "../../../src/utils/string";
 import { daysOfWeekMapping } from "../../../src/utils/schedule";
@@ -224,7 +222,14 @@ export default function SelectStudentsWorkout() {
           )}
         </View>
       }
-      ListHeaderComponent={<HeaderDefault title={"Selecionar Alunos"} />}
+      ListHeaderComponent={
+        <HeaderDefault
+          style={{
+            mb: 4,
+          }}
+          title={"Selecionar Alunos"}
+        />
+      }
     />
   );
 }

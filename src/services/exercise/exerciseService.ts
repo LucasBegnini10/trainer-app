@@ -10,7 +10,6 @@ interface ICreateExercise {
 export const createExercise = async (data: ICreateExercise) => {
   const formData = new FormData();
 
-
   formData.append("name", data.name);
   formData.append("description", data.description);
   //@ts-ignore
@@ -34,7 +33,13 @@ export const createExercise = async (data: ICreateExercise) => {
 
 export const getExercises = async (trainerId: string, name?: string) => {
   return await api
-    .get(`/exercises/?trainerId=${trainerId}${name ? `&name=${name}` : ""}`)
+    .get(`/exercises/`, {
+      params: {
+        trainer_id: trainerId,
+        name
+        ,
+      },
+    })
     .then((res) => res)
     .catch((err) => {
       throw err?.response || err;

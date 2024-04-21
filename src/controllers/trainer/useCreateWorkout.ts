@@ -1,19 +1,22 @@
-import { useEffect, useState } from "react";
-import { WorkoutModel } from "../../models/models";
+import { useEffect, useRef, useState } from "react";
 import { router, useNavigation } from "expo-router";
 import { useStudentsWorkoutStore } from "../../stores/useStudentsWorkoutStore";
-import { Alert, Linking } from "react-native";
+import { Alert} from "react-native";
 import { useExerciseWorkoutStore } from "../../stores/useExercisesWorkoutStore";
 import { useToast } from "native-base";
 import * as ImagePicker from "expo-image-picker";
 import { useCreateWorkoutStore } from "../../stores/useCreateWorkoutStore";
 import { createWorkoutMutation } from "../../services/workout/workoutMutation";
 import { AxiosResponse } from "axios";
-import { putWorkoutsStudents } from "../../services/workout/workoutService";
+import {
+  putWorkoutsExercises,
+  putWorkoutsStudents,
+} from "../../services/workout/workoutService";
 
 export default function useCreateWorkout() {
   const toast = useToast();
   const navigation = useNavigation();
+  const workoutCreated = useRef<boolean>(false);
 
   const [loadingStudentsAndExercies, setLoadingStudentsAndExercies] =
     useState(false);
@@ -42,7 +45,7 @@ export default function useCreateWorkout() {
         navigation.dispatch(e.data.action);
       };
 
-      if (fieldsAreEmpty()) return goBack();
+      if (fieldsAreEmpty() || workoutCreated.current) return goBack();
 
       Alert.alert(
         "Atenção",
@@ -129,27 +132,41 @@ export default function useCreateWorkout() {
 
   const onSuccess = async (data: AxiosResponse<any, any>) => {
     if (![200, 201].includes(data.status)) return onError(data);
-    console.log("data.data ==>", data.data);
 
-    // setLoadingStudentsAndExercies(true);
-    // await Promise.all([
-    //   putWorkoutsStudents({
-    //     add: studentsSelected.map((student) => ({
-    //       student_id: student.id,
-    //       schedule: student.schedule_id,
-    //     })),
-    //     remove: [],
-    //     workout_id: data.data.id,
-    //   })
-    // ]);
+    const workoutId = data.data.id;
 
-    // setLoadingStudentsAndExercies(false);
+    setLoadingStudentsAndExercies(true);
+    await Promise.all([
+      putWorkoutsStudents({
+        add: studentsSelected.map((student) => ({
+          student_id: student.id,
+          schedule: student.schedule_id,
+        })),
+        remove: [],
+        workout_id: workoutId,
+      }),
+      putWorkoutsExercises({
+        add: exercisesSelected.map(({ id }) => id),
+        remove: [],
+        workout_id: workoutId,
+      }),
+    ]);
+    setLoadingStudentsAndExercies(false);
+
+    toast.show({
+      title: "Sucesso",
+      description: "Treino criado com sucesso",
+      bgColor: "green.500",
+    });
+
+    workoutCreated.current = true;
+
+    router.back();
   };
 
   const onError = (error: AxiosResponse<any, any>) => {
     console.log("error ==>", error);
     toast.show({
-      title: "Erro",
       description: "Ocorreu um erro ao criar o treino",
       bgColor: "red.500",
     });
