@@ -33,7 +33,7 @@ export default function Workouts() {
         <View px={6}>
           {isLoading ? (
             <Center>
-              <Spinner />
+              <Spinner color={"brand.primary"}/>
             </Center>
           ) : (
             <Text color={"gray.600"} mt={2}>

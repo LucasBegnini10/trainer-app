@@ -42,6 +42,8 @@ export default function useCreateWorkout() {
         navigation.dispatch(e.data.action);
       };
 
+      if (fieldsAreEmpty()) return goBack();
+
       Alert.alert(
         "Atenção",
         "Deseja realmente sair sem salvar? Você possui dados não salvos e os perderá se sair.",
@@ -64,6 +66,16 @@ export default function useCreateWorkout() {
 
     return unsubscribe;
   }, []);
+
+  const fieldsAreEmpty = () => {
+    return (
+      !workout.name &&
+      !workout.description &&
+      !workout.file &&
+      exercisesSelected.length === 0 &&
+      studentsSelected.length === 0
+    );
+  };
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -95,7 +107,7 @@ export default function useCreateWorkout() {
       error = true;
     }
 
-    if(!workout.file) {
+    if (!workout.file) {
       newInvalid.file = {
         error: true,
         msg: "Imagem do treino é obrigatória",
@@ -135,7 +147,7 @@ export default function useCreateWorkout() {
   };
 
   const onError = (error: AxiosResponse<any, any>) => {
-    console.log("error ==>", error)
+    console.log("error ==>", error);
     toast.show({
       title: "Erro",
       description: "Ocorreu um erro ao criar o treino",
