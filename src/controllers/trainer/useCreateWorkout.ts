@@ -9,12 +9,12 @@ import * as ImagePicker from "expo-image-picker";
 import { useCreateWorkoutStore } from "../../stores/useCreateWorkoutStore";
 import { createWorkoutMutation } from "../../services/workout/workoutMutation";
 import { AxiosResponse } from "axios";
+import { putWorkoutsStudents } from "../../services/workout/workoutService";
 
 export default function useCreateWorkout() {
   const toast = useToast();
   const navigation = useNavigation();
 
-  const [status, requestPermission] = ImagePicker.useMediaLibraryPermissions();
   const [loadingStudentsAndExercies, setLoadingStudentsAndExercies] =
     useState(false);
 
@@ -66,31 +66,6 @@ export default function useCreateWorkout() {
   }, []);
 
   const pickImage = async () => {
-    if (status.status !== ImagePicker.PermissionStatus.GRANTED) {
-      const response = await requestPermission();
-
-      if (response.status !== ImagePicker.PermissionStatus.GRANTED) {
-        Alert.alert(
-          "Atenção",
-          "Você precisa permitir o acesso a galeria para selecionar uma imagem. Deseja ir para a tela de configurações?",
-          [
-            {
-              style: "destructive",
-              text: "Cancelar",
-              onPress: () => {},
-            },
-            {
-              style: "default",
-              text: "Ir até configurações",
-              onPress: () => Linking.openSettings(),
-            },
-          ]
-        );
-
-        return;
-      }
-    }
-
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
@@ -120,6 +95,14 @@ export default function useCreateWorkout() {
       error = true;
     }
 
+    if(!workout.file) {
+      newInvalid.file = {
+        error: true,
+        msg: "Imagem do treino é obrigatória",
+      };
+      error = true;
+    }
+
     setInvalid(newInvalid);
 
     if (error)
@@ -134,7 +117,7 @@ export default function useCreateWorkout() {
 
   const onSuccess = async (data: AxiosResponse<any, any>) => {
     if (![200, 201].includes(data.status)) return onError(data);
-    console.log("data.data ==>", data);
+    console.log("data.data ==>", data.data);
 
     // setLoadingStudentsAndExercies(true);
     // await Promise.all([
@@ -144,14 +127,15 @@ export default function useCreateWorkout() {
     //       schedule: student.schedule_id,
     //     })),
     //     remove: [],
-    //     workout_id: data.data.
-    //   }),
+    //     workout_id: data.data.id,
+    //   })
     // ]);
 
     // setLoadingStudentsAndExercies(false);
   };
 
   const onError = (error: AxiosResponse<any, any>) => {
+    console.log("error ==>", error)
     toast.show({
       title: "Erro",
       description: "Ocorreu um erro ao criar o treino",

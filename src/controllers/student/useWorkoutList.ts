@@ -1,13 +1,11 @@
-import workouts from "../../data/workouts.json";
 import { WorkoutModel } from "../../models/models";
-import { CardProps } from "../../components/card/card";
-import { formatScheduleArrayToString } from "../../utils/schedule";
-import { format } from "date-fns";
 import { useState } from "react";
 import { router } from "expo-router";
+import { getWorkoutsQuery } from "../../services/workout/workoutQuery";
+import { useUserStore } from "../../stores/useUserStore";
 
 export default function useWorkoutList() {
-  const [loading, setLoading] = useState(false);
+  const { user } = useUserStore();
 
   const changeDay = () => {};
 
@@ -16,26 +14,18 @@ export default function useWorkoutList() {
       pathname: "/student/workout/details/[id]",
       params: { id: workout.id },
     });
-  }
-
-  const formatWorkoutToCard = (workout: WorkoutModel): CardProps => {
-    return {
-      title: workout.name,
-      description: workout.description,
-      img: workout.logo_url,
-      subtitle: formatScheduleArrayToString(workout.schedule_description),
-      time: `Publicado em ${format(
-        new Date(workout.created_at),
-        "dd/MM/yyyy"
-      )}`,
-    };
   };
+
+  const { data, isLoading } = getWorkoutsQuery({
+    student_id: user.Students.student_id,
+  });
+
+  const workouts = (data?.data?.workouts || []) as Array<WorkoutModel> 
 
   return {
     navigationWorkout,
     workouts,
-    formatWorkoutToCard,
     changeDay,
-    loading,
+    loading: isLoading,
   };
 }

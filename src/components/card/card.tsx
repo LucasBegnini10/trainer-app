@@ -72,15 +72,17 @@ export default function Card(props: CardProps) {
               <Heading size="md" color={"white"} fontWeight={"bold"} ml="-1">
                 {props.title}
               </Heading>
-              <Text
-                fontSize="xs"
-                color={"brand.primary"}
-                fontWeight="600"
-                ml="-0.5"
-                mt="-1"
-              >
-                {props.subtitle}
-              </Text>
+              {props.subtitle && (
+                <Text
+                  fontSize="xs"
+                  color={"brand.primary"}
+                  fontWeight="600"
+                  ml="-0.5"
+                  mt="-1"
+                >
+                  {props.subtitle}
+                </Text>
+              )}
             </Stack>
             <Text fontWeight="400" color={"white"}>
               {props.description}

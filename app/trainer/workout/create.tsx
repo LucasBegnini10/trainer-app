@@ -26,7 +26,7 @@ export default function CreateWorkout() {
     invalid,
     handleCreateWorkout,
     pickImage,
-    isLoading
+    isLoading,
   }: CreateWorkoutType = useCreateWorkout();
 
   return (
@@ -36,7 +36,7 @@ export default function CreateWorkout() {
         <InputComponent
           label="Nome do Treino"
           value={workout.get.name}
-          onChange={(e) => workout.set({key: "name", value: e})}
+          onChange={(e) => workout.set({ key: "name", value: e })}
           invalid={invalid.name?.error}
           error={invalid.name?.msg}
         />
@@ -44,7 +44,7 @@ export default function CreateWorkout() {
           textarea
           label="Descrição do Treino"
           value={workout.get.description}
-          onChange={(e) => workout.set({key: "description", value: e})}
+          onChange={(e) => workout.set({ key: "description", value: e })}
           invalid={invalid.workout?.error}
           error={invalid.workout?.msg}
         />
@@ -93,10 +93,13 @@ export default function CreateWorkout() {
           mt={4}
           onPress={pickImage}
           bg={"brand.bg"}
-          borderColor={"brand.primary"}
+          borderColor={invalid.file?.error ? "red.500" : "brand.primary"}
           borderWidth={"1"}
         >
-          <Text fontFamily={"Roboto-Medium"} color={"brand.primary"}>
+          <Text
+            fontFamily={"Roboto-Medium"}
+            color={invalid.file?.error ? "red.500" : "brand.primary"}
+          >
             {(workout.get.file?.uri ? "TROCAR" : "ESCOLHAR") +
               " IMAGEM DO TREINO"}
           </Text>
@@ -114,11 +117,7 @@ export default function CreateWorkout() {
           </View>
         ) : null}
 
-        <Button
-          onPress={handleCreateWorkout}
-          isLoading={isLoading}
-          mt={4}
-        >
+        <Button onPress={handleCreateWorkout} isLoading={isLoading} mt={4}>
           <Text fontFamily={"Roboto-Bold"} color={"brand.bg"} fontSize={14}>
             CRIAR TREINO
           </Text>

@@ -6,12 +6,12 @@ import InputComponent from "../../../src/components/common/input/input";
 import { WorkoutModel } from "../../../src/models/models";
 import FilterDayWeek from "../../../src/components/filter-day-week/FilterDayWeek";
 import CardSkeleton from "../../../src/components/card/card-skeleton";
+import { formatWorkoutToCard } from "../../../src/utils/workout";
 
 export default function HomeIndex() {
   const {
     navigationWorkout,
     workouts,
-    formatWorkoutToCard,
     changeDay,
     loading,
   } = useWorkoutList();
