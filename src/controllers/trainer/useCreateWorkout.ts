@@ -139,7 +139,7 @@ export default function useCreateWorkout() {
     await Promise.all([
       putWorkoutsStudents({
         add: studentsSelected.map((student) => ({
-          student_id: student.id,
+          student_id: student.student_id,
           schedule: student.schedule_id,
         })),
         remove: [],

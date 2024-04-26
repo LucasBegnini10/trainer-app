@@ -5,6 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export interface StudentsWorkout extends UserModel {
   schedule_id: number[];
+  student_id: string;
 }
 
 interface StudentWorkoutStoreModel {
