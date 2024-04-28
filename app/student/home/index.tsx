@@ -1,4 +1,4 @@
-import { FlatList, Icon, VStack, View } from "native-base";
+import { FlatList, Icon, Text, VStack, View } from "native-base";
 import Card from "../../../src/components/card/card";
 import { Ionicons } from "@expo/vector-icons";
 import useWorkoutList from "../../../src/controllers/student/useWorkoutList";
@@ -18,6 +18,9 @@ export default function HomeIndex() {
       data={workouts}
       ItemSeparatorComponent={() => <View py={2} />}
       keyExtractor={(item, index) => String(item.id || index)}
+      ListEmptyComponent={
+        <Text color={"brand.gray"} ml={8}>Nenhum treino disponível.</Text>
+      }
       renderItem={({ item: workout }) => {
         if (loading) {
           return <CardSkeleton />;

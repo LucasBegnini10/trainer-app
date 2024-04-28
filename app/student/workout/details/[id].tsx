@@ -4,25 +4,41 @@ import {
   FlatList,
   HStack,
   Heading,
-  Icon,
   IconButton,
   Image,
   ScrollView,
+  Spinner,
   Text,
   VStack,
   View,
 } from "native-base";
 import useWorkoutDetails from "../../../../src/controllers/student/useWorkoutDetails";
-import Workouts from "../../../../src/data/workoutsWithExercises.json";
 import { Ionicons } from "@expo/vector-icons";
-import { formatScheduleArrayToString } from "../../../../src/utils/schedule";
 import { format } from "date-fns";
 
 export default function WorkoutDetails() {
-  const { goBack, height, panResponder, maxHeightActive, goToDoWorkout } =
-    useWorkoutDetails();
+  const {
+    goBack,
+    height,
+    panResponder,
+    maxHeightActive,
+    goToDoWorkout,
+    isLoading,
+    workout,
+  } = useWorkoutDetails();
 
-  const workout = Workouts[0];
+  if (isLoading) {
+    return (
+      <View
+        flex={1}
+        bg={"brand.bg"}
+        alignItems={"center"}
+        justifyContent={"center"}
+      >
+        <Spinner color={"brand.primary"} />
+      </View>
+    );
+  }
 
   return (
     <>
@@ -56,9 +72,9 @@ export default function WorkoutDetails() {
       </View>
       <ScrollView bg={"brand.bg"} flex={0.25} p={4}>
         <VStack space={2}>
-          <Text fontSize={"xs"} color={"brand.primary"}>
-            {formatScheduleArrayToString(workout.student)}
-          </Text>
+          {/* <Text fontSize={"xs"} color={"brand.primary"}>
+            Teste
+          </Text> */}
           <Heading fontWeight={"bold"} color={"white"}>
             {workout.name}
           </Heading>

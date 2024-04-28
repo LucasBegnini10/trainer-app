@@ -1,6 +1,8 @@
 import { router, useLocalSearchParams } from "expo-router";
 import { useRef, useState } from "react";
 import { Dimensions, PanResponder } from "react-native";
+import { getWorkoutQuery } from "../../services/workout/workoutQuery";
+import { WorkoutDetailsModel } from "../../models/models";
 
 const HEIGHT_SCREEN = Dimensions.get("window").height;
 
@@ -45,6 +47,10 @@ export default function useWorkoutDetails() {
     })
   ).current;
 
+  const { data, isLoading } = getWorkoutQuery(workoutId);
+
+  const workout = (data?.data?.workout || {}) as WorkoutDetailsModel;
+
   const goToDoWorkout = () =>
     router.push({
       pathname: "/student/workout/do/[id]",
@@ -57,5 +63,7 @@ export default function useWorkoutDetails() {
     maxHeightActive: height === HEIGHTS.max,
     panResponder,
     goToDoWorkout,
+    isLoading,
+    workout,
   };
 }

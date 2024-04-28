@@ -36,6 +36,11 @@ export interface WorkoutModel {
   updated_at: string;
 }
 
+export interface WorkoutDetailsModel extends WorkoutModel {
+  exercises: ExercisesModel[];
+  students: Student[];
+}
+
 export interface ExercisesModel {
   id: number;
   name: string;
