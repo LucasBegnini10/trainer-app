@@ -27,19 +27,18 @@ export default function SignUpPage() {
     loading,
   } = useSignup();
 
-  const inset = useSafeAreaInsets()
+  const inset = useSafeAreaInsets();
 
   return (
     <KeyboardAvoidingView
-      style={{ flex: 1, paddingTop: inset.top}}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      style={{ flex: 1, paddingTop: inset.top }}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
       enabled
       bg={"brand.bg"}
     >
       <ScrollView
-        flexGrow={1}
         px={4}
-        contentContainerStyle={{ gap: 20, justifyContent: "center" }}
+        contentContainerStyle={{ gap: 20, justifyContent: "center", flex: 1 }}
       >
         <Center mb={4}>
           <Image
@@ -49,9 +48,15 @@ export default function SignUpPage() {
             h={32}
           />
         </Center>
-        <Heading fontFamily={"Roboto-Bold"} color="brand.primary" fontSize={22}>
-          Bem vindo(a) treinador(a)!
-        </Heading>
+        <View>
+          <Heading
+            fontFamily={"Roboto-Bold"}
+            color="brand.primary"
+            fontSize={22}
+          >
+            Bem vindo(a) treinador(a)!
+          </Heading>
+        </View>
         <InputComponent
           value={get.name}
           onChange={set.name}
