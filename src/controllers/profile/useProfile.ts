@@ -7,6 +7,7 @@ import { clear } from "../../utils/storage";
 import { router } from "expo-router";
 import { updateUserMutation } from "../../services/user/userMutation";
 import { getUser } from "../../services/user/userService";
+import { Alert } from "react-native";
 
 const initialStateInvalid = {
   name: false,
@@ -114,9 +115,21 @@ export default function useProfile() {
   const mutation = updateUserMutation(onSuccess, onError);
 
   const logout = async () => {
+    Alert.alert("Atenção", "Tem certeza que deseja sair?", [
+      { isPreferred: true, text: "Cancelar", style: "cancel" },
+      {
+        onPress: handleLogout,
+        isPreferred: true,
+        text: "Sair",
+        style: "destructive",
+      },
+    ]);
+  };
+
+  const handleLogout = async () => {
     router.replace("/login");
     await clear();
-  };
+  }
 
   const onShowUpdatePassword = () => setShowUpdatePassword(true)
   const onCloseUpdatePassword = () => setShowUpdatePassword(false) 

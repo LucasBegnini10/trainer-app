@@ -4,6 +4,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useUserStore } from "../../../stores/useUserStore";
 import { router } from "expo-router";
 import { getInitials } from "../../../utils/string";
+import { Alert } from "react-native";
 
 export default function Header() {
   const insets = useSafeAreaInsets();
@@ -14,6 +15,18 @@ export default function Header() {
   const logout = async () => {
     router.replace("/login");
     await clear();
+  };
+
+  const alertLogout = () => {
+    Alert.alert("Atenção", "Tem certeza que deseja sair?", [
+      { isPreferred: true, text: "Cancelar", style: "cancel" },
+      {
+        onPress: logout,
+        isPreferred: true,
+        text: "Sair",
+        style: "destructive",
+      },
+    ]);
   };
 
   return (
@@ -29,14 +42,16 @@ export default function Header() {
           <Text>{getInitials(user.name)}</Text>
         </Avatar>
         <VStack space={0.5}>
-          <Heading fontSize={"md"} fontWeight={"bold"} color={"white"}>{user.name}</Heading>
-          <Text fontSize={"xs"}  color="gray.100">
+          <Heading fontSize={"md"} fontWeight={"bold"} color={"white"}>
+            {user.name}
+          </Heading>
+          <Text fontSize={"xs"} color="gray.100">
             {user.email}
           </Text>
         </VStack>
       </HStack>
       <IconButton
-        onPress={logout}
+        onPress={alertLogout}
         colorScheme="red"
         _icon={{
           as: Ionicons,

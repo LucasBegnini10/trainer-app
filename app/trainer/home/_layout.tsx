@@ -17,7 +17,7 @@ import {
   DrawerItemList,
   DrawerToggleButton,
 } from "@react-navigation/drawer";
-import { TouchableOpacity } from "react-native";
+import { Alert, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useUserStore } from "../../../src/stores/useUserStore";
@@ -34,7 +34,12 @@ const routes = [
     title: "Treinos",
   },
 
-  { name: "exercises", href: "home/exercises", icon: "barbell", title: "Exercícios" },
+  {
+    name: "exercises",
+    href: "home/exercises",
+    icon: "barbell",
+    title: "Exercícios",
+  },
   {
     name: "students",
     href: "home/students",
@@ -54,9 +59,19 @@ export default function LayoutHomeTrainer() {
 
   const user = useUserStore((state) => state.user);
 
-  const logout = async () => {
-    router.replace("/login");
-    await clear();
+  const logout = () => {
+    Alert.alert("Atenção", "Tem certeza que deseja sair?", [
+      { isPreferred: true, text: "Cancelar", style: "cancel" },
+      {
+        onPress: async () => {
+          router.replace("/login");
+          await clear();
+        },
+        isPreferred: true,
+        text: "Sair",
+        style: "destructive",
+      },
+    ]);
   };
 
   const navigation = useNavigation();
