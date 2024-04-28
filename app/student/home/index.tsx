@@ -19,7 +19,7 @@ export default function HomeIndex() {
       ItemSeparatorComponent={() => <View py={2} />}
       keyExtractor={(item, index) => String(item.id || index)}
       ListEmptyComponent={
-        <Text color={"brand.gray"} ml={8}>Nenhum treino disponível.</Text>
+        loading ? <CardSkeleton /> : <Text color={"brand.gray"} ml={8}>Nenhum treino disponível.</Text>
       }
       renderItem={({ item: workout }) => {
         if (loading) {
