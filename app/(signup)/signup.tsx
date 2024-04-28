@@ -38,7 +38,7 @@ export default function SignUpPage() {
     >
       <ScrollView
         px={4}
-        contentContainerStyle={{ gap: 20, justifyContent: "center", flex: 1 }}
+        contentContainerStyle={{ gap: 20, justifyContent: "center", flexGrow: 1 }}
       >
         <Center mb={4}>
           <Image
