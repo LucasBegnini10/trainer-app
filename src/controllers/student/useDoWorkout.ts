@@ -1,11 +1,12 @@
-import { router, useNavigation } from "expo-router";
-import Workouts from "../../data/workoutsWithExercises.json";
-import { useEffect, useRef, useState } from "react";
+import { router, useLocalSearchParams, useNavigation } from "expo-router";
+import { useEffect, useReducer, useRef, useState } from "react";
 import { useKeepAwake } from "expo-keep-awake";
-const workout = Workouts[0];
 import * as ScreenOrientation from "expo-screen-orientation";
 import { Video } from "expo-av";
 import { Alert } from "react-native";
+import { getWorkoutQuery } from "../../services/workout/workoutQuery";
+import { WorkoutDetailsModel } from "../../models/models";
+import { useToast } from "native-base";
 
 const labelTired = {
   0: "Não estou cansado",
@@ -23,15 +24,26 @@ const iconTired = {
 
 export default function useDoWorkout() {
   useKeepAwake();
+
+  const toast = useToast();
+  const local = useLocalSearchParams();
+  const navigation = useNavigation();
+
+  const workoutId = (local.id || "") as string;
+  const { data, isLoading } = getWorkoutQuery(workoutId);
+
+  const workout = (data?.data?.workout || {}) as WorkoutDetailsModel;
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [feedback, setFeedback] = useState({
     isOpen: false,
     message: "",
     tiredLevel: 0,
   });
+
   const exercise = workout.exercises[currentIndex];
-  const navigation = useNavigation();
   const playerRef = useRef<Video>(null);
+  const workoutFinished = useRef(false);
 
   const showAlertGoBack = (e: any) => {
     Alert.alert(
@@ -104,16 +116,30 @@ export default function useDoWorkout() {
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("beforeRemove", (e) => {
-      e.preventDefault();
-      showAlertGoBack(e);
+      if (!workoutFinished.current) {
+        e.preventDefault();
+        showAlertGoBack(e);
+      }
     });
 
     return unsubscribe;
   }, []);
 
+  const finishWorkout = () => {
+    console.log("Treino finalizado");
+    workoutFinished.current = true;
+    toast.show({
+      description: "Treino finalizado com sucesso",
+      bgColor: "green.500",
+    });
+
+    router.replace("/student/home");
+  };
+
   return {
     goBack,
     goNext,
+    isLoading,
     exercise,
     workout,
     currentIndex,
@@ -123,11 +149,11 @@ export default function useDoWorkout() {
       ...feedback,
       onClose: () => setFeedback((prev) => ({ ...prev, isOpen: false })),
       setTiredLevel: (tiredLevel: number) => {
-        console.log(tiredLevel);
         setFeedback((prev) => ({ ...prev, tiredLevel }));
       },
       labelTired: labelTired[feedback.tiredLevel],
       iconTired: iconTired[feedback.tiredLevel],
     },
+    finishWorkout,
   };
 }

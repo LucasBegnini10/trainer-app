@@ -15,6 +15,7 @@ import {
 import useWorkoutDetails from "../../../../src/controllers/student/useWorkoutDetails";
 import { Ionicons } from "@expo/vector-icons";
 import { format } from "date-fns";
+import LoadingPage from "../../../../src/components/common/loading-page/loadingPage";
 
 export default function WorkoutDetails() {
   const {
@@ -28,16 +29,7 @@ export default function WorkoutDetails() {
   } = useWorkoutDetails();
 
   if (isLoading) {
-    return (
-      <View
-        flex={1}
-        bg={"brand.bg"}
-        alignItems={"center"}
-        justifyContent={"center"}
-      >
-        <Spinner color={"brand.primary"} />
-      </View>
-    );
+    return <LoadingPage />
   }
 
   return (

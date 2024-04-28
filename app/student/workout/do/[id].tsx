@@ -14,6 +14,7 @@ import useDoWorkout from "../../../../src/controllers/student/useDoWorkout";
 import { ResizeMode, Video } from "expo-av";
 import { Dimensions } from "react-native";
 import InputComponent from "../../../../src/components/common/input/input";
+import LoadingPage from "../../../../src/components/common/loading-page/loadingPage";
 
 const HEIGHT_SCREEN = Dimensions.get("window").height;
 
@@ -27,7 +28,13 @@ export default function DoWorkout() {
     playerRef,
     isLast,
     feedback,
+    isLoading,
+    finishWorkout
   } = useDoWorkout();
+
+  if (isLoading) {
+    return <LoadingPage />;
+  }
 
   return (
     <>
@@ -134,7 +141,9 @@ export default function DoWorkout() {
                   borderWidth={0}
                   bg="transparent"
                 >
-                  <Text fontSize={"3xl"} pr={8} pb={10}>{feedback.iconTired}</Text>
+                  <Text fontSize={"3xl"} pr={8} pb={10}>
+                    {feedback.iconTired}
+                  </Text>
                 </Slider.Thumb>
               </Slider>
               <Text color="brand.primary" fontSize={"sm"}>
@@ -147,7 +156,7 @@ export default function DoWorkout() {
               label="Feedback (opcional)"
               hint="Descreva como foi o exercício, o que sentiu, etc."
             />
-            <Button rounded={"full"} color={"brand.primary"}>
+            <Button rounded={"full"} color={"brand.primary"} onPress={finishWorkout}>
               <Text fontSize={"xl"} color={"brand.bg"}>
                 Enviar
               </Text>
