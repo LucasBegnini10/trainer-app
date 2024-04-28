@@ -60,7 +60,7 @@ export default function HomeTrainer() {
                     </Text>
                   }
                 </Avatar>
-                <VStack space={1}>
+                <VStack space={1} flex={1}>
                   <Heading
                     fontSize={"md"}
                     fontFamily={"Roboto-Medium"}
@@ -68,8 +68,13 @@ export default function HomeTrainer() {
                   >
                     {exercise.name}
                   </Heading>
-                  <Text ellipsizeMode="tail" color={"white"} numberOfLines={1} fontSize={"sm"}>
-                    {exercise.description + exercise.description  + exercise.description }
+                  <Text
+                    ellipsizeMode="tail"
+                    color={"white"}
+                    numberOfLines={1}
+                    fontSize={"sm"}
+                  >
+                    {exercise.description}
                   </Text>
                 </VStack>
               </HStack>
