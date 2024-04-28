@@ -48,9 +48,13 @@ export default function LoginPage() {
     >
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <ScrollView
-          flexGrow={1}
           px={4}
-          contentContainerStyle={{ gap: 20, justifyContent: "center", marginVertical: "auto"}}
+          contentContainerStyle={{
+            gap: 20,
+            flex: 1,
+            flexGrow: 1,
+            justifyContent: "center",
+          }}
         >
           <Center mb={4}>
             <Image
@@ -60,6 +64,7 @@ export default function LoginPage() {
               h={32}
             />
           </Center>
+          <View>
           <Heading
             color="brand.primary"
             fontFamily={"Roboto-Bold"}
@@ -67,6 +72,7 @@ export default function LoginPage() {
           >
             Bem vindo(a) de volta
           </Heading>
+          </View>
           <InputComponent
             label="Digite seu e-mail"
             onChange={setEmail}
