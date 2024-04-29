@@ -1,4 +1,4 @@
-import { AntDesign } from "@expo/vector-icons";
+import { AntDesign, Ionicons } from "@expo/vector-icons";
 import {
   Avatar,
   Divider,
@@ -16,10 +16,17 @@ import {
 import useExerciseList from "../../../src/controllers/trainer/useExerciseList";
 import { getInitials } from "../../../src/utils/string";
 import { TouchableOpacity } from "react-native";
+import InputComponent from "../../../src/components/common/input/input";
 
 export default function HomeTrainer() {
-  const { goToCreateExercice, exercises, isLoading, goToUpdateExercise } =
-    useExerciseList();
+  const {
+    goToCreateExercice,
+    exercises,
+    isLoading,
+    goToUpdateExercise,
+    filter,
+    setFilter,
+  } = useExerciseList();
 
   return (
     <>
@@ -40,7 +47,24 @@ export default function HomeTrainer() {
             )}
           </View>
         }
-        ListHeaderComponent={<View my={2} />}
+        ListHeaderComponent={
+          <InputComponent
+            placeholder="Pesquisar Aluno"
+            onChange={setFilter}
+            value={filter}
+            inputProps={{
+              mb: "4",
+              leftElement: (
+                <Icon
+                  as={<Ionicons name="search" />}
+                  size={4}
+                  ml="2"
+                  color="muted.400"
+                />
+              ),
+            }}
+          />
+        }
         renderItem={({ item: exercise }) => {
           return (
             <TouchableOpacity onPress={() => goToUpdateExercise(exercise)}>

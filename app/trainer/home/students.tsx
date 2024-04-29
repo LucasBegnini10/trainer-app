@@ -56,7 +56,7 @@ export default function StudentsList() {
             onChange={setKey}
             value={key}
             inputProps={{
-              my: "4",
+              mb: "4",
               leftElement: (
                 <Icon
                   as={<Ionicons name="search" />}
