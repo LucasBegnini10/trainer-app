@@ -1,5 +1,6 @@
 import {
   Actionsheet,
+  Avatar,
   Button,
   FlatList,
   HStack,
@@ -26,10 +27,11 @@ export default function WorkoutDetails() {
     goToDoWorkout,
     isLoading,
     workout,
+    thumbs,
   } = useWorkoutDetails();
 
   if (isLoading) {
-    return <LoadingPage />
+    return <LoadingPage />;
   }
 
   return (
@@ -121,12 +123,10 @@ export default function WorkoutDetails() {
               data={workout.exercises}
               renderItem={({ item }) => {
                 return (
-                  <Actionsheet.Item
-                    bg={"brand.gray"}
-                    _text={{ color: "white" }}
-                  >
-                    {item.name}
-                  </Actionsheet.Item>
+                  <HStack space={2} alignItems={"center"} mb={2}>
+                    <Avatar source={{ uri: thumbs[item.id] }} />
+                    <Text fontSize={"lg"} color={"white"}>{item.name}</Text >
+                  </HStack>
                 );
               }}
               ListHeaderComponent={

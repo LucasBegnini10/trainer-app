@@ -29,7 +29,8 @@ export default function DoWorkout() {
     isLast,
     feedback,
     isLoading,
-    finishWorkout
+    finishWorkout,
+    setStatusVideo
   } = useDoWorkout();
 
   if (isLoading) {
@@ -46,9 +47,9 @@ export default function DoWorkout() {
           }}
           style={{ width: "100%", height: "100%" }}
           useNativeControls
+          onPlaybackStatusUpdate={setStatusVideo}
           resizeMode={ResizeMode.COVER}
           isLooping
-          shouldPlay
         />
       </View>
       <VStack bg={"brand.bg"} flex={0.4} space={2}>

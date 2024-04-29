@@ -2,7 +2,7 @@ import { router, useLocalSearchParams, useNavigation } from "expo-router";
 import { useEffect, useReducer, useRef, useState } from "react";
 import { useKeepAwake } from "expo-keep-awake";
 import * as ScreenOrientation from "expo-screen-orientation";
-import { Video } from "expo-av";
+import { Video, Audio, AVPlaybackStatus } from "expo-av";
 import { Alert } from "react-native";
 import { getWorkoutQuery } from "../../services/workout/workoutQuery";
 import { WorkoutDetailsModel } from "../../models/models";
@@ -40,10 +40,48 @@ export default function useDoWorkout() {
     message: "",
     tiredLevel: 0,
   });
+  const [statusVideo, setStatusVideo] = useState<AVPlaybackStatus>(null)
 
-  const exercise = workout.exercises[currentIndex];
   const playerRef = useRef<Video>(null);
   const workoutFinished = useRef(false);
+
+  const exercise = workout.exercises[currentIndex];
+
+  useEffect(() => {
+    if(statusVideo?.isLoaded){
+      triggerAudio()
+    }
+  }, [statusVideo?.isLoaded])
+
+  useEffect(() => {
+    const subscription = ScreenOrientation.addOrientationChangeListener(
+      listenOrientationChange
+    );
+
+    setOrientation(ScreenOrientation.OrientationLock.DEFAULT);
+
+    return () => {
+      ScreenOrientation.removeOrientationChangeListener(subscription);
+      setOrientation(ScreenOrientation.OrientationLock.PORTRAIT_UP);
+    };
+  }, []);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("beforeRemove", (e) => {
+      if (!workoutFinished.current) {
+        e.preventDefault();
+        showAlertGoBack(e);
+      }
+    });
+
+    return unsubscribe;
+  }, []);
+
+
+  const triggerAudio = async () => {
+    await Audio.setAudioModeAsync({ playsInSilentModeIOS: true });
+    playerRef.current.playAsync();
+  };
 
   const showAlertGoBack = (e: any) => {
     Alert.alert(
@@ -101,32 +139,7 @@ export default function useDoWorkout() {
     await ScreenOrientation.lockAsync(orientation);
   };
 
-  useEffect(() => {
-    const subscription = ScreenOrientation.addOrientationChangeListener(
-      listenOrientationChange
-    );
-
-    setOrientation(ScreenOrientation.OrientationLock.DEFAULT);
-
-    return () => {
-      ScreenOrientation.removeOrientationChangeListener(subscription);
-      setOrientation(ScreenOrientation.OrientationLock.PORTRAIT_UP);
-    };
-  }, []);
-
-  useEffect(() => {
-    const unsubscribe = navigation.addListener("beforeRemove", (e) => {
-      if (!workoutFinished.current) {
-        e.preventDefault();
-        showAlertGoBack(e);
-      }
-    });
-
-    return unsubscribe;
-  }, []);
-
   const finishWorkout = () => {
-    console.log("Treino finalizado");
     workoutFinished.current = true;
     toast.show({
       description: "Treino finalizado com sucesso",
@@ -155,5 +168,6 @@ export default function useDoWorkout() {
       iconTired: iconTired[feedback.tiredLevel],
     },
     finishWorkout,
+    setStatusVideo
   };
 }
