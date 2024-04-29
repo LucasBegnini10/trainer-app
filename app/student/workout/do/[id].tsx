@@ -15,6 +15,7 @@ import { ResizeMode, Video } from "expo-av";
 import { Dimensions } from "react-native";
 import InputComponent from "../../../../src/components/common/input/input";
 import LoadingPage from "../../../../src/components/common/loading-page/loadingPage";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const HEIGHT_SCREEN = Dimensions.get("window").height;
 
@@ -33,6 +34,8 @@ export default function DoWorkout() {
     setStatusVideo
   } = useDoWorkout();
 
+  const inset = useSafeAreaInsets()
+
   if (isLoading) {
     return <LoadingPage />;
   }
@@ -49,7 +52,6 @@ export default function DoWorkout() {
           useNativeControls
           onPlaybackStatusUpdate={setStatusVideo}
           resizeMode={ResizeMode.COVER}
-          isLooping
         />
       </View>
       <VStack bg={"brand.bg"} flex={0.4} space={2}>
@@ -74,6 +76,7 @@ export default function DoWorkout() {
           justifyContent={"center"}
           space={2}
           p={2}
+          style={{marginBottom: inset.bottom}}
         >
           <Button
             flex={0.5}
