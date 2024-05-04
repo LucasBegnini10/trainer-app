@@ -9,53 +9,60 @@ import CardSkeleton from "../../../src/components/card/card-skeleton";
 import { formatWorkoutToCard } from "../../../src/utils/workout";
 
 export default function HomeIndex() {
-  const { navigationWorkout, workouts, changeDay, loading } = useWorkoutList();
+  const { navigationWorkout, workouts, filterDay, loading, filterKey } = useWorkoutList();
 
   return (
-    <FlatList
-      contentContainerStyle={{ paddingBottom: 20 }}
-      bg={"brand.bg"}
-      data={workouts}
-      ItemSeparatorComponent={() => <View py={2} />}
-      keyExtractor={(item, index) => String(item.id || index)}
-      ListEmptyComponent={
-        loading ? <CardSkeleton /> : <Text color={"brand.gray"} ml={8}>Nenhum treino disponível.</Text>
-      }
-      renderItem={({ item: workout }) => {
-        if (loading) {
-          return <CardSkeleton />;
+    <VStack bg={"brand.bg"} flex={1}>
+      <VStack>
+        <FilterDayWeek key={"filter-day"} filterDay={filterDay} />
+
+        <InputComponent
+          value={filterKey.key}
+          onChange={filterKey.changeKey}
+          key={"search"}
+          placeholder="Pesquisar Treino"
+          inputProps={{
+            mx: 6,
+            mb: 6,
+            InputLeftElement: (
+              <Icon
+                as={<Ionicons name="search" />}
+                size={4}
+                ml="2"
+                color="muted.400"
+              />
+            ),
+          }}
+        />
+      </VStack>
+      <FlatList
+        contentContainerStyle={{ paddingBottom: 20 }}
+        data={workouts}
+        ItemSeparatorComponent={() => <View py={2} />}
+        keyExtractor={(item, index) =>
+          String(item.id || index).concat("#WORKOUT")
         }
+        ListEmptyComponent={
+          loading ? (
+            <CardSkeleton />
+          ) : (
+            <Text color={"brand.gray"} ml={8}>
+              Nenhum treino disponível.
+            </Text>
+          )
+        }
+        renderItem={({ item: workout }: { item: WorkoutModel }) => {
+          if (loading) return <CardSkeleton />;
 
-        const params = formatWorkoutToCard(workout as WorkoutModel);
-        return (
-          <Card
-            key={workout.id}
-            {...params}
-            onClick={() => navigationWorkout(workout as WorkoutModel)}
-          />
-        );
-      }}
-      ListHeaderComponent={
-        <VStack>
-          <FilterDayWeek onChange={changeDay} />
-
-          <InputComponent
-            placeholder="Pesquisar Treino"
-            inputProps={{
-              mx: 6,
-              mb: 6,
-              InputLeftElement: (
-                <Icon
-                  as={<Ionicons name="search" />}
-                  size={4}
-                  ml="2"
-                  color="muted.400"
-                />
-              ),
-            }}
-          />
-        </VStack>
-      }
-    />
+          return (
+            <Card
+              key={workout.id}
+              {...formatWorkoutToCard(workout)}
+              onClick={() => navigationWorkout(workout)}
+            />
+          );
+        }}
+      />
+    </VStack>
   );
 }

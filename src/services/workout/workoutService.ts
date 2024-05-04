@@ -49,6 +49,7 @@ export interface GetWorkoutsType {
   name?: string;
   startsAt?: string;
   endsAt?: string;
+  scheduledAt?: number[]
 }
 
 export const getWorkouts = async (params: GetWorkoutsType) => {

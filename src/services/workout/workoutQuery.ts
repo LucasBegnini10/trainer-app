@@ -11,6 +11,6 @@ export function getWorkoutQuery(workoutId: string) {
 export function getWorkoutsQuery(params: GetWorkoutsType) {
   return useQuery({
     queryFn: () => getWorkouts(params),
-    queryKey: ["workout", ...[params]],
+    queryKey: ["workout", params],
   });
 }

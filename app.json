@@ -29,7 +29,8 @@
       },
       "permissions": [
         "android.permission.RECORD_AUDIO"
-      ]
+      ],
+      "package": "com.lucasbegnini004.trainer"
     },
     "web": {
       "favicon": "./assets/logo.png"

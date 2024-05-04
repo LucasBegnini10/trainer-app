@@ -1,39 +1,35 @@
 import { Badge, FlatList, Pressable } from "native-base";
 import { LAST_KEY_DAY, daysOfWeekMapping } from "../../utils/schedule";
-import { memo, useEffect, useRef, useState } from "react";
+import { memo, useEffect, useRef } from "react";
 
 interface FilterDayWeekProps {
-  onChange?: (day: number) => void;
+  filterDay: {
+    day: number;
+    changeDay: (day: number) => void;
+  };
 }
 
-function FilterDayWeek({ onChange }: FilterDayWeekProps) {
-  const [dayFilter, setDayFilter] = useState(() => new Date().getDay());
-
-  const handleChangeDay = async (day: number) => {
-    setDayFilter(day);
-    if (onChange) {
-      onChange(day);
-    }
-  };
-
+function FilterDayWeek({ filterDay }: FilterDayWeekProps) {
   const flatListRef = useRef(null);
 
-  const scrollToActiveItem = () => {
+  const handleChangeDay = async (day: number) => filterDay.changeDay(day);
+
+  const scrollToActiveItem = (day: number) => {
     flatListRef.current?.scrollToIndex({
       animated: true,
-      index: dayFilter,
+      index: day,
     });
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      scrollToActiveItem();
+    const timer = setTimeout(() => {
+      scrollToActiveItem(filterDay.day);
     }, 500);
-  }, []);
+    return () => clearTimeout(timer);
+  }, [filterDay.day]);
 
   return (
     <FlatList
-      key={"DAYS_OF_WEEK"}
       ref={flatListRef}
       py={2}
       pl={6}
@@ -44,16 +40,15 @@ function FilterDayWeek({ onChange }: FilterDayWeekProps) {
         offset: 50 * index,
         index,
       })}
-      keyExtractor={(item) => `DAYS_OF_WEEK_${item[0]}`}
+      keyExtractor={(item) => String(item[0]).concat("#DAY")}
       renderItem={({ item }) => {
         const [key, value] = item;
 
-        const active = key === `${dayFilter}`;
+        const active = key === `${filterDay.day}`;
 
         return (
-          <Pressable key={key} onPress={() => handleChangeDay(Number(key))}>
+          <Pressable onPress={() => handleChangeDay(Number(key))}>
             <Badge
-              key={key}
               borderWidth={1}
               borderColor={"brand.primary"}
               bg={active ? "brand.primary" : "brand.bg"}
@@ -75,4 +70,4 @@ function FilterDayWeek({ onChange }: FilterDayWeekProps) {
   );
 }
 
-export default memo(FilterDayWeek);
+export default memo(FilterDayWeek, (prev, next) => prev.filterDay.day === next.filterDay.day);    
