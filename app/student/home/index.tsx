@@ -7,9 +7,17 @@ import { WorkoutModel } from "../../../src/models/models";
 import FilterDayWeek from "../../../src/components/filter-day-week/FilterDayWeek";
 import CardSkeleton from "../../../src/components/card/card-skeleton";
 import { formatWorkoutToCard } from "../../../src/utils/workout";
+import { RefreshControl } from "react-native";
 
 export default function HomeIndex() {
-  const { navigationWorkout, workouts, filterDay, loading, filterKey } = useWorkoutList();
+  const {
+    navigationWorkout,
+    workouts,
+    filterDay,
+    loading,
+    filterKey,
+    refresh,
+  } = useWorkoutList();
 
   return (
     <VStack bg={"brand.bg"} flex={1}>
@@ -36,6 +44,14 @@ export default function HomeIndex() {
         />
       </VStack>
       <FlatList
+        refreshControl={
+          <RefreshControl
+            colors={["#ffb81a"]}
+            tintColor={"#ffb81a"}
+            refreshing={refresh.refreshing}
+            onRefresh={refresh.onRefresh}
+          />
+        }
         contentContainerStyle={{ paddingBottom: 20 }}
         data={workouts}
         ItemSeparatorComponent={() => <View py={2} />}
